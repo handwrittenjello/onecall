@@ -1,4 +1,4 @@
-# weather plus
+# onecall (Openweathermap)
 
 https://github.com/hangorazvan/onecall
 
@@ -16,7 +16,7 @@ Current weather with onecall
 		position: "top_right",
 		disabled: true,
 		config: {
-		// no needed anyore
+			// no needed anyore
 		}
 	}, 
 	{
@@ -29,7 +29,7 @@ Current weather with onecall
 			// you cand skip these options, they are true by default
 			lat: "",		// your location latitude,
 			lon: "",		// your location longitude,
-			location: "",	// your location,
+			location: "",		// your location,
 			appid: "",		// your openweathermap API key,
 			units: "",		// your units, metric or imperial
 			updateInterval: 15 * 60 * 1000, // every 15 minutes
@@ -47,7 +47,7 @@ Current weather with onecall
 			useBeaufort: false,
 			useKMPHwind: true,
 			showFeelsLike: true,
-			realFeelsLike: true,	// from onecall not calculated by module
+			realFeelsLike: true,		// from onecall not calculated by module
 			showVisibility: true,
 			showHumidity: true,
 			showPressure: true,
@@ -98,7 +98,7 @@ Daily forecast with onecall (7 days)
 
 			// hourly & daily settings
 			maxNumberOfDays: 8,
-			showRainAmount: true, 		// snow show only in winter months
+			showRainAmount: true, 			// snow show only in winter months
 			fade: false,
 			fadePoint: 0.25, 			// Start on 1/4th of the list.
 			colored: true,
@@ -144,7 +144,7 @@ Hourly forecast with onecall (1 hour)
 
 			// hourly & daily settings
 			maxNumberOfDays: 4,
-			showRainAmount: true, 		// snow show only in winter months
+			showRainAmount: true, 			// snow show only in winter months
 			fade: true,
 			fadePoint: 0.25, 			// Start on 1/4th of the list.
 			colored: true,
