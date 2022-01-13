@@ -68,7 +68,7 @@ Current weather with onecall
 
 			onlyTemp: false,
 			hideTemp: false,
-			roundTemp: false,
+			roundTemp: false,	// error on true
 		}
 	},
 
