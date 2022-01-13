@@ -25,7 +25,7 @@ Current weather with onecall
 		header: "Current Weather",
 		classes: "current weather",
 		config: {
-			// you cand skip these options, they are true by default
+			// you cand skip these settings if they are by default
 			lat: "",		// your location latitude,
 			lon: "",		// your location longitude,
 			location: "",		// your location,
@@ -82,7 +82,7 @@ Daily forecast with onecall (7 days)
 		header: "Daily Weather Forecast",
 		classes: "daily",
 		config: {
-			// you cand skip these options, they are true by default
+			// you cand skip these settings if they are by default
 			lat: "",	// your location latitude,
 			lon: "",	// your location longitude,
 			location: "",	// your location,
@@ -130,7 +130,7 @@ Hourly forecast with onecall (1 hour)
 		header: "Hourly Weather Forecast",
 		classes: "hourly",
 		config: {
-			// you cand skip these options, they are true by default
+			// you cand skip these settings if they are by default
 			lat: "",	// your location latitude,
 			lon: "",	// your location longitude,
 			location: "",	// your location,
