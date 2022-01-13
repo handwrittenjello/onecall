@@ -1,0 +1,331 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/font-awesome.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons.min.css");
+
+/* Weather */
+
+.currentweather .subs {
+  font-size: 50%;
+}
+
+.currentweather .wi-strong-wind {
+  color: cyan;
+}
+
+.currentweather .wi-thermometer,
+.currentweather .wi-humidity, 
+.currentweather .wi-sunset, 
+.currentweather .wi-sunrise,
+.currentweather .fa-binoculars {
+  display: inline-block;
+  transform: scale(0.65);
+}
+
+.currentweather .wi-hot,
+.currentweather .wi-barometer {
+  transform: scale(0.75);
+}
+
+.currentweather .wi-barometer,
+.currentweather .wi-thermometer {
+  color: gold;
+  margin-top: 5px;
+}
+
+.currentweather .fa-binoculars {
+  color: violet;
+}
+
+.currentweather .fa-tint {
+  transform: translate(0, 2px) scale(0.65);
+}
+
+.currentweather .fa-tint-slash {
+  transform: translate(0, 2px) scale(0.5);
+  margin: 0 -10px;
+  color: lime;
+}
+
+.currentweather .fa-tint,
+.currentweather .wi-humidity {
+  color: skyblue;
+}
+
+.currentweather .wi-sunset, 
+.currentweather .wi-sunrise {
+  color: gold;
+}
+
+.currentweather .xlarge {
+  display: inline-block;
+  transform: translate(-5px, -5px);
+  letter-spacing: -5px;
+  padding-right: 3px;
+}
+
+.currentweather .weathericon {
+  transform: translate(0, 20px);
+  height: 70px;
+  float: left;
+}
+
+.currentweather .deg {
+  font-size: 50%;
+  font-weight: 400;
+  margin-left: -30px;
+}
+
+.currentweather .bright::first-letter {
+  text-transform: capitalize;
+}
+
+.currentweather .wi-day-sunny {
+  content: url("icons/clear.png");
+  transform: translate(0, 15px) scale(1.4);
+}
+
+.currentweather .wi-day-cloudy {
+  content: url("icons/mostlysunny.png");
+}
+
+.currentweather .wi-cloudy {
+  content: url("icons/cloudy.png");
+}
+
+.currentweather .wi-day-cloudy-windy {
+  content: url("icons/mostlycloudy.png");
+}
+
+.currentweather .wi-day-showers {
+  content: url("icons/rain.png");
+}
+
+.currentweather .wi-day-rain {
+  content: url("icons/rain.png");
+}
+
+.currentweather .wi-day-thunderstorm {
+  content: url("icons/tstorms.png");
+}
+
+.currentweather .wi-day-snow {
+  content: url("icons/snow.png");
+}
+
+.currentweather .wi-day-fog {
+  content: url("icons/fog.png");
+}
+
+.currentweather .wi-night-clear {
+  content: url("icons/nt_clear.png");
+  transform: translate(0, 15px) scale(1.6);
+}
+
+.currentweather .wi-night-cloudy {
+  content: url("icons/nt_cloudy.png");
+}
+
+.currentweather .wi-night-alt-cloudy {
+  content: url("icons/nt_cloudy.png");
+}
+
+.currentweather .wi-night-alt-showers {
+  content: url("icons/nt_rain.png");
+}
+
+.currentweather .wi-night-alt-rain {
+  content: url("icons/nt_rain.png");
+}
+
+.currentweather .wi-night-alt-thunderstorm {
+  content: url("icons/nt_tstorms.png");
+}
+
+.currentweather .wi-night-alt-snow {
+  content: url("icons/nt_snow.png");
+}
+
+.currentweather .wi-night-alt-cloudy-windy {
+  content: url("icons/nt_hazy.png");
+}
+
+/* Forecast */
+
+.weatherforecast header {
+  margin-bottom: 5px;
+}
+
+.weatherforecast table {
+  float: right;
+  margin-bottom: 5px;
+}
+
+.daily table tr:nth-child(1) .ziua:nth-child(1),
+.daily table tr:nth-child(2) .ziua:nth-child(1) {
+  text-indent: -9999px;
+  line-height: 0;
+}
+
+.daily table tr:nth-child(1) .ziua:nth-child(1)::after {
+  text-indent: 0;
+  content: "Astăzi";
+  display: block;
+  line-height: initial;
+  color: lime;
+}
+
+.daily table tr:nth-child(2) .ziua:nth-child(1)::after {
+  text-indent: 0;
+  content: "Mâine";
+  display: block;
+  line-height: initial;
+  color: greenyellow;
+}
+
+.daily table tr:nth-child(1) .day:nth-child(1)::after,
+.hourly table tr:nth-child(1) .day:nth-child(1) {
+  color: lime;
+}
+
+.weatherforecast table tr:nth-child(1) td:nth-child(1) {
+  color: lime;
+}
+
+.weatherforecast .daily table tr:nth-child(2) td:nth-child(1) {
+  color: greenyellow;
+}
+
+.weatherforecast .day {
+  text-align: left;
+  width: 20%;
+}
+
+.weatherforecast .weather-icon,
+.weatherforecast .currentweather-icon {
+  width: 10%;
+  text-align: center;
+}
+
+.weatherforecast .day-temp {
+  width: 20%;
+}
+
+.weatherforecast .max-temp {
+  width: 20%;
+  color: coral;
+}
+
+.weatherforecast .min-temp {
+  width: 20%;
+  color: skyblue;
+}
+
+.weatherforecast .shade {
+  width: 30%;
+}
+
+.weatherforecast .rain, .weatherforecast .snow {
+  color: lightgray;
+}
+
+.weatherforecast .fa-tint,
+.weatherforecast .wi-umbrella {
+  font-size: 80%;
+}
+
+.weatherforecast .fa-tint-slash {
+  font-size: 75%;
+}
+
+.weatherforecast .wi-day-sunny {
+  transform: translateX(-2px);
+  color: gold;
+}
+
+.weatherforecast .wi-day-cloudy {
+  transform: translate(0, 3px);
+  color: lightblue;
+}
+
+.weatherforecast .wi-cloudy {
+  transform: translateX(-1px);
+  color: powderblue;
+}
+
+.weatherforecast .wi-day-cloudy-windy {
+  color: skyblue;
+}
+
+.weatherforecast .wi-day-showers {
+  color: skyblue;
+}
+
+.weatherforecast .wi-day-rain {
+  color: deepskyblue;
+}
+
+.weatherforecast .wi-day-thunderstorm {
+  color: dodgerblue;
+}
+
+.weatherforecast .wi-day-snow {
+  color: snow;
+}
+
+.weatherforecast .wi-day-fog {
+  color: white;
+}
+
+.weatherforecast .wi-night-clear {
+  transform: translateX(-2px);
+  font-size: 120%;
+  color: silver;
+}
+
+.weatherforecast .wi-night-cloudy {
+  color: powderblue;
+}
+
+.weatherforecast .wi-night-alt-cloudy {
+  color: powderblue;
+}
+
+.weatherforecast .wi-night-showers {
+  color: skyblue;
+}
+
+.weatherforecast .wi-night-alt-showers {
+  color: skyblue;
+}
+
+.weatherforecast .wi-night-rain {
+  color: deepskyblue;
+}
+
+.weatherforecast .wi-night-alt-rain {
+  color: deepskyblue;
+}
+
+.weatherforecast .wi-night-thunderstorm {
+  color: royalblue;
+}
+
+.weatherforecast .wi-night-alt-thunderstorm {
+  color: royalblue;
+}
+
+.weatherforecast .wi-night-snow {
+  color: snow;
+}
+
+.weatherforecast .wi-night-alt-snow {
+  color: snow;
+}
+
+.weatherforecast .wi-night-alt-cloudy-windy {
+  transform: translateX(-1px);
+  color: skyblue;
+}
+
+.grayscale {
+   filter: grayscale(100%);
+}
