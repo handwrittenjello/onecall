@@ -5,8 +5,8 @@ https://github.com/hangorazvan/onecall
 Modified MagicMirror2 current & forecast weather module based on Openweathermap with Onecall endpoint
 <br>This module is no longer maintained, will not have any improvements or bug fixes.
 
-<img src=https://github.com/hangorazvan/onecall/blob/master/current.png>
-<img src=https://github.com/hangorazvan/onecall/blob/master/forecast.png>
+<img src=hhttps://github.com/hangorazvan/onecall/blob/main/current.png>
+<img src=https://github.com/hangorazvan/onecall/blob/main/forecast.png>
 Do not make modification and do not replace the default, just add <i>disabled: true</i> in config.js and use this one as 3rd party, then put in config.js:
 
 Current weather with onecall
