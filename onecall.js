@@ -129,6 +129,7 @@ Module.register("onecall", {
 		this.snow = null;	 			// snow.
 		this.pressure = null;	 		// main pressure.
 		this.visibility = null;	 		// visibility.
+
 		this.loaded = false;
 		this.scheduleUpdate(this.config.initialLoadDelay);
 
@@ -456,9 +457,9 @@ Module.register("onecall", {
 
 				var dayCell = document.createElement("td");
 
-				if (config.language == "ro") {
-					dayCell.className = "day ziua";
-				} else dayCell.className = "day";
+				if (this.config.language == "ro") {
+					dayCell.className = "day ro";
+				} else dayCell.className = "day en";
 
 				dayCell.innerHTML = forecast.day;
 				row.appendChild(dayCell);
@@ -712,7 +713,7 @@ Module.register("onecall", {
 
 		params += "&cnt=" + numberOfDays;
 		params += "&units=" + this.config.units;
-		params += "&lang=" + this.config.lang;
+		params += "&lang=" + this.config.language;
 		params += "&APPID=" + this.config.appid;
 
 		if (this.config.endpointType === "current") {
@@ -896,7 +897,7 @@ Module.register("onecall", {
 			var hour;
 			if (forecast.dt_txt) {
 				day = mom(forecast.dt_txt, "YYYY-MM-DD hh:mm:ss").format(this.config.fullday);
-				hour = new Date(mom(forecast.dt_txt).locale(config.language).format("YYYY-MM-DD HH:mm:ss")).getHours();
+				hour = new Date(mom(forecast.dt_txt).locale(this.config.language).format("YYYY-MM-DD HH:mm:ss")).getHours();
 			} else {
 				day = mom(forecast.dt, "X").format(this.config.fullday);
 				hour = new Date(mom(forecast.dt, "X")).getHours();

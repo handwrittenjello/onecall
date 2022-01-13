@@ -1,6 +1,3 @@
-@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/font-awesome.min.css");
-@import url("https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons.min.css");
-
 /* Weather */
 
 .currentweather .subs {
@@ -159,26 +156,40 @@
   margin-bottom: 5px;
 }
 
-.daily table tr:nth-child(1) .ziua:nth-child(1),
-.daily table tr:nth-child(2) .ziua:nth-child(1) {
+.daily table tr:nth-child(1) .en:nth-child(1),
+.daily table tr:nth-child(2) .en:nth-child(1),
+.daily table tr:nth-child(1) .ro:nth-child(1),
+.daily table tr:nth-child(2) .ro:nth-child(1) {
   text-indent: -9999px;
   line-height: 0;
 }
 
-.daily table tr:nth-child(1) .ziua:nth-child(1)::after {
+.daily table tr:nth-child(1) .ro:nth-child(1)::after {
   text-indent: 0;
   content: "Astăzi";
   display: block;
   line-height: initial;
-  color: lime;
 }
 
-.daily table tr:nth-child(2) .ziua:nth-child(1)::after {
+.daily table tr:nth-child(2) .ro:nth-child(1)::after {
   text-indent: 0;
   content: "Mâine";
   display: block;
   line-height: initial;
-  color: greenyellow;
+}
+
+.daily table tr:nth-child(1) .en:nth-child(1)::after {
+  text-indent: 0;
+  content: "Today";
+  display: block;
+  line-height: initial;
+}
+
+.daily table tr:nth-child(2) .en:nth-child(1)::after {
+  text-indent: 0;
+  content: "Tomorrow";
+  display: block;
+  line-height: initial;
 }
 
 .daily table tr:nth-child(1) .day:nth-child(1)::after,
@@ -186,11 +197,7 @@
   color: lime;
 }
 
-.weatherforecast table tr:nth-child(1) td:nth-child(1) {
-  color: lime;
-}
-
-.weatherforecast .daily table tr:nth-child(2) td:nth-child(1) {
+.daily table tr:nth-child(2) .day:nth-child(1)::after {
   color: greenyellow;
 }
 
