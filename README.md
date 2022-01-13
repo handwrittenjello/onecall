@@ -4,7 +4,7 @@ https://github.com/hangorazvan/onecall
 
 Modified MagicMirror2 current & forecast weather module based on Openweathermap with Onecall endpoint
 
-Do not make modification and do not replace the default, just add <i>disabled: true</i> in config.js and use this one as 3rd party, then put in config.js:
+Do not make modification and do not replace the default, just add <i>disabled: true</i> in config.js and use this one as 3rd party, then put in config.js.
 
 <img src=https://github.com/hangorazvan/onecall/blob/main/current.png>
 
@@ -71,7 +71,7 @@ Current weather with onecall
 		}
 	},
 
-<img src=https://github.com/hangorazvan/onecall/blob/main/forecast.png>
+<img src=https://github.com/hangorazvan/onecall/blob/main/daily.png>
 
 Daily forecast with onecall (7 days)
 
@@ -118,6 +118,8 @@ Daily forecast with onecall (7 days)
 
 		}
 	},
+
+<img src=https://github.com/hangorazvan/onecall/blob/main/hourly.png>
 
 Hourly forecast with onecall (1 hour)
 
