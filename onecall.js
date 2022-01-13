@@ -362,7 +362,7 @@ Module.register("onecall", {
 						}
 					} else feelsLike1.className = "dimmed real";
 
-					feelsLike1.innerHTML = this.translate("FEELS!") + "<i class=\"wi wi-thermometer\"></i>" + this.feelsLike1 + "&deg;" + degreeLabel;
+					feelsLike1.innerHTML = this.translate("FEELS") + "<i class=\"wi wi-thermometer\"></i>" + this.feelsLike1 + "&deg;" + degreeLabel;
 					small.appendChild(feelsLike1);
 				}
 
