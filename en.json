@@ -29,7 +29,6 @@
 	"NW": "NW",
 	"NNW": "NNW",
 
-	"FEELS!": "Feels like: ",
-	"FEELS": "Feels like: {DEGREE}",
+	"FEELS": "Feels like: ",
 	"PRECIP": "PoP"
 }
