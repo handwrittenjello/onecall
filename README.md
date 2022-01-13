@@ -17,7 +17,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 
 Current weather with onecall
 
-<img src=https://github.com/hangorazvan/onecall/blob/main/current.png>
+<img src=https://github.com/hangorazvan/onecall/blob/master/current.png>
 
 	{
 		module: "onecall",
@@ -74,7 +74,7 @@ Current weather with onecall
 
 Daily forecast with onecall (7 days)
 
-<img src=https://github.com/hangorazvan/onecall/blob/main/daily.png>
+<img src=https://github.com/hangorazvan/onecall/blob/master/daily.png>
 
 	{
 		module: "onecall",
@@ -122,7 +122,7 @@ Daily forecast with onecall (7 days)
 
 Hourly forecast with onecall (1 hour)
 
-<img src=https://github.com/hangorazvan/onecall/blob/main/hourly.png>
+<img src=https://github.com/hangorazvan/onecall/blob/master/hourly.png>
 
 	{
 		module: "onecall",
