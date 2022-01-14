@@ -14,6 +14,7 @@ Module.register("onecall", {
 		lon: "",	// your location longitude,
 		location: "",	// your location,
 		appid: "",	// your openweathermap API key,
+		backup: "",	// second openweathermap API key,
 		units: "",	// your units, metric or imperial
 		updateInterval: 15 * 60 * 1000, // every 15 minutes
 		initialLoadDelay: 0,
@@ -121,7 +122,7 @@ Module.register("onecall", {
 		this.windDeg = null;
 		this.temperature = null;
 		this.weatherType = null;
-		this.feelsLike1 = null;
+		this.feelsLike = null;
 		this.dew = null;				// dew point.
 		this.uvi = null;				// uv index.
 		this.desc = null;	 			// weather description.
@@ -322,48 +323,48 @@ Module.register("onecall", {
 
 				// only for metric.
 				if (this.config.showFeelsLike) {
-					var feelsLike1 = document.createElement("div");
+					var feelsLike = document.createElement("div");
 					if (this.config.units == "metric") {
-						if (this.feelsLike1 == -0) {this.feelsLike1 = 0;}
-						if (this.feelsLike1 >= 45) {
-							feelsLike1.className = "real redrf";
-						} else if (this.feelsLike1 >= 40 && this.feelsLike1 < 45) {
-							feelsLike1.className = "real orangered";
-						} else if (this.feelsLike1 >= 35 && this.feelsLike1 < 40) {
-							feelsLike1.className = "real tomato";
-						} else if (this.feelsLike1 >= 30 && this.feelsLike1 < 35) {
-							feelsLike1.className = "real coral";
-						} else if (this.feelsLike1 >= 25 && this.feelsLike1 < 30) {
-							feelsLike1.className = "real darkorange";
-						} else if (this.feelsLike1 >= 20 && this.feelsLike1 < 25) {
-							feelsLike1.className = "real gold";
-						} else if (this.feelsLike1 >= 15 && this.feelsLike1 < 20) {
-							feelsLike1.className = "real yellow";
-						} else if (this.feelsLike1 >= 10 && this.feelsLike1 < 15) {
-							feelsLike1.className = "real greenyellow";
-						} else if (this.feelsLike1 >= 5 && this.feelsLike1 < 10) {
-							feelsLike1.className = "real chartreuse";
-						} else if (this.feelsLike1 >= 0 && this.feelsLike1 < 5) {
-							feelsLike1.className = "real lawngreen";
-						} else if (this.feelsLike1 >= -5 && this.feelsLike1 < 0) {
-							feelsLike1.className = "real lime";
-						} else if (this.feelsLike1 >= -10 && this.feelsLike1 < -5) {
-							feelsLike1.className = "real powderblue";
-						} else if (this.feelsLike1 >= -15 && this.feelsLike1 < -10) {
-							feelsLike1.className = "real lightblue";
-						} else if (this.feelsLike1 >= -20 && this.feelsLike1 < -15) {
-							feelsLike1.className = "real skyblue";
-						} else if (this.feelsLike1 >= -25 && this.feelsLike1 < -20) {
-							feelsLike1.className = "real lightskyblue";
-						} else if (this.feelsLike1 >= -30 && this.feelsLike1 < -25) {
-							feelsLike1.className = "real deepskyblue";
-						} else if (this.feelsLike1 < 30) {
-							feelsLike1.className = "real dodgerblue";
+						if (this.feelsLike == -0) {this.feelsLike = 0}
+						if (this.feelsLike >= 45) {
+							feelsLike.className = "real redrf";
+						} else if (this.feelsLike >= 40 && this.feelsLike < 45) {
+							feelsLike.className = "real orangered";
+						} else if (this.feelsLike >= 35 && this.feelsLike < 40) {
+							feelsLike.className = "real tomato";
+						} else if (this.feelsLike >= 30 && this.feelsLike < 35) {
+							feelsLike.className = "real coral";
+						} else if (this.feelsLike >= 25 && this.feelsLike < 30) {
+							feelsLike.className = "real darkorange";
+						} else if (this.feelsLike >= 20 && this.feelsLike < 25) {
+							feelsLike.className = "real gold";
+						} else if (this.feelsLike >= 15 && this.feelsLike < 20) {
+							feelsLike.className = "real yellow";
+						} else if (this.feelsLike >= 10 && this.feelsLike < 15) {
+							feelsLike.className = "real greenyellow";
+						} else if (this.feelsLike >= 5 && this.feelsLike < 10) {
+							feelsLike.className = "real chartreuse";
+						} else if (this.feelsLike >= 0 && this.feelsLike < 5) {
+							feelsLike.className = "real lawngreen";
+						} else if (this.feelsLike >= -5 && this.feelsLike < 0) {
+							feelsLike.className = "real lime";
+						} else if (this.feelsLike >= -10 && this.feelsLike < -5) {
+							feelsLike.className = "real powderblue";
+						} else if (this.feelsLike >= -15 && this.feelsLike < -10) {
+							feelsLike.className = "real lightblue";
+						} else if (this.feelsLike >= -20 && this.feelsLike < -15) {
+							feelsLike.className = "real skyblue";
+						} else if (this.feelsLike >= -25 && this.feelsLike < -20) {
+							feelsLike.className = "real lightskyblue";
+						} else if (this.feelsLike >= -30 && this.feelsLike < -25) {
+							feelsLike.className = "real deepskyblue";
+						} else if (this.feelsLike < 30) {
+							feelsLike.className = "real dodgerblue";
 						}
-					} else feelsLike1.className = "dimmed real";
+					} else feelsLike.className = "dimmed real";
 
-					feelsLike1.innerHTML = this.translate("FEELS") + "<i class=\"wi wi-thermometer\"></i>" + this.feelsLike1 + "&deg;" + degreeLabel;
-					small.appendChild(feelsLike1);
+					feelsLike.innerHTML = this.translate("FEELS") + "<i class=\"wi wi-thermometer\"></i>" + this.feelsLike + "&deg;" + degreeLabel;
+					small.appendChild(feelsLike);
 				}
 
 				// dew point.
@@ -500,10 +501,10 @@ Module.register("onecall", {
 					medTempCell.className = "lime";
 					row.appendChild(medTempCell);
 
-					var feelsLike = document.createElement("td");
-					feelsLike.innerHTML = "<i class=\"wi wi-thermometer little\"></i> " + parseFloat(forecast.feelsLike).toFixed(0).replace(".", this.config.decimalSymbol) + degreeLabel;
-					feelsLike.className = "yellow";
-					row.appendChild(feelsLike);	
+					var realFeel = document.createElement("td");
+					realFeel.innerHTML = "<i class=\"wi wi-thermometer little\"></i> " + parseFloat(forecast.realFeels).toFixed(0).replace(".", this.config.decimalSymbol) + degreeLabel;
+					realFeel.className = "yellow";
+					row.appendChild(realFeel);	
 				} else {
 					var maxTempCell = document.createElement("td");
 					maxTempCell.innerHTML = forecast.maxTemp.replace(".", this.config.decimalSymbol) + degreeLabel;
@@ -570,7 +571,7 @@ Module.register("onecall", {
 					row.appendChild(dewPoint);
 
 					var pressure = document.createElement("td");
-					pressure.innerHTML = Math.round(forecast.pressure * 750.062 / 1000).toFixed(0).replace(".", this.config.decimalSymbol) + " Hg";
+					pressure.innerHTML = Math.round(forecast.pressure * 750.062 / 1000).toFixed(0).replace(".", this.config.decimalSymbol) + " <span class=dimmed>Hg</span>";
 					pressure.className = "pressure greenyellow";
 					row.appendChild(pressure);
 
@@ -647,7 +648,7 @@ Module.register("onecall", {
 	 * Calls processWeather on succesfull response.
 	 */
 	updateWeather: function () {
-		if (this.config.appid === "") {
+		if (this.config.appid === "" || this.config.backup === "") {
 			Log.error("OneCall: APPID not set!");
 			return;
 		}
@@ -665,14 +666,14 @@ Module.register("onecall", {
 					self.processForecast(JSON.parse(this.response));
 				} else if (this.status === 401) {
 					self.updateDom(self.config.animationSpeed);
-
-					if (self.config.endpointType === "daily") {
-						self.config.endpointType = "hourly";
-						Log.warn(self.name + ": Incorrect APPID.");
-					}
+					self.config.appid = self.config.backup;
+				//	if (self.config.endpointType === "daily") {
+				//		self.config.endpointType = "hourly";
+				//		Log.warn(self.name + ": Incorrect APPID.");
+				//	}
 					retry = true;
 				} else {
-					Log.error(self.name + ": Could not load weather.");
+					Log.error(self.name + ": Incorrect APPID. Could not load weather.");
 				}
 
 				if (retry) {
@@ -756,12 +757,14 @@ Module.register("onecall", {
 
 		this.humidity = parseFloat(data.current.humidity);
 		this.temperature = this.roundValue(data.current.temp);
-		this.feelsLike1 = 0;
+		this.feelsLike = 0;
 		this.desc = data.current.weather[0].description;	// weather description.
 		this.pressure = data.current.pressure;				// main pressure.
 		this.visibility = data.current.visibility;			// visibility.
 		this.dew = data.current.dew_point;					// dew point.
 		this.uvi = data.current.uvi;						// uv index.
+
+		this.temperature === "-0.0" ? 0.0 : this.temperature;
 
 		var precip = false;
 		if (!data.current.hasOwnProperty("rain") && !data.current.hasOwnProperty("snow")) {
@@ -805,7 +808,7 @@ Module.register("onecall", {
 		}
 
 		if (this.config.realFeelsLike) {
-			this.feelsLike1 = parseFloat(data.current.feels_like).toFixed(0);
+			this.feelsLike = parseFloat(data.current.feels_like).toFixed(0);
 		} else if (windInMph > 3 && tempInF < 50) {
 			// windchill
 			var windChillInF = Math.round(35.74 + 0.6215 * tempInF - 35.75 * Math.pow(windInMph, 0.16) + 0.4275 * tempInF * Math.pow(windInMph, 0.16));
@@ -813,13 +816,13 @@ Module.register("onecall", {
 
 			switch (this.config.units) {
 				case "metric":
-					this.feelsLike1 = windChillInC.toFixed(0);
+					this.feelsLike = windChillInC.toFixed(0);
 					break;
 				case "imperial":
-					this.feelsLike1 = windChillInF.toFixed(0);
+					this.feelsLike = windChillInF.toFixed(0);
 					break;
 				case "default":
-					this.feelsLike1 = (windChillInC + 273.15).toFixed(0);
+					this.feelsLike = (windChillInC + 273.15).toFixed(0);
 					break;
 			}
 		} else if (tempInF > 80 && this.humidity > 40) {
@@ -837,18 +840,18 @@ Module.register("onecall", {
 
 			switch (this.config.units) {
 				case "metric":
-					this.feelsLike1 = parseFloat((Hindex - 32) / 1.8).toFixed(0);
+					this.feelsLike = parseFloat((Hindex - 32) / 1.8).toFixed(0);
 					break;
 				case "imperial":
-					this.feelsLike1 = Hindex.toFixed(0);
+					this.feelsLike = Hindex.toFixed(0);
 					break;
 				case "default":
 					var tc = parseFloat((Hindex - 32) / 1.8) + 273.15;
-					this.feelsLike1 = tc.toFixed(0);
+					this.feelsLike = tc.toFixed(0);
 					break;
 			}
 		} else {
-			this.feelsLike1 = parseFloat(this.temperature).toFixed(0);
+			this.feelsLike = parseFloat(this.temperature).toFixed(0);
 		}
 		
 		this.windDirection = this.deg2Cardinal(data.current.wind_deg);
@@ -915,7 +918,7 @@ Module.register("onecall", {
 					pressure: forecast.pressure,
 					dayTemp: this.roundValue(forecast.temp),
 					precip: this.roundValue(forecast.pop),
-					feelsLike: this.roundValue(forecast.feels_like),
+					realFeels: this.roundValue(forecast.feels_like),
 					dewPoint: this.roundValue(forecast.dew_point),
 					uvIndex: forecast.uvi,
 				};
