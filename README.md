@@ -33,7 +33,8 @@ Current weather with onecall
 			appid: "",		// your openweathermap API key,
 			backup: "",		// second openweathermap API key,
 			units: "",		// your units, metric or imperial
-			updateInterval: 15 * 60 * 1000, // every 15 minutes
+			dayUpdateInterval: 15 * 60 * 1000, // every 15 minutes
+			nightUpdateInterval: 30 * 60 * 1000, // every 30 minutes
 			initialLoadDelay: 0,
 			retryDelay: 2000,
 			animationSpeed: 1000,
@@ -88,9 +89,11 @@ Daily forecast with onecall (7 days)
 			lat: "",	// your location latitude,
 			lon: "",	// your location longitude,
 			location: "",	// your location,
-			appid: "",	// your openweathermap API key,
-			units: "",	// your units, metric or imperial
-			updateInterval: 15 * 60 * 1000, // every 15 minutes
+			appid: "",		// your openweathermap API key,
+			backup: "",		// second openweathermap API key,
+			units: "",		// your units, metric or imperial
+			dayUpdateInterval: 15 * 60 * 1000, // every 15 minutes
+			nightUpdateInterval: 30 * 60 * 1000, // every 30 minutes
 			initialLoadDelay: 2000,
 			retryDelay: 2000,
 			animationSpeed: 1000,
@@ -136,9 +139,11 @@ Hourly forecast with onecall (1 hour)
 			lat: "",	// your location latitude,
 			lon: "",	// your location longitude,
 			location: "",	// your location,
-			appid: "",	// your openweathermap API key,
-			units: "",	// your units, metric or imperial
-			updateInterval: 15 * 60 * 1000, // every 15 minutes
+			appid: "",		// your openweathermap API key,
+			backup: "",		// second openweathermap API key,
+			units: "",		// your units, metric or imperial
+			dayUpdateInterval: 15 * 60 * 1000, // every 15 minutes
+			nightUpdateInterval: 30 * 60 * 1000, // every 30 minutes
 			initialLoadDelay: 4000,
 			retryDelay: 2000,
 			animationSpeed: 1000,
