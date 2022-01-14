@@ -41,7 +41,7 @@ Module.register("onecall", {
 		showDescription: true,
 
 		// hourly & daily settings
-		maxNumberOfDays: 8,
+		maxNumberOfDays: 7,
 		showRainAmount: true, 			// snow show only in winter months
 		fade: false,
 		fadePoint: 0.25, 			// Start on 1/4th of the list.
