@@ -31,7 +31,7 @@ Current weather with onecall
 			lon: "",		// your location longitude,
 			location: "",		// your location,
 			appid: "",		// your openweathermap API key,
-			backup: "",	// second openweathermap API key,
+			backup: "",		// second openweathermap API key,
 			units: "",		// your units, metric or imperial
 			updateInterval: 15 * 60 * 1000, // every 15 minutes
 			initialLoadDelay: 0,
