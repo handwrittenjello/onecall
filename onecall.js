@@ -16,7 +16,8 @@ Module.register("onecall", {
 		appid: "",	// your openweathermap API key,
 		backup: "",	// second openweathermap API key,
 		units: "",	// your units, metric or imperial
-		updateInterval: 15 * 60 * 1000, // every 15 minutes
+		dayUpdateInterval: 15 * 60 * 1000, // every 15 minutes
+		nightUpdateInterval: 30 * 60 * 1000, // every 30 minutes
 		initialLoadDelay: 0,
 		retryDelay: 2000,
 		animationSpeed: 1000,
@@ -41,7 +42,7 @@ Module.register("onecall", {
 		showDescription: true,
 
 		// hourly & daily settings
-		maxNumberOfDays: 7,
+		maxNumberOfDays: 8,
 		showRainAmount: true, 			// snow show only in winter months
 		fade: false,
 		fadePoint: 0.25, 			// Start on 1/4th of the list.
@@ -667,11 +668,11 @@ Module.register("onecall", {
 				} else if (this.status === 401) {
 					self.updateDom(self.config.animationSpeed);
 					self.config.appid = self.config.backup;
-				/*	if (self.config.endpointType === "daily") {
+			/*	if (self.config.endpointType === "daily") {
 						self.config.endpointType = "hourly";
 						Log.warn(self.name + ": Incorrect APPID.");
 					}
-				*/	retry = true;
+			*/		retry = true;
 				} else {
 					Log.error(self.name + ": Incorrect APPID. Could not load weather.");
 				}
@@ -960,7 +961,16 @@ Module.register("onecall", {
 	 * argument delay number - Milliseconds before next update. If empty, this.config.updateInterval is used.
 	 */
 	scheduleUpdate: function (delay) {
-		var nextLoad = this.config.updateInterval;
+		var now = moment().format("HH:mm:ss");
+		var updateInterval = null;
+
+		if (now >= "07:00:00" && now <= "23:59:59") {
+			updateInterval = this.config.dayUpdateInterval;
+		} else {
+			updateInterval = this.config.nightUpdateInterval;
+		}
+
+		var nextLoad = updateInterval;
 		if (typeof delay !== "undefined" && delay >= 0) {
 			nextLoad = delay;
 		}
