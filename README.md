@@ -58,9 +58,6 @@ Current weather with onecall
 			showPrecip: true,		// precipitation
 			showDescription: true,
 
-			apiVersion: "2.5/",
-			apiBase: "https://api.openweathermap.org/data/",
-			weatherEndpoint: "onecall",
 			endpointType: "current",
 
 			appendLocationNameToHeader: true,
@@ -111,9 +108,6 @@ Daily forecast with onecall (7 days)
 			extra: true,				// snow humidity, dew point, pressure, real feel and rain or snow,
 			fullday: "ddd", 			// "ddd" in case of daily forecast or "HH [h]" for hourly forecast
 
-			apiVersion: "2.5/",
-			apiBase: "https://api.openweathermap.org/data/",
-			weatherEndpoint: "onecall",
 			endpointType: "daily",
 
 			appendLocationNameToHeader: true,
@@ -161,9 +155,6 @@ Hourly forecast with onecall (1 hour)
 			extra: false,				// snow humidity, dew point, pressure, real feel and rain or snow,
 			fullday: "HH [h]", 			// "ddd" in case of daily forecast or "HH [h]" for hourly forecast
 
-			apiVersion: "2.5/",
-			apiBase: "https://api.openweathermap.org/data/",
-			weatherEndpoint: "onecall",
 			endpointType: "hourly",
 
 			appendLocationNameToHeader: true,
