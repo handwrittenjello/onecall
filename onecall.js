@@ -229,7 +229,7 @@ Module.register("onecall", {
 		// humidity.
 		if (this.config.showHumidity) {
 			var humidityIcon = document.createElement("span");
-			humidityIcon.className = "wi wi-humidity humidityIcon";
+			humidityIcon.className = "wi wi-humidity";
 			small.appendChild(humidityIcon);
 
 			var humidity = document.createElement("span");
