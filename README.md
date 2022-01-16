@@ -33,8 +33,8 @@ Current weather with onecall
 			appid: "",		// your openweathermap API key,
 			backup: "",		// second openweathermap API key,
 			units: "",		// your units, metric or imperial
-			dayUpdateInterval: 15 * 60 * 1000, // every 15 minutes
-			nightUpdateInterval: 30 * 60 * 1000, // every 30 minutes
+			dayUpdateInterval: 10 * 60 * 1000, // every 10 minutes
+			nightUpdateInterval: 15 * 60 * 1000, // every 15 minutes
 			initialLoadDelay: 0,
 			retryDelay: 2000,
 			animationSpeed: 1000,
