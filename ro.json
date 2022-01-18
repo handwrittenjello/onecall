@@ -6,11 +6,17 @@
 
 	"NOW": "Acum",
 
-	"DEW": "Rouă: ",
-	"UVI": "Index UV: ",
-	"No prep": "Fără precip",
+	"FEELS": "Se simte ca fiind: {DEGREE}",	
+	"PRECIP": "Precipitații ",
+	"RAIN": "Ploaie ",
+	"SNOW": "Zăpadă ",
+	"DEWPOINT": "Punct de rouă: {DEGREE} ",
+	"DEW": "Punct de rouă: ",
+	"UVI": "Index UV ",
+	"No prep": "Fără precipitații ",
 	"No rain": "Nu plouă",
 	"No snow": "Nu ninge",
+	"ALERTS": "Alertă meteo între ",
 
 	"N": "N",
 	"NNE": "NNE",
@@ -27,8 +33,5 @@
 	"W": "V",
 	"WNW": "VNV",
 	"NW": "NV",
-	"NNW": "NNV",
-
-	"FEELS": "Se simte ca fiind: {DEGREE}",	
-	"PRECIP": "Precipitații"
+	"NNW": "NNV"
 }

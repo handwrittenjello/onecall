@@ -6,11 +6,17 @@
 
 	"NOW": "Now",
 
+	"FEELS": "Feels like: {DEGREE}",
+	"PRECIP": "Precipitations ",
+	"RAIN": "Rain ",
+	"SNOW": "Snow ",
+	"DEWPOINT": "Dew point: {DEGREE}",
 	"DEW": "Dew point: ",
-	"UVI": "UV index: ",
-	"No prep": "No precip",
+	"UVI": "UV Index ",
+	"No prep": "No prep",
 	"No rain": "No rain",
 	"No snow": "No snow",
+	"ALERTS": "Weather alert between ",
 
 	"N": "N",
 	"NNE": "NNE",
@@ -27,8 +33,5 @@
 	"W": "W",
 	"WNW": "WNW",
 	"NW": "NW",
-	"NNW": "NNW",
-
-	"FEELS": "Feels like: {DEGREE}",
-	"PRECIP": "PoP"
+	"NNW": "NNW"
 }

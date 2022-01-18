@@ -57,6 +57,7 @@ Current weather with onecall
 			showUvi: true,			// UV index
 			showPrecip: true,		// precipitation
 			showDescription: true,
+			showAlerts: false,
 
 			endpointType: "current",
 

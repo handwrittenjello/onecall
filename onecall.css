@@ -4,10 +4,6 @@
   font-size: 50%;
 }
 
-.currentweather .wi-strong-wind {
-  color: cyan;
-}
-
 .currentweather .wi-thermometer,
 .currentweather .wi-humidity, 
 .currentweather .wi-sunset, 
@@ -24,12 +20,7 @@
 
 .currentweather .wi-barometer,
 .currentweather .wi-thermometer {
-  color: gold;
   margin-top: 5px;
-}
-
-.currentweather .fa-binoculars {
-  color: violet;
 }
 
 .currentweather .fa-tint {
@@ -39,17 +30,6 @@
 .currentweather .fa-tint-slash {
   transform: translate(0, 2px) scale(0.5);
   margin: 0 -10px;
-  color: lime;
-}
-
-.currentweather .fa-tint,
-.currentweather .wi-humidity {
-  color: skyblue;
-}
-
-.currentweather .wi-sunset, 
-.currentweather .wi-sunrise {
-  color: gold;
 }
 
 .currentweather .xlarge {
@@ -201,33 +181,35 @@
   color: greenyellow;
 }
 
-.weatherforecast .day {
-  text-align: left;
-  width: 20%;
+.weatherforecast .day,
+.weatherforecast .humidity,
+.weatherforecast table tr td:nth-child(1) {
+  width: 20% !important;
 }
 
 .weatherforecast .weather-icon,
-.weatherforecast .currentweather-icon {
-  width: 10%;
-  text-align: center;
+.weatherforecast .dewPoint,
+.weatherforecast table tr td:nth-child(2) {
+  width: 15% !important;
 }
 
-.weatherforecast .day-temp {
-  width: 20%;
+.weatherforecast .max-temp,
+.weatherforecast .pressure,
+.weatherforecast table tr td:nth-child(3) {
+  width: 20% !important;
 }
 
-.weatherforecast .max-temp {
-  width: 20%;
-  color: coral;
+.weatherforecast .min-temp,
+.weatherforecast .uvIndex,
+.weatherforecast table tr td:nth-child(4) {
+  width: 20% !important;
 }
 
-.weatherforecast .min-temp {
-  width: 20%;
-  color: skyblue;
-}
-
-.weatherforecast .shade {
-  width: 30%;
+.weatherforecast .rain,
+.weatherforecast .visibility,
+.weatherforecast .realFeel,
+.weatherforecast table tr td:nth-child(5) {
+  width: 25% !important;
 }
 
 .weatherforecast .rain, .weatherforecast .snow {
@@ -335,4 +317,196 @@
 
 .grayscale {
    filter: grayscale(100%);
+}
+
+.transparent {
+  background: transparent;
+}
+
+.fade {
+  color: var(--color-text-fade);
+}
+
+.shade {
+  color: var(--color-text-shade);
+}
+
+.dimmed {
+  color: var(--color-text-dimmed);
+}
+
+.normal {
+  color: var(--color-text);
+}
+
+.bright {
+  color: var(--color-text-bright);
+}
+
+.little {
+  font-size: 80%;
+  transform: translate(0, -1px);
+}
+
+.xsmall {
+  font-size: 0.7rem;
+}
+
+.small {
+  font-size: 1rem;
+}
+
+.midget {
+  font-size: 1.2rem;
+}
+
+.medium {
+  font-size: 1.6rem;
+}
+
+.slarge {
+  font-size: 3rem;
+  line-height: 1.5;
+}
+
+.large {
+  font-size: 6rem;
+  line-height: 1;
+}
+
+.xlarge {
+  font-size: 7.4rem;
+  line-height: 1;
+  background: -webkit-linear-gradient(white, darkgray);
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+}
+
+.thin {
+  font-family: var(--font-secondary);
+  font-weight: 100;
+}
+
+.light {
+  font-weight: 300;
+}
+
+.regular {
+  font-weight: 400;
+}
+
+.bold {
+  font-weight: 500;
+}
+
+.align-right {
+  text-align: right;
+}
+
+.align-left {
+  text-align: left;
+}
+
+.align-center {
+  text-align: center;
+}
+
+.darkred {
+  color: darkred;
+}
+
+.redrf {
+  color: red;
+}
+
+.orangered {
+  color: orangered;
+}
+
+.tomato {
+  color: tomato;
+}
+
+.coral {
+  color: coral;
+}
+
+.darkorange {
+  color: darkorange;
+}
+
+.orange {
+  color: orange;
+}
+
+.gold {
+  color: gold;
+}
+
+.yellow {
+  color: yellow;
+}
+
+.greenyellow {
+  color: greenyellow;
+}
+
+.chartreuse {
+  color: chartreuse;
+}
+
+.lawngreen {
+  color: lawngreen;
+}
+
+.lime {
+  color: lime;
+}
+
+.powderblue {
+  color: powderblue;
+}
+
+.lightblue {
+  color: lightblue;
+}
+
+.skyblue {
+  color: skyblue;
+}
+
+.lightskyblue {
+  color: lightskyblue;
+}
+
+.deepskyblue {
+  color: deepskyblue;
+}
+
+.dodgerblue {
+  color: dodgerblue;
+}
+
+.lightgreen {
+  color: lightgreen;
+}
+
+.cyan {
+  color: cyan;
+}
+
+.magenta {
+  color: magenta;
+}
+
+.olive {
+  color: olive;
+}
+
+.purple {
+  color: purple;
+}
+
+.violet {
+  color: violet;
 }

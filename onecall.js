@@ -40,6 +40,7 @@ Module.register("onecall", {
 		showUvi: true,			// UV index
 		showPrecip: true,		// precipitation
 		showDescription: true,
+		showAlerts: false,
 
 		// hourly & daily settings
 		maxNumberOfDays: 8,
@@ -124,10 +125,13 @@ Module.register("onecall", {
 		this.dew = null;				// dew point.
 		this.uvi = null;				// uv index.
 		this.desc = null;	 			// weather description.
-		this.rain = null;	 			// rain.
-		this.snow = null;	 			// snow.
+		this.rain = null;	 			// current rain.
+		this.snow = null;	 			// current snow.
 		this.pressure = null;	 		// main pressure.
 		this.visibility = null;	 		// visibility.
+		this.start = null;
+		this.end = null;
+		this.alert = null;
 
 		this.loaded = false;
 		this.scheduleUpdate(this.config.initialLoadDelay);
@@ -143,7 +147,7 @@ Module.register("onecall", {
 		small.className = "normal medium";
 
 		var windIcon = document.createElement("span");
-		windIcon.className = "wi wi-strong-wind";
+		windIcon.className = "wi wi-strong-wind cyan";
 		small.appendChild(windIcon);
 
 		var spacer = document.createElement("span");
@@ -186,7 +190,7 @@ Module.register("onecall", {
 		// pressure.
 		if (this.config.showPressure) {
 			var pressureIcon = document.createElement("span");
-			pressureIcon.className = "wi wi-barometer";
+			pressureIcon.className = "wi wi-barometer gold";
 			small.appendChild(pressureIcon);
 
 			var pressure = document.createElement("span");
@@ -208,7 +212,7 @@ Module.register("onecall", {
 		// visibility.
 		if (this.config.showVisibility) {
 			var visibilityIcon = document.createElement("span");
-			visibilityIcon.className = "fa fa-binoculars";
+			visibilityIcon.className = "fa fa-binoculars violet";
 			small.appendChild(visibilityIcon);
 
 			var visibility = document.createElement("span");
@@ -229,7 +233,7 @@ Module.register("onecall", {
 		// humidity.
 		if (this.config.showHumidity) {
 			var humidityIcon = document.createElement("span");
-			humidityIcon.className = "wi wi-humidity";
+			humidityIcon.className = "wi wi-humidity skyblue";
 			small.appendChild(humidityIcon);
 
 			var humidity = document.createElement("span");
@@ -361,14 +365,14 @@ Module.register("onecall", {
 						}
 					} else feelsLike.className = "dimmed real";
 
-					feelsLike.innerHTML = this.translate("FEELS", {DEGREE: "<i class=\"wi wi-thermometer\"></i> " + this.feelsLike + "&deg;" + degreeLabel});
+					feelsLike.innerHTML = this.translate("FEELS", {DEGREE: "<i class=\"wi wi-thermometer yellow\"></i> " + this.feelsLike + "&deg;" + degreeLabel});
 					small.appendChild(feelsLike);
 				}
 
 				// dew point.
 				if (this.config.showDew) {
 					var dew = document.createElement("span"); 
-					dew.className = "dew midget lightskyblue";
+					dew.className = "dew midget cyan";
 					dew.innerHTML = this.translate("DEW") + "<i class=\"wi wi-raindrops lightgreen\"></i> " + this.dew.toFixed(1) + "&deg;" + degreeLabel;
 					small.appendChild(dew);
 				}
@@ -381,9 +385,9 @@ Module.register("onecall", {
 				if (this.config.showUvi) {
 					var uvi = document.createElement("span");
 					uvi.className = "uvi midget";
-					uvi.innerHTML = this.translate("UVI") + "<i class=\"wi wi-hot\"></i>" + this.uvi.toFixed(1);
+					uvi.innerHTML = this.translate("UVI") + "<i class=\"wi wi-hot gold\"></i>" + this.uvi.toFixed(1);
 					if (this.uvi < 0.1) {
-						uvi.className = uvi.className + " lightblue";
+						uvi.className = uvi.className + " lightgreen";
 						uvi.innerHTML = this.translate("UVI") + "<i class=\"wi wi-stars\"></i> 0";
 					} else if (this.uvi > 0 && this.uvi < 3) {
 						uvi.className = uvi.className + " lime";
@@ -420,9 +424,9 @@ Module.register("onecall", {
 
 					var prepIcon = document.createElement("span");
 					if (this.precipitation > 0) {
-						prepIcon.className = "fa fa-tint prep";
+						prepIcon.className = "wi wi-umbrella lime";
 					} else {
-						prepIcon.className = "fa fa-tint-slash prep";
+						prepIcon.className = "fa fa-tint-slash skyblue";
 					}
 					small.appendChild(prepIcon);
 				}
@@ -433,6 +437,13 @@ Module.register("onecall", {
 					description.className = "bright";
 					description.innerHTML = this.desc;
 					small.appendChild(description);
+				}
+
+				if (this.config.showAlerts && (this.alert !== null)) {
+					var alerts = document.createElement("div");
+					alerts.className = "midget coral alerts";
+					alerts.innerHTML = "<i class=\"wi wi-small-craft-advisory\"></i> " + this.translate("ALERTS") + this.start + " - " + this.end + "<br>" + this.alert;
+					small.appendChild(alerts);
 				}
 
 				wrapper.appendChild(small);
@@ -457,18 +468,18 @@ Module.register("onecall", {
 				var dayCell = document.createElement("td");
 
 				if (this.config.language == "ro") {
-					dayCell.className = "day ro";
-				} else dayCell.className = "day en";
+					dayCell.className = "align-left day ro";
+				} else dayCell.className = "align-left day en";
 
 				dayCell.innerHTML = forecast.day;
 				row.appendChild(dayCell);
 
 				var iconCell = document.createElement("td");
-				iconCell.className = "bright weather-icon";
+				iconCell.className = "align-center bright weather-icon";
 				row.appendChild(iconCell);
 
 				var icon = document.createElement("span");
-				icon.className = "wi forecasticon wi-" + forecast.icon;
+				icon.className = "align-center wi forecasticon wi-" + forecast.icon;
 				iconCell.appendChild(icon);
 
 				var degreeLabel = "";
@@ -496,44 +507,50 @@ Module.register("onecall", {
 				if (this.config.endpointType === "hourly") {
 					var medTempCell = document.createElement("td");
 					medTempCell.innerHTML = forecast.dayTemp.replace(".", this.config.decimalSymbol) + degreeLabel;
-					medTempCell.className = "lime";
+					medTempCell.className = "align-center lime";
 					row.appendChild(medTempCell);
 
 					var realFeel = document.createElement("td");
-					realFeel.innerHTML = "<i class=\"wi wi-thermometer little\"></i> " + parseFloat(forecast.realFeels).toFixed(0).replace(".", this.config.decimalSymbol) + degreeLabel;
-					realFeel.className = "yellow";
+					realFeel.innerHTML = parseFloat(forecast.realFeels).toFixed(0).replace(".", this.config.decimalSymbol) + degreeLabel;
+					realFeel.className = "align-center yellow";
 					row.appendChild(realFeel);	
 				} else {
 					var maxTempCell = document.createElement("td");
 					maxTempCell.innerHTML = forecast.maxTemp.replace(".", this.config.decimalSymbol) + degreeLabel;
-					maxTempCell.className = "coral";
+					maxTempCell.className = "align-center max-temp coral";
 					row.appendChild(maxTempCell);
 
 					var minTempCell = document.createElement("td");
 					minTempCell.innerHTML = forecast.minTemp.replace(".", this.config.decimalSymbol) + degreeLabel;
-					minTempCell.className = "skyblue";
+					minTempCell.className = "align-center min-temp skyblue";
 					row.appendChild(minTempCell);
 				}
 
 				if (this.config.showRainAmount) {
 					var rainCell = document.createElement("td");
-					if (isNaN(forecast.rain)) {
-						rainCell.className = "align-right shade";
+					rainCell.className = "align-right bright";
+					if (!forecast.snow && !forecast.rain) {
+						rainCell.className = "align-right rain";
 						rainCell.innerHTML = this.translate("No rain") + " <i class=\"fa fa-tint-slash skyblue\"></i>";
-					} else if (!isNaN(forecast.snow)) {
-						if(config.units !== "imperial") {
+					} else if (forecast.snow) {
+						if (config.units !== "imperial") {
 							rainCell.innerHTML = parseFloat(forecast.snow).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-snowflake-cold lightblue\"></i>";
 						} else {
 							rainCell.innerHTML = (parseFloat(forecast.snow) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-snowflake-cold lightblue\"></i>";
 						}
-					} else {
+					} else if (forecast.rain) {
 						if (config.units !== "imperial") {
-							rainCell.innerHTML = parseFloat(forecast.rain).toFixed(1).replace(".", this.config.decimalSymbol) + " mm &nbsp;<i class=\"fa fa-tint skyblue\"></i>&nbsp;";
+							rainCell.innerHTML = parseFloat(forecast.rain).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-umbrella lime\"></i>";
 						} else {
-							rainCell.innerHTML = (parseFloat(forecast.rain) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in &nbsp;<i class=\"fa fa-tint skyblue\"></i>&nbsp;";
+							rainCell.innerHTML = (parseFloat(forecast.rain) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-umbrella lime\"></i>";
+						}
+			    	} else if (forecast.rain && forecast.snow) {
+						if (config.units !== "imperial") {
+							rainCell.innerHTML = parseFloat(forecast.rain + forecast.snow).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-umbrella lime\"></i>";
+						} else {
+							rainCell.innerHTML = (parseFloat(forecast.rain + forecast.snow) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-umbrella lime\"></i>";
 						}
 					} 
-					rainCell.className = "align-right bright rain";
 					row.appendChild(rainCell);
 				}
 
@@ -559,30 +576,35 @@ Module.register("onecall", {
 					table.appendChild(row);
 
 					var humidity = document.createElement("td");
-					humidity.innerHTML = "<i class=\"wi wi-humidity skyblue little\"></i> " + parseFloat(forecast.humidity).toFixed(0).replace(".", this.config.decimalSymbol) + "%";
+					humidity.innerHTML = "<i class=\"wi wi-humidity skyblue little\"></i> " + parseFloat(forecast.humidity).toFixed(0) + "%";
 					humidity.className = "align-left humidity";
 					row.appendChild(humidity);
 
 					var dewPoint = document.createElement("td");
 					dewPoint.innerHTML = parseFloat(forecast.dewPoint).toFixed(1).replace(".", this.config.decimalSymbol) + degreeLabel;
-					dewPoint.className = "dewPoint skyblue";
+					dewPoint.className = "align-center dewPoint cyan";
 					row.appendChild(dewPoint);
 
 					var pressure = document.createElement("td");
-					pressure.innerHTML = Math.round(forecast.pressure * 750.062 / 1000).toFixed(0).replace(".", this.config.decimalSymbol) + " <span class=dimmed>Hg</span>";
-					pressure.className = "pressure greenyellow";
+					pressure.innerHTML = Math.round(forecast.pressure * 750.062 / 1000).toFixed(0) + " Hg";
+					pressure.className = "align-center pressure gold";
 					row.appendChild(pressure);
 
 					var uvIndex = document.createElement("td");
-					uvIndex.innerHTML = "<i class=\"wi wi-hot gold little\"></i> " + parseFloat(forecast.uvIndex).toFixed(1).replace(".", this.config.decimalSymbol);
-					uvIndex.className = "uvIndex";
+					uvIndex.innerHTML = "uv " + parseFloat(forecast.uvIndex).toFixed(1).replace(".", this.config.decimalSymbol);
+					uvIndex.className = "align-center uvIndex lightgreen";
 					row.appendChild(uvIndex);
 
-					if (this.config.showRainAmount) {
-						var precip = document.createElement("td");
-						precip.innerHTML =  parseFloat(forecast.precip).toFixed(2).replace(".", this.config.decimalSymbol) + "% <i class=\"wi wi-umbrella lime\"></i>";
-						precip.className = "precipitation";
-						row.appendChild(precip);
+					if (this.config.endpointType === "hourly") {
+						var visible = document.createElement("td");
+						visible.innerHTML =  "<i class=\"fa fa-binoculars little violet\"></i> " + forecast.visibility/1000 + " Km";
+						visible.className = "align-right visibility";
+						row.appendChild(visible);
+					} else {
+						var realFeelDay = document.createElement("td");
+						realFeelDay.innerHTML =  "Realfeel " + parseFloat(forecast.realFeelsDay).toFixed(0) + degreeLabel;
+						realFeelDay.className = "align-right realFeel yellow";
+						row.appendChild(realFeelDay);
 					}
 				}
 
@@ -716,7 +738,7 @@ Module.register("onecall", {
 		params += "&APPID=" + this.config.appid;
 
 		if (this.config.endpointType === "current") {
-			params += "&exclude=minutely,hourly,daily,alerts";
+			params += "&exclude=minutely,hourly,daily";
 		}
 		else if (this.config.endpointType === "hourly") {
 			params += "&exclude=current,minutely,daily,alerts";
@@ -724,11 +746,8 @@ Module.register("onecall", {
 		else if (this.config.endpointType === "daily") {
 			params += "&exclude=current,minutely,hourly,alerts";
 		}
-		else if (this.config.endpointType === "alerts") {
-			params += "&exclude=current,minutely,hourly,daily";
-		}
 		else {
-			params += "&exclude=minutely";
+			params += "&exclude=minutely,alerts";
 		}
 
 		return params;
@@ -746,12 +765,14 @@ Module.register("onecall", {
 	 *
 	 * argument data object - Weather information received form openweather.org.
 	 */
-	processWeather: function (data) {
+	processWeather: function (data, momenttz) {
 		if (!data || !data.current || typeof data.current.temp === "undefined") {
 			// Did not receive usable new data.
 			// Maybe this needs a better check?
 			return;
 		}
+
+		var mom = momenttz ? momenttz : moment; // Exception last.
 
 		this.humidity = parseFloat(data.current.humidity);
 		this.temperature = this.roundValue(data.current.temp);
@@ -762,19 +783,29 @@ Module.register("onecall", {
 		this.dew = data.current.dew_point;					// dew point.
 		this.uvi = data.current.uvi;						// uv index.
 
+		if (data.hasOwnProperty("alerts")) {
+			this.start = mom(data.alerts[0].start, "X").format("HH:mm");
+			this.end = mom(data.alerts[0].end, "X").format("HH:mm");
+			this.alert = data.alerts[0].description;
+		}
+
 		this.temperature === "-0.0" ? 0.0 : this.temperature;
 
 		var precip = false;
-		if (!data.current.hasOwnProperty("rain") && !data.current.hasOwnProperty("snow")) {
-			this.precipitation = 0;
-			precip = false;
-		}
-		if (data.current.hasOwnProperty("rain") && !data.current.hasOwnProperty("snow")) {
-			this.rain = data.current["rain"]["1h"];
+		if (data.current.hasOwnProperty("rain") && !isNaN(data.current["rain"]["1h"])) {
+			if (this.config.units === "imperial") {
+				this.rain = data.current["rain"]["1h"] / 25.4;
+			} else {
+				this.rain = data.current["rain"]["1h"];
+			}
 			precip = true;
 		}
-		if (data.current.hasOwnProperty("snow") && !data.current.hasOwnProperty("rain")) {
-			this.snow = data.current["snow"]["1h"];
+		if (data.current.hasOwnProperty("snow") && !isNaN(data.current["snow"]["1h"])) {
+			if (this.config.units === "imperial") {
+				this.snow = data.current["snow"]["1h"] / 25.4;
+			} else {
+				this.snow = data.current["snow"]["1h"];
+			}
 			precip = true;
 		}
 		if (precip) {
@@ -885,8 +916,6 @@ Module.register("onecall", {
 			forecastList = data.daily;
 		} else if (data.hourly) {
 			forecastList = data.hourly;
-		} else if (data.alerts) {
-			forecastList = data.alerts;
 		} else {
 //			Log.error("Unexpected forecast data");
 			return undefined;
@@ -919,8 +948,10 @@ Module.register("onecall", {
 					dayTemp: this.roundValue(forecast.temp),
 					precip: this.roundValue(forecast.pop),
 					realFeels: this.roundValue(forecast.feels_like),
+					realFeelsDay: this.roundValue(forecast.feels_like.day),
 					dewPoint: this.roundValue(forecast.dew_point),
 					uvIndex: forecast.uvi,
+					visibility: forecast.visibility,
 				};
 
 				this.forecast.push(forecastData);
@@ -1062,8 +1093,14 @@ Module.register("onecall", {
 		var mom = momenttz ? momenttz : moment; // Exception last.
 
 		//If the amount of rain actually is a number, return it
-		if (!isNaN(forecast.rain)) {
-			return forecast.rain;
+		if (this.config.endpointType === "hourly") {
+			if (!isNaN(forecast.rain) && !isNaN(forecast.rain["1h"])) {
+				return forecast.rain;
+			}
+		} else {
+			if (!isNaN(forecast.rain)) {
+				return forecast.rain;
+			}
 		}
 
 		//Find all forecasts that is for the same day
@@ -1091,8 +1128,15 @@ Module.register("onecall", {
 	processSnow: function (forecast, allForecasts, momenttz) {
 		var mom = momenttz ? momenttz : moment; // Exception last.
 
-		if (!isNaN(forecast.snow)) {
-			return forecast.snow;
+        //If the amount of snow actually is a number, return it
+		if (this.config.endpointType === "hourly") {
+			if (!isNaN(forecast.snow) && !isNaN(forecast.snow["1h"])) {
+				return forecast.snow;
+			}
+		} else {
+			if (!isNaN(forecast.snow)) {
+				return forecast.snow;
+			}
 		}
 
 		//Find all forecasts that is for the same day
@@ -1102,12 +1146,12 @@ Module.register("onecall", {
 			return itemDateTime.isSame(checkDateTime, "day") && item.snow instanceof Object;
 		});
 
-		//If no rain this day return undefined so it wont be displayed for this day
+		//If no snow this day return undefined so it wont be displayed for this day
 		if (daysForecasts.length === 0) {
 			return undefined;
 		}
 
-		//Summarize all the rain from the matching days
+		//Summarize all the snow from the matching days
 		return daysForecasts
 			.map(function (item) {
 				return Object.values(item.snow)[0];
