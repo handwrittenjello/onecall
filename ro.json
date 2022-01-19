@@ -17,6 +17,13 @@
 	"No rain": "Nu plouă",
 	"No snow": "Nu ninge",
 	"ALERTS": "Alertă meteo între ",
+	"Good": "Bun",
+    "Fair": "Rezonabil",
+    "Moderate": "Moderat",
+    "Poor": "Slab",
+    "Unhealty": "Riscant",
+    "Index": "Index calitate aer",
+    "Update": "Ultima actualizare ",
 
 	"N": "N",
 	"NNE": "NNE",
