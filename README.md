@@ -17,7 +17,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 		}
 	},
 
-Current weather with onecall
+#### Current weather with onecall
 
 <img src=https://github.com/hangorazvan/onecall/blob/master/current.png>
 
@@ -74,7 +74,7 @@ Current weather with onecall
 		}
 	},
 
-Daily forecast with onecall (7 days)
+#### Daily forecast with onecall (7 days)
 
 <img src=https://github.com/hangorazvan/onecall/blob/master/daily.png>
 
@@ -121,7 +121,7 @@ Daily forecast with onecall (7 days)
 		}
 	},
 
-Hourly forecast with onecall (1 hour)
+#### Hourly forecast with onecall (1 hour)
 
 <img src=https://github.com/hangorazvan/onecall/blob/master/hourly.png>
 
@@ -164,6 +164,24 @@ Hourly forecast with onecall (1 hour)
 			useLocationAsHeader: false,
 
 			tableClass: "small",
+		}
+	},
+
+#### Air Polution Index under construction
+
+	{
+		module: "onecall",
+		position: "top_left",
+		header: "Air polution in",
+		classes: "air polution day",
+		disabled: false,
+		config: {
+			lat: "",	// your location latitude,
+			lon: "",	// your location longitude,
+			appid: "",		// your openweathermap API key,
+			endpointType: "aqi",
+			appendLocationNameToHeader: true,
+			initialLoadDelay: 6000,
 		}
 	},
 
