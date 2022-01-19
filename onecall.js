@@ -159,7 +159,7 @@ Module.register("onecall", {
 			windDirection.className = "wind";
 			if (this.config.showWindDirectionAsArrow) {
 				if (this.windDeg !== null) {
-					windDirection.innerHTML = "<i class=\"wi wi-direction-down\" style=\"transform:rotate(" + this.windDeg + "deg);\"></i>";
+					windDirection.innerHTML = "<i class=¥"wi wi-direction-down¥" style=¥"transform:rotate(" + this.windDeg + "deg);¥"></i>";
 				}
 			} else {
 				windDirection.innerHTML = this.translate(this.windDirection);
@@ -309,7 +309,7 @@ Module.register("onecall", {
 
 				var temperature = document.createElement("span");
 				temperature.className = "bright light xlarge";
-				temperature.innerHTML = " " + this.temperature.replace(".", this.config.decimalSymbol) + "&deg;<span class=\"deg\">" + degreeLabel + "</span>";
+				temperature.innerHTML = " " + this.temperature.replace(".", this.config.decimalSymbol) + "&deg;<span class=¥"deg¥">" + degreeLabel + "</span>";
 				large.appendChild(temperature);
 
 				var spacer = document.createElement("span");
@@ -365,7 +365,7 @@ Module.register("onecall", {
 						}
 					} else feelsLike.className = "dimmed real";
 
-					feelsLike.innerHTML = this.translate("FEELS", {DEGREE: "<i class=\"wi wi-thermometer yellow\"></i> " + this.feelsLike + "&deg;" + degreeLabel});
+					feelsLike.innerHTML = this.translate("FEELS", {DEGREE: "<i class=¥"wi wi-thermometer yellow¥"></i> " + this.feelsLike + "&deg;" + degreeLabel});
 					small.appendChild(feelsLike);
 				}
 
@@ -373,7 +373,7 @@ Module.register("onecall", {
 				if (this.config.showDew) {
 					var dew = document.createElement("span"); 
 					dew.className = "dew midget cyan";
-					dew.innerHTML = this.translate("DEW") + "<i class=\"wi wi-raindrops lightgreen\"></i> " + this.dew.toFixed(1) + "&deg;" + degreeLabel;
+					dew.innerHTML = this.translate("DEW") + "<i class=¥"wi wi-raindrops lightgreen¥"></i> " + this.dew.toFixed(1) + "&deg;" + degreeLabel;
 					small.appendChild(dew);
 				}
 
@@ -385,10 +385,10 @@ Module.register("onecall", {
 				if (this.config.showUvi) {
 					var uvi = document.createElement("span");
 					uvi.className = "uvi midget";
-					uvi.innerHTML = this.translate("UVI") + "<i class=\"wi wi-hot gold\"></i>" + this.uvi.toFixed(1);
+					uvi.innerHTML = this.translate("UVI") + "<i class=¥"wi wi-hot gold¥"></i>" + this.uvi.toFixed(1);
 					if (this.uvi < 0.1) {
 						uvi.className = uvi.className + " lightgreen";
-						uvi.innerHTML = this.translate("UVI") + "<i class=\"wi wi-stars\"></i> 0";
+						uvi.innerHTML = this.translate("UVI") + "<i class=¥"wi wi-stars¥"></i> 0";
 					} else if (this.uvi > 0 && this.uvi < 3) {
 						uvi.className = uvi.className + " lime";
 					} else if (this.uvi >= 3 && this.uvi < 6) {
@@ -442,7 +442,7 @@ Module.register("onecall", {
 				if (this.config.showAlerts && (this.alert !== null)) {
 					var alerts = document.createElement("div");
 					alerts.className = "midget coral alerts";
-					alerts.innerHTML = "<i class=\"wi wi-small-craft-advisory\"></i> " + this.translate("ALERTS") + this.start + " - " + this.end + "<br>" + this.alert;
+					alerts.innerHTML = "<i class=¥"wi wi-small-craft-advisory¥"></i> " + this.translate("ALERTS") + this.start + " - " + this.end + "<br>" + this.alert;
 					small.appendChild(alerts);
 				}
 
@@ -531,24 +531,24 @@ Module.register("onecall", {
 					rainCell.className = "align-right bright";
 					if (!forecast.snow && !forecast.rain) {
 						rainCell.className = "align-right rain";
-						rainCell.innerHTML = this.translate("No rain") + " <i class=\"fa fa-tint-slash skyblue\"></i>";
+						rainCell.innerHTML = this.translate("No rain") + " <i class=¥"fa fa-tint-slash skyblue¥"></i>";
 					} else if (forecast.snow) {
 						if (config.units !== "imperial") {
-							rainCell.innerHTML = parseFloat(forecast.snow).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-snowflake-cold lightblue\"></i>";
+							rainCell.innerHTML = parseFloat(forecast.snow).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=¥"wi wi-snowflake-cold lightblue¥"></i>";
 						} else {
-							rainCell.innerHTML = (parseFloat(forecast.snow) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-snowflake-cold lightblue\"></i>";
+							rainCell.innerHTML = (parseFloat(forecast.snow) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=¥"wi wi-snowflake-cold lightblue¥"></i>";
 						}
 					} else if (forecast.rain) {
 						if (config.units !== "imperial") {
-							rainCell.innerHTML = parseFloat(forecast.rain).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-umbrella lime\"></i>";
+							rainCell.innerHTML = parseFloat(forecast.rain).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=¥"wi wi-umbrella lime¥"></i>";
 						} else {
-							rainCell.innerHTML = (parseFloat(forecast.rain) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-umbrella lime\"></i>";
+							rainCell.innerHTML = (parseFloat(forecast.rain) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=¥"wi wi-umbrella lime¥"></i>";
 						}
 			    	} else if (forecast.rain && forecast.snow) {
 						if (config.units !== "imperial") {
-							rainCell.innerHTML = parseFloat(forecast.rain + forecast.snow).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-umbrella lime\"></i>";
+							rainCell.innerHTML = parseFloat(forecast.rain + forecast.snow).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=¥"wi wi-umbrella lime¥"></i>";
 						} else {
-							rainCell.innerHTML = (parseFloat(forecast.rain + forecast.snow) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-umbrella lime\"></i>";
+							rainCell.innerHTML = (parseFloat(forecast.rain + forecast.snow) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=¥"wi wi-umbrella lime¥"></i>";
 						}
 					} 
 					row.appendChild(rainCell);
@@ -576,7 +576,7 @@ Module.register("onecall", {
 					table.appendChild(row);
 
 					var humidity = document.createElement("td");
-					humidity.innerHTML = "<i class=\"wi wi-humidity skyblue little\"></i> " + parseFloat(forecast.humidity).toFixed(0) + "%";
+					humidity.innerHTML = "<i class=¥"wi wi-humidity skyblue little¥"></i> " + parseFloat(forecast.humidity).toFixed(0) + "%";
 					humidity.className = "align-left humidity";
 					row.appendChild(humidity);
 
@@ -590,22 +590,22 @@ Module.register("onecall", {
 					pressure.className = "align-center pressure gold";
 					row.appendChild(pressure);
 
-					var uvIndex = document.createElement("td");
-					uvIndex.innerHTML = "uv " + parseFloat(forecast.uvIndex).toFixed(1).replace(".", this.config.decimalSymbol);
-					uvIndex.className = "align-center uvIndex lightgreen";
-					row.appendChild(uvIndex);
-
 					if (this.config.endpointType === "hourly") {
 						var visible = document.createElement("td");
-						visible.innerHTML =  "<i class=\"fa fa-binoculars little violet\"></i> " + forecast.visibility/1000 + " Km";
-						visible.className = "align-right visibility";
+						visible.innerHTML =  forecast.visibility/1000 + " Km";
+						visible.className = "align-center violet visibility";
 						row.appendChild(visible);
 					} else {
 						var realFeelDay = document.createElement("td");
-						realFeelDay.innerHTML =  "Realfeel " + parseFloat(forecast.realFeelsDay).toFixed(0) + degreeLabel;
-						realFeelDay.className = "align-right realFeel yellow";
+						realFeelDay.innerHTML =  parseFloat(forecast.realFeelsDay).toFixed(0) + degreeLabel;
+						realFeelDay.className = "align-center realFeel yellow";
 						row.appendChild(realFeelDay);
 					}
+					
+					var uvIndex = document.createElement("td");
+					uvIndex.innerHTML = "UVI " + parseFloat(forecast.uvIndex).toFixed(1).replace(".", this.config.decimalSymbol);
+					uvIndex.className = "align-right uvIndex lightgreen";
+					row.appendChild(uvIndex);
 				}
 
 				if (this.config.fade && this.config.fadePoint < 1) {
