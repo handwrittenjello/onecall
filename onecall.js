@@ -240,7 +240,9 @@ Module.register("onecall", {
 			}
 
 	        // air quality index
-	        if (this.aqi == 1) { 
+	        if (this.aqi == 1) {
+		    var quality = null;
+	            var color = null;
 	            quality = this.translate("Good");
 			    color = "lime";
 			} else if (this.aqi == 2) { 
