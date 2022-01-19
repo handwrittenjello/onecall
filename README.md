@@ -169,10 +169,11 @@ Do not make modification and do not replace the default module, just add <i>disa
 
 #### Air Polution Index under construction
 
+<img src=https://github.com/hangorazvan/onecall/blob/master/aqi.png>
+
 	{
 		module: "onecall",
-		position: "top_left",
-		header: "Air polution in",
+		position: "top_right",
 		classes: "air polution day",
 		disabled: false,
 		config: {
@@ -180,8 +181,8 @@ Do not make modification and do not replace the default module, just add <i>disa
 			lon: "",	// your location longitude,
 			appid: "",		// your openweathermap API key,
 			endpointType: "aqi",
-			appendLocationNameToHeader: true,
-			initialLoadDelay: 6000,
+			showAqiTime: true,
+		        showPollution: true,
 		}
 	},
 
