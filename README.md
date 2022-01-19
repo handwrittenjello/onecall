@@ -2,7 +2,7 @@
 
 https://github.com/hangorazvan/onecall
 
-Modified MagicMirror2 deprecated current & forecast weather module based on Openweathermap with Onecall endpoint and AQI
+Modified MagicMirror2 deprecated current & forecast weather module based on Openweathermap with Onecall endpoint and Air Quality Index
 
 Do not make modification and do not replace the default module, just add <i>disabled: true</i> in config.js and use this one as 3rd party
 
