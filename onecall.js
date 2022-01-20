@@ -243,12 +243,14 @@ Module.register("onecall", {
 	// Override dom generator.
 	getDom: function () {
 		if (this.config.appid === "" || this.config.backup === "") {
+		    var wrapper = document.createElement("div");
 			wrapper.innerHTML = "Please set the correct openweather <i>appid</i> in the config for module: " + this.name + ".";
 			wrapper.className = "dimmed light small";
 			return wrapper;
 		}
 			
 		if (!this.loaded) {
+		    var wrapper = document.createElement("div");
 			wrapper.innerHTML = this.translate("LOADING");
 			wrapper.className = "dimmed light small";
 			return wrapper;
