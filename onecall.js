@@ -135,6 +135,17 @@ Module.register("onecall", {
 		this.end = null;
 		this.alert = null;
 
+		this.aqi = null;	 		    // Air Quality
+		this.aqi_t = null;
+		this.c_co = null;
+		this.c_no = null;
+		this.c_no2 = null;
+		this.c_o3 = null;
+		this.c_so2 = null;
+		this.c_pm25 = null;
+		this.c_pm10 = null;
+		this.c_nh3 = null;
+
 		this.loaded = false;
 		this.scheduleUpdate(this.config.initialLoadDelay);
 
@@ -231,110 +242,24 @@ Module.register("onecall", {
 
 	// Override dom generator.
 	getDom: function () {
-	    if (this.config.endpointType === "aqi") {
-	        var wrapper = document.createElement("div");
-			if (!this.config.colored) {
-				wrapper.className = "grayscale airpolution";
-			} else {
-				wrapper.className = "airpolution";
-			}
-
-	        // air quality index
-	        var aqi_q = null; var aqi_c = null;
-	        if (this.aqi == 1) { 
-	            aqi_q = this.translate("Good");
-			    aqi_c = "lime";
-			} else if (this.aqi == 2) { 
-			    aqi_q = this.translate("Fair");
-			    aqi_c = "yellow";
-			} else if (this.aqi == 3) { 
-			    aqi_q = this.translate("Moderate");
-			    aqi_c = "orange";
-			} else if (this.aqi == 4) { 
-			    aqi_q = this.translate("Poor");
-			    aqi_c = "tomato";
-			} else if (this.aqi == 5) { 
-			    aqi_q = this.translate("Unhealty");
-			    aqi_c = "redrf";
-			}
-			
-			var aqi = document.createElement("div");
-		    aqi.className = "normal medium aqi bright";
-			aqi.innerHTML = this.translate("Index") + " <i class=\"fa fa-leaf " + aqi_c + "\"></i> <span class=" + aqi_c + ">" + aqi_q + " (" + this.aqi + ")</span>";
-			wrapper.appendChild(aqi);
-
-            if (this.config.showAqiTime) {
-         		var aqi_t = document.createElement("div");
-        		aqi_t.className = "shade small aqi_t";
-        		aqi_t.innerHTML = this.translate("Update") + this.aqi_t + ", " + this.config.location;
-        		wrapper.appendChild(aqi_t);
-            }
-    		
-            if (this.config.showPollution) {
-        		var spacer = document.createElement("br");
-    			wrapper.appendChild(spacer);
-    			
-     			var c_co = document.createElement("div");
-    			c_co.className = "normal small c_co";
-    			c_co.innerHTML = "Carbon monoxid (CO) " + this.c_co + " µg/m³";
-    			wrapper.appendChild(c_co);
-    
-    			var c_no = document.createElement("div");
-    			c_no.className = "normal small c_no";
-    			c_no.innerHTML = "Nitrogen monoxid (NO) " + this.c_no + " µg/m³";
-    			wrapper.appendChild(c_no);
-    
-    			var c_no2 = document.createElement("div");
-    			c_no2.className = "normal small c_no2";
-    			c_no2.innerHTML = "Nitrogen dioxid (NO<sub>2</sub>) " + this.c_no2 + " µg/m³";
-    			wrapper.appendChild(c_no2);
-    
-    			var c_o3 = document.createElement("div");
-    			c_o3.className = "normal small c_o3";
-    			c_o3.innerHTML = "Ozon (O<sub>3</sub>) " + this.c_o3 + " µg/m³";
-    			wrapper.appendChild(c_o3);
-    
-    			var c_so2 = document.createElement("div");
-    			c_so2.className = "normal small c_so2";
-    			c_so2.innerHTML = "Sulfur dioxid (SO<sub>2</sub>) " + this.c_so2 + " µg/m³";
-    			wrapper.appendChild(c_so2);
-    
-    			var c_nh3 = document.createElement("div");
-    			c_nh3.className = "normal small c_nh3";
-    			c_nh3.innerHTML = "Ammonia (NH<sub>3</sub>) " + this.c_nh3 + " µg/m³";
-    			wrapper.appendChild(c_nh3);
-    
-    			var c_pm25 = document.createElement("div");
-    			c_pm25.className = "normal small c_pm25";
-    			c_pm25.innerHTML = "2.5μm particle (PM<sub>2.5</sub>) " + this.c_pm25 + " µg/m³";
-    			wrapper.appendChild(c_pm25);
-    
-    			var c_pm10 = document.createElement("div");
-    			c_pm10.className = "normal small c_pm10";
-    			c_pm10.innerHTML = "10μm particle (PM<sub>10</sub>) " + this.c_pm10 + " µg/m³";
-    			wrapper.appendChild(c_pm10);
-            }
-
+		if (this.config.appid === "" || this.config.backup === "") {
+			wrapper.innerHTML = "Please set the correct openweather <i>appid</i> in the config for module: " + this.name + ".";
+			wrapper.className = "dimmed light small";
 			return wrapper;
+		}
+			
+		if (!this.loaded) {
+			wrapper.innerHTML = this.translate("LOADING");
+			wrapper.className = "dimmed light small";
+			return wrapper;
+		}
 
-	    } else if (this.config.endpointType === "current") {
+	    if (this.config.endpointType === "current") {
 			var wrapper = document.createElement("div");
 			if (!this.config.colored) {
 				wrapper.className = "grayscale currentweather";
 			} else {
 				wrapper.className = "currentweather";
-			}
-
-			if (this.config.appid === "") {
-				wrapper.innerHTML = "Please set the correct openweather <i>appid</i> in the config for module: " + this.name + ".";
-				wrapper.className = "dimmed light small";
-				return wrapper;
-			}
-
-			if (!this.loaded) {
-				wrapper.innerHTML = this.translate("LOADING");
-				wrapper.className = "dimmed light small";
-				return wrapper;
 			}
 
 			if (this.config.onlyTemp === false) {
@@ -499,7 +424,94 @@ Module.register("onecall", {
 
 			return wrapper;
 
-		} else {
+		} else if (this.config.endpointType === "aqi") {
+	        var wrapper = document.createElement("div");
+			if (!this.config.colored) {
+				wrapper.className = "grayscale airpolution";
+			} else {
+				wrapper.className = "airpolution";
+			}
+
+	        // air quality index
+	        var aqi_q = null; var aqi_c = null;
+	        if (this.aqi == 1) { 
+	            aqi_q = this.translate("Good");
+			    aqi_c = "lime";
+			} else if (this.aqi == 2) { 
+			    aqi_q = this.translate("Fair");
+			    aqi_c = "yellow";
+			} else if (this.aqi == 3) { 
+			    aqi_q = this.translate("Moderate");
+			    aqi_c = "orange";
+			} else if (this.aqi == 4) { 
+			    aqi_q = this.translate("Poor");
+			    aqi_c = "tomato";
+			} else if (this.aqi == 5) { 
+			    aqi_q = this.translate("Unhealty");
+			    aqi_c = "redrf";
+			}
+			
+			var aqi = document.createElement("div");
+		    aqi.className = "normal medium aqi bright";
+			aqi.innerHTML = this.translate("Index") + " <i class=\"fa fa-leaf " + aqi_c + "\"></i> <span class=" + aqi_c + ">" + aqi_q + " (" + this.aqi + ")</span>";
+			wrapper.appendChild(aqi);
+
+
+            if (this.config.showAqiTime) {
+         		var aqi_t = document.createElement("div");
+        		aqi_t.className = "shade small aqi_t";
+        		aqi_t.innerHTML = this.translate("Update") + this.aqi_t + ", " + this.config.location;
+        		wrapper.appendChild(aqi_t);
+            }
+    		
+            if (this.config.showPollution) {
+        		var spacer = document.createElement("br");
+    			wrapper.appendChild(spacer);
+    			
+    			var c_co = document.createElement("div");
+    			c_co.className = "normal small c_co";
+    			c_co.innerHTML = "Carbon monoxid (CO) " + this.c_co + " µg/m³";
+    			wrapper.appendChild(c_co);
+    
+    			var c_no = document.createElement("div");
+    			c_no.className = "normal small c_no";
+    			c_no.innerHTML = "Nitrogen monoxid (NO) " + this.c_no + " µg/m³";
+    			wrapper.appendChild(c_no);
+    
+    			var c_no2 = document.createElement("div");
+    			c_no2.className = "normal small c_no2";
+    			c_no2.innerHTML = "Nitrogen dioxid (NO<sub>2</sub>) " + this.c_no2 + " µg/m³";
+    			wrapper.appendChild(c_no2);
+    
+    			var c_o3 = document.createElement("div");
+    			c_o3.className = "normal small c_o3";
+    			c_o3.innerHTML = "Ozon (O<sub>3</sub>) " + this.c_o3 + " µg/m³";
+    			wrapper.appendChild(c_o3);
+    
+    			var c_so2 = document.createElement("div");
+    			c_so2.className = "normal small c_so2";
+    			c_so2.innerHTML = "Sulfur dioxid (SO<sub>2</sub>) " + this.c_so2 + " µg/m³";
+    			wrapper.appendChild(c_so2);
+    
+    			var c_nh3 = document.createElement("div");
+    			c_nh3.className = "normal small c_nh3";
+    			c_nh3.innerHTML = "Ammonia (NH<sub>3</sub>) " + this.c_nh3 + " µg/m³";
+    			wrapper.appendChild(c_nh3);
+    
+    			var c_pm25 = document.createElement("div");
+    			c_pm25.className = "normal small c_pm25";
+    			c_pm25.innerHTML = "2.5μm particle (PM<sub>2.5</sub>) " + this.c_pm25 + " µg/m³";
+    			wrapper.appendChild(c_pm25);
+    
+    			var c_pm10 = document.createElement("div");
+    			c_pm10.className = "normal small c_pm10";
+    			c_pm10.innerHTML = "10μm particle (PM<sub>10</sub>) " + this.c_pm10 + " µg/m³";
+    			wrapper.appendChild(c_pm10);
+            }
+
+			return wrapper;
+
+	    } else {
 
 			var table = document.createElement("table");
 			table.className = "weatherforecast " + this.config.tableClass;
@@ -614,6 +626,8 @@ Module.register("onecall", {
 					}
 				}
 
+            	// add extra information of weather forecast
+            	// humidity, dew point,, pressure, visibility, feels like and UV index
 				if (this.config.extra) {
 					var row = document.createElement("tr");
 					if (!this.config.colored) {
@@ -800,7 +814,11 @@ Module.register("onecall", {
 
 		return params;
 	},
-	
+
+	/* updateAir (Air Qualiti Index)
+	 * Requests new data from openweather.org.
+	 * Calls processAir on succesfull response.
+	 */
 	updateAir: function () {
 		if (this.config.appid === "" || this.config.backup === "") {
 			Log.error("Air Polution: APPID not set!");
@@ -832,27 +850,31 @@ Module.register("onecall", {
 		};
 		airRequest.send();
 	},
-	
+
+	/* processAir(data)
+	 * Uses the received data to set the various values.
+	 *
+	 * argument data object - air quality information received form openweather.org.
+	 */
 	processAir: function (data, momenttz) {
 		if (!data || !data.list === "undefined") {
-			// Did not receive usable new data.
-			// Maybe this needs a better check?
 			return;
 		}
 
         var mom = momenttz ? momenttz : moment; // Exception last.
 
-        this.aqi_t = mom(data.list[0].dt, "X").format("HH:mm");
 		this.aqi = data.list[0].main.aqi;
+        this.aqi_t = mom(data.list[0].dt, "X").format("HH:mm");
 		if (data.list[0].hasOwnProperty("components")) {
-    		this.c_co = data.list[0].components.co;
-    		this.c_no = data.list[0].components.no2;
-    		this.c_no2 = data.list[0].components.no2;
-    		this.c_o3 = data.list[0].components.o3;
-    		this.c_so2 = data.list[0].components.so2;
-    		this.c_pm25 = data.list[0].components.pm2_5;
-    		this.c_pm10 = data.list[0].components.pm10;
-    		this.c_nh3 = data.list[0].components.nh3;
+		    var aqi_p = data.list[0].components;
+    		this.c_co = aqi_p.co;
+    		this.c_no = aqi_p.no;
+    		this.c_no2 = aqi_p.no2;
+    		this.c_o3 = aqi_p.o3;
+    		this.c_so2 = aqi_p.so2;
+    		this.c_pm25 = aqi_p.pm2_5;
+    		this.c_pm10 = aqi_p.pm10;
+    		this.c_nh3 = aqi_p.nh3;
 		}
 
 		if (!this.loaded) {
