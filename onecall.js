@@ -240,28 +240,27 @@ Module.register("onecall", {
 			}
 
 	        // air quality index
-	        if (this.aqi == 1) {
-		    var quality = null;
-	            var color = null;
-	            quality = this.translate("Good");
-			    color = "lime";
+	        var aqi_q = null; var aqi_c = null;
+	        if (this.aqi == 1) { 
+	            aqi_q = this.translate("Good");
+			    aqi_c = "lime";
 			} else if (this.aqi == 2) { 
-			    quality = this.translate("Fair");
-			    color = "yellow";
+			    aqi_q = this.translate("Fair");
+			    aqi_c = "yellow";
 			} else if (this.aqi == 3) { 
-			    quality = this.translate("Moderate");
-			    color = "orange";
+			    aqi_q = this.translate("Moderate");
+			    aqi_c = "orange";
 			} else if (this.aqi == 4) { 
-			    quality = this.translate("Poor");
-			    color = "tomato";
+			    aqi_q = this.translate("Poor");
+			    aqi_c = "tomato";
 			} else if (this.aqi == 5) { 
-			    quality = this.translate("Unhealty");
-			    color = "redrf";
+			    aqi_q = this.translate("Unhealty");
+			    aqi_c = "redrf";
 			}
 			
 			var aqi = document.createElement("div");
-		    aqi.className = "normal midget aqi bright";
-			aqi.innerHTML = this.translate("Index") + " <i class=\"fa fa-leaf " + color + "\"></i> <span class=" + color + ">" + quality + " (" + this.aqi + ")</span>";
+		    aqi.className = "normal medium aqi bright";
+			aqi.innerHTML = this.translate("Index") + " <i class=\"fa fa-leaf " + aqi_c + "\"></i> <span class=" + aqi_c + ">" + aqi_q + " (" + this.aqi + ")</span>";
 			wrapper.appendChild(aqi);
 
             if (this.config.showAqiTime) {
