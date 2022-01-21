@@ -177,14 +177,14 @@ Do not make modification and do not replace the default module, just add <i>disa
 		classes: "air quality day",
 		disabled: false,
 		config: {
-			lat: "",	// your location latitude,
-			lon: "",	// your location longitude,
+			lat: "",		// your location latitude,
+			lon: "",		// your location longitude,
 			appid: "",		// your openweathermap API key,
 			endpointType: "aqi",
 			calculateAqi: true,			// calculate AQI from pollutants concentration
 			showAqiTime: false,			// show last update time
 			showAqiData: true,			// show AQI calculation pollutants
-			showPollution: false,		// snow list of all pollutants
+			showPollution: false,			// snow list of all pollutants
 		}
 	},
 

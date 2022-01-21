@@ -57,7 +57,7 @@ Module.register("onecall", {
 		calculateAqi: true,			// calculate AQI from pollutants concentration
 		showAqiTime: false,			// show last update time
 		showAqiData: true,			// show AQI calculation pollutants
-		showPollution: false,		// snow list of all pollutants
+		showPollution: false,			// snow list of all pollutants
 
 		appendLocationNameToHeader: true,
 		useLocationAsHeader: false,
