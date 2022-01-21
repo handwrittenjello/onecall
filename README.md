@@ -172,15 +172,18 @@ Do not make modification and do not replace the default module, just add <i>disa
 	{
 		module: "onecall",
 		position: "top_right",
-		classes: "air polution day",
+		header: "Air Quality Index",
+		classes: "air quality day",
 		disabled: false,
 		config: {
 			lat: "",	// your location latitude,
 			lon: "",	// your location longitude,
 			appid: "",		// your openweathermap API key,
 			endpointType: "aqi",
-			showAqiTime: true,
-		        showPollution: true,
+			calculateAqi: true,			// calculate AQI from pollutants concentration
+			showAqiTime: false,			// show last update time
+			showAqiData: true,			// show AQI calculation pollutants
+			showPollution: false,		// snow list of all pollutants
 		}
 	},
 

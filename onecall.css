@@ -23,12 +23,12 @@
   margin-top: 5px;
 }
 
-.currentweather .fa-tint {
-  transform: translate(0, 2px) scale(0.65);
+.onecall .currentweather .fa-tint {
+  transform: translate(0, 2px) scale(0.7);
 }
 
-.currentweather .fa-tint-slash {
-  transform: translate(0, 2px) scale(0.5);
+.onecall .currentweather .fa-tint-slash {
+  transform: translate(0, 2px) scale(0.7);
   margin: 0 -10px;
 }
 
@@ -146,14 +146,14 @@
 
 .daily table tr:nth-child(1) .ro:nth-child(1)::after {
   text-indent: 0;
-  content: "Astăzi";
+  content: "Astﾄホi";
   display: block;
   line-height: initial;
 }
 
 .daily table tr:nth-child(2) .ro:nth-child(1)::after {
   text-indent: 0;
-  content: "Mâine";
+  content: "Mﾃ｢ine";
   display: block;
   line-height: initial;
 }
@@ -200,14 +200,14 @@
 }
 
 .weatherforecast .min-temp,
-.weatherforecast .uvIndex,
+.weatherforecast .realFeel,
+.weatherforecast .visibility,
 .weatherforecast table tr td:nth-child(4) {
   width: 20% !important;
 }
 
 .weatherforecast .rain,
-.weatherforecast .visibility,
-.weatherforecast .realFeel,
+.weatherforecast .uvIndex,
 .weatherforecast table tr td:nth-child(5) {
   width: 25% !important;
 }
