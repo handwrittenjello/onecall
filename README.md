@@ -183,8 +183,8 @@ Do not make modification and do not replace the default module, just add <i>disa
 			endpointType: "aqi",
 			calculateAqi: true,			// calculate AQI from pollutants concentration
 			showAqiTime: true,			// show last update time
-			showAqiData: true,			// show AQI calculation pollutants
-			showPollution: false,			// snow list of all pollutants
+			showAqiData: true,			// show AQI calculation pollutants, hidding last update
+			showPollution: false,			// snow list of all pollutants, hidding AQI calculation
 		}
 	},
 
