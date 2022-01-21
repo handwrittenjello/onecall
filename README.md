@@ -167,6 +167,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 
 #### Air Quality Index
 
+<img src=https://github.com/hangorazvan/onecall/blob/master/aqi_c.png>
 <img src=https://github.com/hangorazvan/onecall/blob/master/aqi.png>
 
 	{
