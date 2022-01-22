@@ -188,19 +188,19 @@ Do not make modification and do not replace the default module, just add <i>disa
 		}
 	},
 
-	/*
-	Quality   Index     AQI calculation from highest pollutant concentration in μg/m3
+		/*
+		Quality   Index     AQI calculation from highest pollutant concentration in μg/m3
 
-	                    NO2         PM10        O3          PM25         SO2         CO
-	                                                        (optional)
-	Good        1       0-50        0-25        0-60        0-15         0-50        0-5000
-	Fair        2       50-100      25-50       60-120      15-30        50-100      5000-7500
-	Moderate    3       100-200     50-90       120-180     30-55        100-350     7500-10000
-	Poor        4       200-400     90-180      180-240     55-110       350-500     10000-20000
-	Very Poor   5       > 400       > 180       > 240       > 110        > 500       > 20000
+				    NO2         PM10        O3          PM25         SO2         CO
+									(optional)
+		Good        1       0-50        0-25        0-60        0-15         0-50        0-5000
+		Fair        2       50-100      25-50       60-120      15-30        50-100      5000-7500
+		Moderate    3       100-200     50-90       120-180     30-55        100-350     7500-10000
+		Poor        4       200-400     90-180      180-240     55-110       350-500     10000-20000
+		Very Poor   5       > 400       > 180       > 240       > 110        > 500       > 20000
 
-	Source: https://www.airqualitynow.eu/download/CITEAIR-Comparing_Urban_Air_Quality_across_Borders.pdf
-	*/
+		Source: https://www.airqualitynow.eu/download/CITEAIR-Comparing_Urban_Air_Quality_across_Borders.pdf
+		*/
 
 Weather compliments to put in your config.js
 
@@ -260,87 +260,87 @@ Weather compliments to put in your config.js
 
 To put in your custom.css
 
-	.compliments .wi {
-		display: inline-block;
-		transform: translate(20px, 25px) scale(0.6);
-	}
+		.compliments .wi {
+			display: inline-block;
+			transform: translate(20px, 25px) scale(0.6);
+		}
 
-	.compliments .wi-day-sunny {
-		content: url("../modules/onecall/icons/clear.png");
-		transform: translate(0, 25px);
-	}
+		.compliments .wi-day-sunny {
+			content: url("../modules/onecall/icons/clear.png");
+			transform: translate(0, 25px);
+		}
 
-	.ompliments .wi-day-cloudy {
-	  content: url("../modules/onecall/icons/mostlysunny.png");
-	}
+		.ompliments .wi-day-cloudy {
+		  content: url("../modules/onecall/icons/mostlysunny.png");
+		}
 
-	.compliments .wi-cloudy {
-	  content: url("../modules/onecall/icons/cloudy.png");
-	}
+		.compliments .wi-cloudy {
+		  content: url("../modules/onecall/icons/cloudy.png");
+		}
 
-	.compliments .wi-day-cloudy-windy {
-	  content: url("../modules/onecall/icons/mostlycloudy.png");
-	}
+		.compliments .wi-day-cloudy-windy {
+		  content: url("../modules/onecall/icons/mostlycloudy.png");
+		}
 
-	.compliments .wi-day-showers {
-	  content: url("../modules/onecall/icons/rain.png");
-	}
+		.compliments .wi-day-showers {
+		  content: url("../modules/onecall/icons/rain.png");
+		}
 
-	.compliments .wi-day-rain {
-	  content: url("../modules/onecall/icons/rain.png");
-	}
+		.compliments .wi-day-rain {
+		  content: url("../modules/onecall/icons/rain.png");
+		}
 
-	.compliments .wi-day-thunderstorm {
-	  content: url("../modules/onecall/icons/tstorms.png");
-	}
+		.compliments .wi-day-thunderstorm {
+		  content: url("../modules/onecall/icons/tstorms.png");
+		}
 
-	.compliments .wi-day-snow {
-	  content: url("../modules/onecall/icons/snow.png");
-	}
+		.compliments .wi-day-snow {
+		  content: url("../modules/onecall/icons/snow.png");
+		}
 
-	.compliments .wi-day-fog {
-	  content: url("../modules/onecall/icons/fog.png");
-	}
+		.compliments .wi-day-fog {
+		  content: url("../modules/onecall/icons/fog.png");
+		}
 
-	.compliments .wi-night-clear {
-		content: url("../modules/onecall/icons/nt_clear.png");
-		transform: translate(0, 25px) scale(1.2);
-	}
+		.compliments .wi-night-clear {
+			content: url("../modules/onecall/icons/nt_clear.png");
+			transform: translate(0, 25px) scale(1.2);
+		}
 
-	.compliments .wi-night-cloudy {
-	  content: url("../modules/onecall/icons/nt_cloudy.png");
-	}
+		.compliments .wi-night-cloudy {
+		  content: url("../modules/onecall/icons/nt_cloudy.png");
+		}
 
-	.compliments .wi-night-alt-cloudy {
-	  content: url("../modules/onecall/icons/nt_cloudy.png");
-	}
+		.compliments .wi-night-alt-cloudy {
+		  content: url("../modules/onecall/icons/nt_cloudy.png");
+		}
 
-	.compliments .wi-night-alt-showers {
-	  content: url("../modules/onecall/icons/nt_rain.png");
-	}
+		.compliments .wi-night-alt-showers {
+		  content: url("../modules/onecall/icons/nt_rain.png");
+		}
 
-	.compliments .wi-night-alt-rain {
-	  content: url("../modules/onecall/icons/nt_rain.png");
-	}
+		.compliments .wi-night-alt-rain {
+		  content: url("../modules/onecall/icons/nt_rain.png");
+		}
 
-	.compliments .wi-night-alt-thunderstorm {
-	  content: url("../modules/onecall/icons/nt_tstorms.png");
-	}
+		.compliments .wi-night-alt-thunderstorm {
+		  content: url("../modules/onecall/icons/nt_tstorms.png");
+		}
 
-	.compliments .wi-night-alt-snow {
-	  content: url("../modules/onecall/icons/nt_snow.png");
-	}
+		.compliments .wi-night-alt-snow {
+		  content: url("../modules/onecall/icons/nt_snow.png");
+		}
 
-	.compliments .wi-night-alt-cloudy-windy {
-	  content: url("../modules/onecall/icons/nt_hazy.png");
-	}
+		.compliments .wi-night-alt-cloudy-windy {
+		  content: url("../modules/onecall/icons/nt_hazy.png");
+		}
 
-	.compliments .fa,
-	.compliments .fas,
-	.compliments .far {
-		display: inline-block;
-		transform: scale(0.75);
-	}
+		.compliments .fa,
+		.compliments .fas,
+		.compliments .far {
+			display: inline-block;
+			transform: scale(0.75);
+		}
 
 Redesigned by Răzvan Cristea
 https://github.com/hangorazvan
