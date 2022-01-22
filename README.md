@@ -11,7 +11,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 		position: "top_right",
 		disabled: true,
 		config: {
-			// no needed anyore
+								// no needed anyore
 		}
 	},
 
@@ -22,19 +22,19 @@ Do not make modification and do not replace the default module, just add <i>disa
 	{
 		module: "onecall",
 		position: "top_right",
-		disabled: false,        // not necessary
+		disabled: false,        			// not necessary
 		header: "Current Weather",
 		classes: "current weather",
 		config: {
 			// you cand skip these settings if they are by default
-			lat: "",		// your location latitude,
-			lon: "",		// your location longitude,
-			location: "",		// your location,
-			appid: "",		// your openweathermap API key,
-			backup: "",		// second openweathermap API key,
-			units: "",		// your units, metric or imperial
-			dayUpdateInterval: 10 * 60 * 1000, // every 10 minutes
-			nightUpdateInterval: 15 * 60 * 1000, // every 15 minutes
+			lat: "",				// your location latitude,
+			lon: "",				// your location longitude,
+			location: "",				// your location,
+			appid: "",				// your openweathermap API key,
+			backup: "",				// second openweathermap API key,
+			units: "",				// your units, metric or imperial
+			dayUpdateInterval: 10 * 60 * 1000, 	// every 10 minutes
+			nightUpdateInterval: 15 * 60 * 1000, 	// every 15 minutes
 			initialLoadDelay: 0,
 			retryDelay: 2000,
 			animationSpeed: 1000,
@@ -49,13 +49,13 @@ Do not make modification and do not replace the default module, just add <i>disa
 			useBeaufort: false,
 			useKMPHwind: true,
 			showFeelsLike: true,
-			realFeelsLike: true,		// from onecall not calculated by module
+			realFeelsLike: true,			// from onecall not calculated by module
 			showVisibility: true,
 			showHumidity: true,
 			showPressure: true,
-			showDew: true,			// dew point
-			showUvi: true,			// UV index
-			showPrecip: true,		// precipitation
+			showDew: true,				// dew point
+			showUvi: true,				// UV index
+			showPrecip: true,			// precipitation
 			showDescription: true,
 			showAlerts: false,
 
@@ -68,7 +68,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 
 			onlyTemp: false,
 			hideTemp: false,
-			roundTemp: false,	// error on true
+			roundTemp: false,			// error on true
 		}
 	},
 
@@ -79,19 +79,19 @@ Do not make modification and do not replace the default module, just add <i>disa
 	{
 		module: "onecall",
 		position: "top_right",
-		disabled: false,        // not necessary
+		disabled: false,        			// not necessary
 		header: "Daily Weather Forecast",
 		classes: "daily",
 		config: {
 			// you cand skip these settings if they are by default
-			lat: "",	// your location latitude,
-			lon: "",	// your location longitude,
-			location: "",	// your location,
-			appid: "",		// your openweathermap API key,
-			backup: "",		// second openweathermap API key,
-			units: "",		// your units, metric or imperial
-			dayUpdateInterval: 10 * 60 * 1000, // every 10 minutes
-			nightUpdateInterval: 15 * 60 * 1000, // every 15 minutes
+			lat: "",				// your location latitude,
+			lon: "",				// your location longitude,
+			location: "",				// your location,
+			appid: "",				// your openweathermap API key,
+			backup: "",				// second openweathermap API key,
+			units: "",				// your units, metric or imperial
+			dayUpdateInterval: 10 * 60 * 1000, 	// every 10 minutes
+			nightUpdateInterval: 15 * 60 * 1000,	// every 15 minutes
 			initialLoadDelay: 2000,
 			retryDelay: 2000,
 			animationSpeed: 1000,
@@ -126,19 +126,19 @@ Do not make modification and do not replace the default module, just add <i>disa
 	{
 		module: "onecall",
 		position: "top_right",
-		disabled: false,        // not necessary
+		disabled: false,        			// not necessary
 		header: "Hourly Weather Forecast",
 		classes: "hourly",
 		config: {
 			// you cand skip these settings if they are by default
-			lat: "",	// your location latitude,
-			lon: "",	// your location longitude,
-			location: "",	// your location,
-			appid: "",		// your openweathermap API key,
-			backup: "",		// second openweathermap API key,
-			units: "",		// your units, metric or imperial
-			dayUpdateInterval: 10 * 60 * 1000, // every 10 minutes
-			nightUpdateInterval: 15 * 60 * 1000, // every 15 minutes
+			lat: "",				// your location latitude,
+			lon: "",				// your location longitude,
+			location: "",				// your location,
+			appid: "",				// your openweathermap API key,
+			backup: "",				// second openweathermap API key,
+			units: "",				// your units, metric or imperial
+			dayUpdateInterval: 10 * 60 * 1000, 	// every 10 minutes
+			nightUpdateInterval: 15 * 60 * 1000, 	// every 15 minutes
 			initialLoadDelay: 4000,
 			retryDelay: 2000,
 			animationSpeed: 1000,
@@ -177,9 +177,9 @@ Do not make modification and do not replace the default module, just add <i>disa
 		classes: "air quality day",
 		disabled: false,
 		config: {
-			lat: "",		// your location latitude,
-			lon: "",		// your location longitude,
-			appid: "",		// your openweathermap API key,
+			lat: "",				// your location latitude,
+			lon: "",				// your location longitude,
+			appid: "",				// your openweathermap API key,
 			endpointType: "aqi",
 			calculateAqi: true,			// calculate AQI from pollutants concentration
 			showAqiTime: time,			// show last update time
