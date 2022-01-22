@@ -188,6 +188,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 		}
 	},
 
+	/*
 	Quality	      Index	AQI calculation from highest pollutant concentration in μg/m3
 
 				NO2		PM10		O3		PM25		SO2		CO
@@ -199,6 +200,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 	Very Poor	5	> 400		> 180		> 240		> 110		> 500		> 20000
 
 	Source: https://www.airqualitynow.eu/download/CITEAIR-Comparing_Urban_Air_Quality_across_Borders.pdf
+	*/
 
 Weather compliments to put in your config.js
 
