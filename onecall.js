@@ -10,21 +10,21 @@
 Module.register("onecall", {
 	// Default module config.
 	defaults: {
-		lat: "",	// your location latitude,
-		lon: "",	// your location longitude,
-		location: "",	// your location,
-		appid: "",	// your openweathermap API key,
-		backup: "",	// second openweathermap API key,
-		units: "",	// your units, metric or imperial
+		lat: config.latitude,
+		lon: config.longitude,
+		location: config.location,
+		appid: "",
+		backup: config.backup,
+		units: config.units,
 		dayUpdateInterval: 10 * 60 * 1000, // every 10 minutes
 		nightUpdateInterval: 15 * 60 * 1000, // every 15 minutes
-		initialLoadDelay: 0,
-		retryDelay: 2000,
-		animationSpeed: 1000,
-		timeFormat: 24,
-		lang: "en",
-		decimalSymbol: ".",
-		degreeLabel: true,
+		initialLoadDelay: 0, // 0 seconds delay
+		retryDelay: config.delay,
+		animationSpeed: config.animation,
+		timeFormat: config.timeFormat,
+		language: config.language,
+		decimalSymbol: config.decimal,
+		degreeLabel: config.scale,
 
 		// current settings
 		showWindDirection: true,
@@ -32,32 +32,32 @@ Module.register("onecall", {
 		useBeaufort: false,
 		useKMPHwind: true,
 		showFeelsLike: true,
-		realFeelsLike: true,		// from onecall not calculated by module
+		realFeelsLike: true,
 		showVisibility: true,
 		showHumidity: true,
 		showPressure: true,
-		showDew: true,			// dew point
-		showUvi: true,			// UV index
-		showPrecip: true,		// precipitation
+		showDew: true,
+		showUvi: true,
+		showPrecip: true,
 		showDescription: true,
 		showAlerts: false,
 
 		// hourly & daily settings
 		maxNumberOfDays: 8,
-		showRainAmount: true, 			// snow show only in winter months
+		showRainAmount: true,
 		fade: false,
-		fadePoint: 0.25, 			// Start on 1/4th of the list.
+		fadePoint: 0.25, // Start on 1/4th of the list.
 		colored: true,
-		extra: true,				// snow humidity, dew point, pressure, real feel and rain or snow,
-		fullday: "ddd", 			// "ddd" in case of daily forecast or "HH [h]" for hourly forecast
+		extra: false,
+		fullday: "ddd",
 
 		endpointType: "current",
-
+		
 		// Air Quality settings for endpointType: "aqi"
-		calculateAqi: true,			// calculate AQI from pollutants concentration
-		showAqiTime: true,			// show last update time
-		showAqiData: true,			// show AQI calculation pollutants, hidding last update
-		showPollution: false,			// snow list of all pollutants, hidding AQI calculation
+		calculateAqi: true,
+		showAqiTime: true,
+		showAqiData: true,
+		showPollution: false,
 
 		appendLocationNameToHeader: true,
 		useLocationAsHeader: false,
@@ -67,7 +67,7 @@ Module.register("onecall", {
 
 		onlyTemp: false,
 		hideTemp: false,
-		roundTemp: false, // error on true
+		roundTemp: config.roundTemp,
 
 		iconTable: {
 			"01d": "day-sunny",
@@ -109,10 +109,7 @@ Module.register("onecall", {
 
 	// Define required translations.
 	getTranslations: function () {
-		return {
-			en: "en.json",
-			ro: "ro.json"
-		};
+		return false;
 	},
 
 	// Define start sequence.
@@ -461,11 +458,11 @@ Module.register("onecall", {
 
 								NO2			PM10		O3			PM25		SO2			CO
 																	(optional)
-			Good		  1		0-50		0-25		0-60		0-15		0-50		0-5000
-			Fair		  2		50-100		25-50		60-120		15-30		50-100		5000-7500
-			Moderate	  3		100-200		50-90		120-180		30-55		100-350		7500-10000
-			Poor		  4		200-400		90-180		180-240		55-110		350-500		10000-20000
-			Very Poor	  5		> 400		> 180		> 240		> 110		> 500		> 20000
+			Good		1		0-50		0-25		0-60		0-15		0-50		0-5000
+			Fair		2		50-100		25-50		60-120		15-30		50-100		5000-7500
+			Moderate	3		100-200		50-90		120-180		30-55		100-350		7500-10000
+			Poor		4		200-400		90-180		180-240		55-110		350-500		10000-20000
+			Very Poor	5		> 400		> 180		> 240		> 110		> 500		> 20000
 
 			Source: https://www.airqualitynow.eu/download/CITEAIR-Comparing_Urban_Air_Quality_across_Borders.pdf
 			*/
