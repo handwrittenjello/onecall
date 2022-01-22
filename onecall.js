@@ -128,18 +128,18 @@ Module.register("onecall", {
 		this.temperature = null;
 		this.weatherType = null;
 		this.feelsLike = null;
-		this.dew = null;			// dew point.
-		this.uvi = null;			// uv index.
-		this.desc = null;	 		// weather description.
-		this.rain = null;	 		// current rain.
-		this.snow = null;	 		// current snow.
+		this.dew = null;				// dew point.
+		this.uvi = null;				// uv index.
+		this.desc = null;	 			// weather description.
+		this.rain = null;	 			// current rain.
+		this.snow = null;	 			// current snow.
 		this.pressure = null;	 		// main pressure.
 		this.visibility = null;	 		// visibility.
 		this.start = null;
 		this.end = null;
 		this.alert = null;
 
-		this.aqi = null;	 		// Air Quality
+		this.aqi = null;	 			// Air Quality
 		this.aqi_t = null;
 		this.c_co = null;
 		this.c_no = null;
@@ -438,7 +438,6 @@ Module.register("onecall", {
 				wrapper.className = "airpollution";
 			}
 
-			// air quality index
 			var aqi_q = null; var aqi_c = null;
 			if (this.aqi == 1) { 
 				aqi_q = this.translate("Good");
@@ -458,17 +457,34 @@ Module.register("onecall", {
 			}
 
 			/*
-			Quality 	Index	AQI calculation from highest pollutant concentration in μg/m3
-						NO2		PM10		O3		PM25 (optional)
-			Good		1	0-50		0-25		0-60		0-15
-			Fair		2	50-100		25-50		60-120		15-30
-			Moderate	3	100-200		50-90		120-180		30-55
-			Poor		4	200-400		90-180		180-240		55-110
-			Very Poor	5	>400		>180		>240		>110
+			Quality		Index	AQI calculation from highest pollutant concentration in μg/m3
+
+								NO2			PM10		O3			PM25		SO2			CO
+																	(optional)
+			Good		  1		0-50		0-25		0-60		0-15		0-50		0-5000
+			Fair		  2		50-100		25-50		60-120		15-30		50-100		5000-7500
+			Moderate	  3		100-200		50-90		120-180		30-55		100-350		7500-10000
+			Poor		  4		200-400		90-180		180-240		55-110		350-500		10000-20000
+			Very Poor	  5		> 400		> 180		> 240		> 110		> 500		> 20000
+
+			Source: https://www.airqualitynow.eu/download/CITEAIR-Comparing_Urban_Air_Quality_across_Borders.pdf
 			*/
 
 			if (this.config.calculateAqi) {
-				this.aqi = parseFloat(Math.max(this.c_no2, this.c_pm10, this.c_pm25, this.c_o3, this.c_so2)).toFixed(0);
+				this.aqi = parseFloat(Math.max(this.c_no2, this.c_pm10, this.c_o3, this.c_pm25, this.c_so2, this.c_co/100)).toFixed(0);
+				if (this.c_no2 > 50 || this.c_pm10 > 25 || this.c_o3 > 60 || this.c_pm25 > 15 || this.c_co > 5000 || this.c_so2 > 50) {
+					aqi_q = this.translate("Fair");
+					aqi_c = "yellow";
+				} else if (this.c_no2 > 100 || this.c_pm10 > 50 || this.c_o3 > 120 || this.c_pm25 > 30 || this.c_co > 7500 || this.c_so2 > 100) {
+					aqi_q = this.translate("Moderate");
+					aqi_c = "orange";
+				} else if (this.c_no2 > 200 || this.c_pm10 > 90 || this.c_o3 > 180 || this.c_pm25 > 55 || this.c_co > 10000 || this.c_so2 > 350) {
+					aqi_q = this.translate("Poor");
+					aqi_c = "tomato";
+				} else if (this.c_no2 > 400 || this.c_pm10 > 180 || this.c_o3 > 240 || this.c_pm25 > 110 || this.c_co > 20000 || this.c_so2 > 500) {
+					aqi_q = this.translate("Unhealty");
+					aqi_c = "redrf";
+				}
 			}
 
 			var aqi = document.createElement("div");
