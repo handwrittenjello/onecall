@@ -146,14 +146,14 @@
 
 .daily table tr:nth-child(1) .ro:nth-child(1)::after {
   text-indent: 0;
-  content: "Astﾄホi";
+  content: "Astăzi";
   display: block;
   line-height: initial;
 }
 
 .daily table tr:nth-child(2) .ro:nth-child(1)::after {
   text-indent: 0;
-  content: "Mﾃ｢ine";
+  content: "Mâine";
   display: block;
   line-height: initial;
 }
