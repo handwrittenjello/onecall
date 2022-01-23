@@ -451,7 +451,7 @@ Module.register("onecall", {
 			var aqi_q = null; var aqi_c = null;
 			if (this.config.calculateAqi) {
 				var aqi_i = null;
-				aqi_i = parseFloat(Math.max(
+				aqi_i = Math.max(
 					this.c_no2/4,       // mandatory
 					this.c_no/4,        // optional
 					this.c_pm10/1.8,    // mandatory 
@@ -460,7 +460,7 @@ Module.register("onecall", {
 					this.c_so2/5,       // optional
 					this.c_nh3/16,      // optional
 					this.c_co/200       // optional
-				)).toFixed(0);
+				).toFixed(0);
 				if (aqi_i <= 25 
 					|| this.c_no2 <= 50 
 					|| this.c_no <= 50 
@@ -542,12 +542,21 @@ Module.register("onecall", {
 			if (this.config.showAqiData && !this.config.showPollution) {
 		 		var aqi_d = document.createElement("div");
 				aqi_d.className = "normal small aqi_d";
-				aqi_d.innerHTML = "O<sub>3</sub> <span class=bright>" + this.c_o3.toFixed(2).replace(".", this.config.decimalSymbol)
-					+ "</span>; PM<sub>10</sub> <span class=bright>" + this.c_pm10.toFixed(2).replace(".", this.config.decimalSymbol)
-					+ "</span>; PM<sub>2.5</sub> <span class=bright>" + this.c_pm25.toFixed(2).replace(".", this.config.decimalSymbol)
-					+ "</span>; NO<sub>2</sub> <span class=bright>" + this.c_no2.toFixed(2).replace(".", this.config.decimalSymbol)
-					+ "</span>; SO<sub>2</sub> <span class=bright>" + this.c_so2.toFixed(2).replace(".", this.config.decimalSymbol)
-					+ "</span>";
+				if (this.config.calculateAqi) {
+    				aqi_d.innerHTML = "O<sub>3</sub> <span class=bright>" + (this.c_o3/2.4).toFixed(0)
+    					+ "</span>; PM<sub>10</sub> <span class=bright>" + (this.c_pm10/1.8).toFixed(0)
+    					+ "</span>; PM<sub>2.5</sub> <span class=bright>" + (this.c_pm25/1.1).toFixed(0)
+    					+ "</span>; NO<sub>2</sub> <span class=bright>" + (this.c_no2/4).toFixed(0)
+    					+ "</span>; SO<sub>2</sub> <span class=bright>" + (this.c_so2/5).toFixed(0)
+    					+ "</span>";
+				} else {
+    				aqi_d.innerHTML = "O<sub>3</sub> <span class=bright>" + this.c_o3.toFixed(0).replace(".", this.config.decimalSymbol)
+    					+ "</span>; PM<sub>10</sub> <span class=bright>" + this.c_pm10.toFixed(0).replace(".", this.config.decimalSymbol)
+    					+ "</span>; PM<sub>2.5</sub> <span class=bright>" + this.c_pm25.toFixed(0).replace(".", this.config.decimalSymbol)
+    					+ "</span>; NO<sub>2</sub> <span class=bright>" + this.c_no2.toFixed(0).replace(".", this.config.decimalSymbol)
+    					+ "</span>; SO<sub>2</sub> <span class=bright>" + this.c_so2.toFixed(0).replace(".", this.config.decimalSymbol)
+    					+ "</span>";
+				}
 				wrapper.appendChild(aqi_d);
 			} else if (this.config.showAqiTime) {
 		 		var aqi_t = document.createElement("div");
