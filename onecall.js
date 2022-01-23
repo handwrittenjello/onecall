@@ -256,14 +256,15 @@ Module.register("onecall", {
 			wrapper.className = "dimmed light small";
 			return wrapper;
 		}
+		
+		if (!this.config.colored) {
+		    var onegray = Array.from(document.querySelectorAll(".onecall"));
+		    onegray.forEach(function(element) {return element.style.filter = "grayscale(1)";});
+		}
 
 		if (this.config.endpointType === "current") {
 			var wrapper = document.createElement("div");
-			if (!this.config.colored) {
-				wrapper.className = "grayscale currentweather";
-			} else {
-				wrapper.className = "currentweather";
-			}
+			wrapper.className = "currentweather";
 
 			if (this.config.onlyTemp === false) {
 				this.addExtraInfoWeather(wrapper);
@@ -429,11 +430,7 @@ Module.register("onecall", {
 
 		} else if (this.config.endpointType === "aqi") {
 			var wrapper = document.createElement("div");
-			if (!this.config.colored) {
-				wrapper.className = "grayscale airpollution";
-			} else {
-				wrapper.className = "airpollution";
-			}
+			wrapper.className = "airpollution";
 
 			/*
 			Quality   Index     Sub-index   CAQI calculation from highest pollutant concentration in μg/m3
@@ -475,7 +472,7 @@ Module.register("onecall", {
 					|| this.c_nh3 <= 200) {
 					aqi_q = this.translate("Good");
 					aqi_c = "lime";
-				} else if (aqi_i >= 25 
+				} else if (aqi_i > 25 
 					|| this.c_no2 > 50 
 					|| this.c_no > 50 
 					|| this.c_pm10 > 25 
@@ -486,7 +483,7 @@ Module.register("onecall", {
 					|| this.c_nh3 > 200) {
 					aqi_q = this.translate("Fair");
 					aqi_c = "yellow";
-				} else if (aqi_i <= 50 
+				} else if (aqi_i > 50 
 					|| this.c_no2 > 100 
 					|| this.c_no > 100 
 					|| this.c_pm10 > 50 
@@ -497,7 +494,7 @@ Module.register("onecall", {
 					|| this.c_nh3 > 400) {
 					aqi_q = this.translate("Moderate");
 					aqi_c = "orange";
-				} else if (aqi_i <= 75 
+				} else if (aqi_i > 75 
 					|| this.c_no2 > 200 
 					|| this.c_no > 200 
 					|| this.c_pm10 > 90 
@@ -508,7 +505,7 @@ Module.register("onecall", {
 					|| this.c_nh3 > 800) {
 					aqi_q = this.translate("Poor");
 					aqi_c = "orangered";
-				} else if (aqi_i <= 100 
+				} else if (aqi_i > 100 
 					|| this.c_no2 > 400 
 					|| this.c_no > 400 
 					|| this.c_pm10 > 180 
@@ -546,11 +543,11 @@ Module.register("onecall", {
 		 		var aqi_d = document.createElement("div");
 				aqi_d.className = "normal small aqi_d";
 				aqi_d.innerHTML = "O<sub>3</sub> <span class=bright>" + this.c_o3.toFixed(2).replace(".", this.config.decimalSymbol)
-								+ "</span>; PM<sub>10</sub> <span class=bright>" + this.c_pm10.toFixed(2).replace(".", this.config.decimalSymbol)
-								+ "</span>; PM<sub>2.5</sub> <span class=bright>" + this.c_pm25.toFixed(2).replace(".", this.config.decimalSymbol)
-								+ "</span>; NO<sub>2</sub> <span class=bright>" + this.c_no2.toFixed(2).replace(".", this.config.decimalSymbol)
-								+ "</span>; SO<sub>2</sub> <span class=bright>" + this.c_so2.toFixed(2).replace(".", this.config.decimalSymbol)
-								+ "</span>";
+					+ "</span>; PM<sub>10</sub> <span class=bright>" + this.c_pm10.toFixed(2).replace(".", this.config.decimalSymbol)
+					+ "</span>; PM<sub>2.5</sub> <span class=bright>" + this.c_pm25.toFixed(2).replace(".", this.config.decimalSymbol)
+					+ "</span>; NO<sub>2</sub> <span class=bright>" + this.c_no2.toFixed(2).replace(".", this.config.decimalSymbol)
+					+ "</span>; SO<sub>2</sub> <span class=bright>" + this.c_so2.toFixed(2).replace(".", this.config.decimalSymbol)
+					+ "</span>";
 				wrapper.appendChild(aqi_d);
 			} else if (this.config.showAqiTime) {
 		 		var aqi_t = document.createElement("div");
@@ -616,9 +613,7 @@ Module.register("onecall", {
 				var forecast = this.forecast[f];
 
 				var row = document.createElement("tr");
-				if (!this.config.colored) {
-					row.className = "grayscale";
-				}
+				row.className = "forecast";
 				table.appendChild(row);
 
 				var dayCell = document.createElement("td");
@@ -726,11 +721,7 @@ Module.register("onecall", {
 				// humidity, dew point,, pressure, visibility, feels like and UV index
 				if (this.config.extra) {
 					var row = document.createElement("tr");
-					if (!this.config.colored) {
-						row.className = "grayscale extra";
-					} else {
-						row.className = "extra";
-					}
+					row.className = "extra";
 					table.appendChild(row);
 
 					var humidity = document.createElement("td");
