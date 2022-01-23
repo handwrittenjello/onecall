@@ -189,15 +189,15 @@ Do not make modification and do not replace the default module, just add <i>disa
 	},
 
 	/*
-	Quality   Index     AQI calculation from highest pollutant concentration in μg/m3
+	Quality   Index     Sub-index   CAQI calculation from highest pollutant concentration in μg/m3
 
-	                    NO2         PM10        O3          PM25         SO2         NH3		CO
-	                                                        (optional)
-	Good        1       0-50        0-25        0-60        0-15         0-50        0-200		0-5000
-	Fair        2       50-100      25-50       60-120      15-30        50-100      200-400	5000-7500
-	Moderate    3       100-200     50-90       120-180     30-55        100-350     400-800	7500-10000
-	Poor        4       200-400     90-180      180-240     55-110       350-500     800-1600	10000-20000
-	Very Poor   5       > 400       > 180       > 240       > 110        > 500       > 1600		> 20000
+	                                O3          NO2         PM10        PM25         SO2         NH3        CO
+
+	Good        1       0-25        0-60        0-50        0-25        0-15         0-50        0-200      0-5000
+	Fair        2       25-50       60-120      50-100      25-50       15-30        50-100      200-400    5000-7500
+	Moderate    3       50-75       120-180     100-200     50-90       30-55        100-350     400-800    7500-10000
+	Poor        4       75-100      180-240     200-400     90-180      55-110       350-500     800-1600   10000-20000
+	Very Poor   5       > 100       > 240       > 400       > 180       > 110        > 500       > 1600     > 20000
 
 	Source: https://www.airqualitynow.eu/download/CITEAIR-Comparing_Urban_Air_Quality_across_Borders.pdf
 	*/
