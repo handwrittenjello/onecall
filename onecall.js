@@ -545,11 +545,11 @@ Module.register("onecall", {
 			if (this.config.showAqiData && !this.config.showPollution) {
 		 		var aqi_d = document.createElement("div");
 				aqi_d.className = "normal small aqi_d";
-				aqi_d.innerHTML = "O<sub>3</sub> <span class=bright>" + this.c_o3.toFixed(2).replace(".", this.config.decimalSymbol) 
-								+ "</span>; NO<sub>2</sub> <span class=bright>" + this.c_no2.toFixed(2).replace(".", this.config.decimalSymbol) 
-								+ "</span>; SO<sub>2</sub> <span class=bright>" + this.c_so2.toFixed(2).replace(".", this.config.decimalSymbol) 
-								+ "</span>; PM<sub>10</sub> <span class=bright>" + this.c_pm10.toFixed(2).replace(".", this.config.decimalSymbol) 
-								+ "</span>; PM<sub>2.5</sub> <span class=bright>" + this.c_pm25.toFixed(2).replace(".", this.config.decimalSymbol) 
+				aqi_d.innerHTML = "O<sub>3</sub> <span class=bright>" + this.c_o3.toFixed(2).replace(".", this.config.decimalSymbol)
+								+ "</span>; PM<sub>10</sub> <span class=bright>" + this.c_pm10.toFixed(2).replace(".", this.config.decimalSymbol)
+								+ "</span>; PM<sub>2.5</sub> <span class=bright>" + this.c_pm25.toFixed(2).replace(".", this.config.decimalSymbol)
+								+ "</span>; NO<sub>2</sub> <span class=bright>" + this.c_no2.toFixed(2).replace(".", this.config.decimalSymbol)
+								+ "</span>; SO<sub>2</sub> <span class=bright>" + this.c_so2.toFixed(2).replace(".", this.config.decimalSymbol)
 								+ "</span>";
 				wrapper.appendChild(aqi_d);
 			} else if (this.config.showAqiTime) {
@@ -563,11 +563,6 @@ Module.register("onecall", {
 				this.config.showAqiData = false;
 				var spacer = document.createElement("br");
 				wrapper.appendChild(spacer);
-
-				var c_no2 = document.createElement("div");
-				c_no2.className = "normal small c_no2";
-				c_no2.innerHTML = "Nitrogen dioxide (NO<sub>2</sub>) <span class=bright>" + this.c_no2.toFixed(2).replace(".", this.config.decimalSymbol) + " µg/m³</span>";
-				wrapper.appendChild(c_no2);
 
 				var c_o3 = document.createElement("div");
 				c_o3.className = "normal small c_o3";
@@ -584,6 +579,16 @@ Module.register("onecall", {
 				c_pm25.innerHTML = "2.5μm particle (PM<sub>2.5</sub>) <span class=bright>" + this.c_pm25.toFixed(2).replace(".", this.config.decimalSymbol) + " µg/m³</span>";
 				wrapper.appendChild(c_pm25);
 
+				var c_no2 = document.createElement("div");
+				c_no2.className = "normal small c_no2";
+				c_no2.innerHTML = "Nitrogen dioxide (NO<sub>2</sub>) <span class=bright>" + this.c_no2.toFixed(2).replace(".", this.config.decimalSymbol) + " µg/m³</span>";
+				wrapper.appendChild(c_no2);
+
+				var c_no = document.createElement("div");
+				c_no.className = "normal small c_no";
+				c_no.innerHTML = "Nitrogen monoxide (NO) <span class=bright>" + this.c_no.toFixed(2).replace(".", this.config.decimalSymbol) + " µg/m³</span>";
+				wrapper.appendChild(c_no);
+
 				var c_so2 = document.createElement("div");
 				c_so2.className = "normal small c_so2";
 				c_so2.innerHTML = "Sulphur dioxide (SO<sub>2</sub>) <span class=bright>" + this.c_so2.toFixed(2).replace(".", this.config.decimalSymbol) + " µg/m³</span>";
@@ -593,11 +598,6 @@ Module.register("onecall", {
 				c_co.className = "normal small c_co";
 				c_co.innerHTML = "Carbon monoxide (CO) <span class=bright>" + this.c_co.toFixed(2).replace(".", this.config.decimalSymbol) + " µg/m³</span>";
 				wrapper.appendChild(c_co);
-	
-				var c_no = document.createElement("div");
-				c_no.className = "normal small c_no";
-				c_no.innerHTML = "Nitrogen monoxide (NO) <span class=bright>" + this.c_no.toFixed(2).replace(".", this.config.decimalSymbol) + " µg/m³</span>";
-				wrapper.appendChild(c_no);
 
 				var c_nh3 = document.createElement("div");
 				c_nh3.className = "normal small c_nh3";
