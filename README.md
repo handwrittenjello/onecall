@@ -202,7 +202,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 	Source: https://www.airqualitynow.eu/download/CITEAIR-Comparing_Urban_Air_Quality_across_Borders.pdf
 	*/
 
-Weather compliments to put in your config.js
+Weather and Air Quality compliments to put in your config.js
 
 	compliments: {
 		AQI_1 : [
