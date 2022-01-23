@@ -474,7 +474,7 @@ Module.register("onecall", {
 					|| this.c_so2 <= 50 
 					|| this.c_nh3 <= 200) {
 					aqi_q = this.translate("Good");
-					aqi_c = "greenyellow";
+					aqi_c = "lime";
 				} else if (aqi_i >= 25 
 					|| this.c_no2 > 50 
 					|| this.c_no > 50 
@@ -524,7 +524,7 @@ Module.register("onecall", {
 			} else {
 				if (this.aqi == 1) { 
 					aqi_q = this.translate("Good");
-					aqi_c = "greenyellow";
+					aqi_c = "lime";
 				} else if (this.aqi == 2) { 
 					aqi_q = this.translate("Fair");
 					aqi_c = "yellow";
