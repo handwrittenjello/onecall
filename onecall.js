@@ -979,6 +979,7 @@ Module.register("onecall", {
 		}
 
 		this.updateDom(this.config.animationSpeed);
+		this.sendNotification("AIR_QUALITY", "AQI_" + this.aqi);
 	},
 
 	parserDataWeather: function (data) {

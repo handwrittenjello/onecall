@@ -2,7 +2,7 @@
 
 https://github.com/hangorazvan/onecall
 
-Modified MagicMirror2 deprecated current & forecast weather module based on Openweathermap with Onecall endpoint and Air Quality Index
+Modified MagicMirror2 deprecated current & forecast weather module based on Openweathermap with Onecall endpoint and Air Quality Index with compliments
 
 Do not make modification and do not replace the default module, just add <i>disabled: true</i> in config.js and use this one as 3rd party
 
@@ -204,7 +204,22 @@ Do not make modification and do not replace the default module, just add <i>disa
 
 Weather compliments to put in your config.js
 
-	compliments: {			
+	compliments: {
+		AQI_1 : [
+			 "<i class=\"fa fa-leaf lime\"></i> AQI Index Good",
+		],
+		AQI_2 : [
+			 "<i class=\"fa fa-leaf yellow\"></i> AQI Index Fair",
+			],
+		AQI_3 : [
+			 "<i class=\"fa fa-leaf orange\"></i> AQI Index Moderate",
+		],
+		AQI_4 : [
+			 "<i class=\"fa fa-leaf orangered\"></i> AQI Index Poor",
+		],
+		AQI_5 : [
+			 "<i class=\"fa fa-leaf redrf\"></i> AQI Index Unhealty",
+		],			
 		day_sunny : [
 			"<i class=\"gold wi wi-day-sunny\"></i> Sunny",
 		],
