@@ -197,7 +197,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 	Fair        2       25-50       60-120      50-100      25-50       15-30        50-100      200-400    5000-7500
 	Moderate    3       50-75       120-180     100-200     50-90       30-55        100-350     400-800    7500-10000
 	Poor        4       75-100      180-240     200-400     90-180      55-110       350-500     800-1600   10000-20000
-	Very Poor   5       > 100       > 240       > 400       > 180       > 110        > 500       > 1600     > 20000
+	Unhealty    5       > 100       > 240       > 400       > 180       > 110        > 500       > 1600     > 20000
 
 	Source: https://www.airqualitynow.eu/download/CITEAIR-Comparing_Urban_Air_Quality_across_Borders.pdf
 	*/
