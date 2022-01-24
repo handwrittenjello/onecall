@@ -182,7 +182,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			appid: "",				// your openweathermap API key,
 			endpointType: "aqi",
 			calculateAqi: true,			// calculate AQI from pollutants concentration
-			showAqiTime: time,			// show last update time
+			showAqiTime: true,			// show last update time
 			showAqiData: true,			// show AQI calculation pollutants, hidding last update
 			showPollution: false,			// snow list of all pollutants, hidding AQI calculationt of all pollutants
 		}
