@@ -1,3 +1,6 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/font-awesome.min.css");
+@import url("https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons.min.css");
+
 /* Weather */
 
 .currentweather .subs {
@@ -146,14 +149,14 @@
 
 .daily table tr:nth-child(1) .ro:nth-child(1)::after {
   text-indent: 0;
-  content: "Astăzi";
+  content: "Astﾄホi";
   display: block;
   line-height: initial;
 }
 
 .daily table tr:nth-child(2) .ro:nth-child(1)::after {
   text-indent: 0;
-  content: "Mâine";
+  content: "Mﾃ｢ine";
   display: block;
   line-height: initial;
 }
