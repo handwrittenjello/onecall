@@ -206,19 +206,19 @@ Weather and Air Quality compliments to put in your config.js
 
 	compliments: {
 		AQI_1 : [
-			 "<i class=\"fa fa-leaf lime\"></i> AQI Index Good",
+			 "<i class=\"fa fa-leaf lime\"></i> Air Quality Good",
 		],
 		AQI_2 : [
-			 "<i class=\"fa fa-leaf yellow\"></i> AQI Index Fair",
+			 "<i class=\"fa fa-leaf yellow\"></i> Air Quality Fair",
 			],
 		AQI_3 : [
-			 "<i class=\"fa fa-leaf orange\"></i> AQI Index Moderate",
+			 "<i class=\"fa fa-leaf orange\"></i> Air Quality Moderate",
 		],
 		AQI_4 : [
-			 "<i class=\"fa fa-leaf orangered\"></i> AQI Index Poor",
+			 "<i class=\"fa fa-leaf orangered\"></i> Air Quality Poor",
 		],
 		AQI_5 : [
-			 "<i class=\"fa fa-leaf redrf\"></i> AQI Index Unhealty",
+			 "<i class=\"fa fa-leaf redrf\"></i> Air Quality Unhealty",
 		],			
 		day_sunny : [
 			"<i class=\"gold wi wi-day-sunny\"></i> Sunny",
