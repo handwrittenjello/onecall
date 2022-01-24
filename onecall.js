@@ -54,7 +54,7 @@ Module.register("onecall", {
 		endpointType: "current",
 		
 		// Air Quality settings for endpointType: "aqi"
-		calculateAqi: true,
+		calculateAqi: false,			// calculate AQI from pollutants concentration (not fully tested)
 		showAqiTime: true,
 		showAqiData: true,
 		showPollution: false,
