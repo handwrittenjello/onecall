@@ -10,21 +10,21 @@
 Module.register("onecall", {
 	// Default module config.
 	defaults: {
-		lat: config.latitude,
-		lon: config.longitude,
-		location: config.location,
+		lat: "",
+		lon: "",
+		location: "",
 		appid: "",
-		backup: config.backup,
+		backup: "",
 		units: config.units,
 		dayUpdateInterval: 10 * 60 * 1000, // every 10 minutes
 		nightUpdateInterval: 15 * 60 * 1000, // every 15 minutes
 		initialLoadDelay: 0, // 0 seconds delay
-		retryDelay: config.delay,
-		animationSpeed: config.animation,
+		retryDelay: 0,
+		animationSpeed: 100,
 		timeFormat: config.timeFormat,
 		language: config.language,
-		decimalSymbol: config.decimal,
-		degreeLabel: config.scale,
+		decimalSymbol: ".",
+		degreeLabel: true,
 
 		// current settings
 		showWindDirection: true,
@@ -67,7 +67,7 @@ Module.register("onecall", {
 
 		onlyTemp: false,
 		hideTemp: false,
-		roundTemp: config.roundTemp,
+		roundTemp: false,
 
 		iconTable: {
 			"01d": "day-sunny",
