@@ -826,11 +826,7 @@ Module.register("onecall", {
 				} else if (this.status === 401) {
 					self.updateDom(self.config.animationSpeed);
 					self.config.appid = self.config.backup;
-			/*	if (self.config.endpointType === "daily") {
-						self.config.endpointType = "hourly";
-						Log.warn(self.name + ": Incorrect APPID.");
-					}
-			*/		retry = true;
+					retry = true;
 				} else {
 					Log.error(self.name + ": Incorrect APPID. Could not load weather.");
 				}
@@ -852,8 +848,6 @@ Module.register("onecall", {
 		var params = "?";
 		if (this.config.lat && this.config.lon) {
 			params += "lat=" + this.config.lat + "&lon=" + this.config.lon;
-		} else if (this.firstEvent && this.firstEvent.geo) {
-			params += "lat=" + this.firstEvent.geo.lat + "&lon=" + this.firstEvent.geo.lon;
 		} else {
 			this.hide(this.config.animationSpeed, { lockString: this.identifier });
 			Log.error(this.name + ": Latitude and longitude not set!");
