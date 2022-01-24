@@ -91,12 +91,6 @@ Module.register("onecall", {
 		}
 	},
 
-	// create a variable for the first upcoming calendar event. Used if no location is specified.
-	firstEvent: true,
-
-	// create a variable to hold the location name based on the API result.
-	fetchedLocationName: this.config.location,
-
 	// Define required scripts.
 	getScripts: function () {
 		return ["moment.js"];
@@ -109,7 +103,10 @@ Module.register("onecall", {
 
 	// Define required translations.
 	getTranslations: function () {
-		return false;
+        return {
+            en: "en.json",
+            ro: "ro.json"
+        };
 	},
 
 	// Define start sequence.
@@ -790,8 +787,7 @@ Module.register("onecall", {
 		}
 
 		if (this.config.appendLocationNameToHeader) {
-			if (this.data.header) return this.data.header + " " + this.fetchedLocationName;
-			else return this.fetchedLocationName;
+			if (this.data.header) return this.data.header + " " + this.config.location;
 		}
 
 		return this.data.header ? this.data.header : "";
@@ -802,21 +798,6 @@ Module.register("onecall", {
 		if (notification === "DOM_OBJECTS_CREATED") {
 			if (this.config.appendLocationNameToHeader) {
 				this.hide(0, { lockString: this.identifier });
-			}
-		}
-		if (notification === "CALENDAR_EVENTS") {
-			var senderClasses = sender.data.classes.toLowerCase().split(" ");
-			if (senderClasses.indexOf(this.config.calendarClass.toLowerCase()) !== -1) {
-				this.firstEvent = false;
-
-				for (var e in payload) {
-					var event = payload[e];
-					if (event.location || event.geo) {
-						this.firstEvent = event;
-					//	Log.log("First upcoming event with location: ", event);
-						break;
-					}
-				}
 			}
 		}
 	},
