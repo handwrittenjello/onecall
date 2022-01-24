@@ -181,7 +181,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			lon: "",				// your location longitude,
 			appid: "",				// your openweathermap API key,
 			endpointType: "aqi",
-			calculateAqi: true,			// calculate AQI from pollutants concentration
+			calculateAqi: false,			// calculate AQI from pollutants concentration (not fully tested)
 			showAqiTime: true,			// show last update time
 			showAqiData: true,			// show AQI calculation pollutants, hidding last update
 			showPollution: false,			// snow list of all pollutants, hidding AQI calculation of all pollutants
