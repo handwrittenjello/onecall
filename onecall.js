@@ -458,64 +458,27 @@ Module.register("onecall", {
 					this.c_nh3/16,      // optional
 					this.c_co/200       // optional
 				).toFixed(0);
-				if (aqi_i <= 25 
-					|| this.c_no2 <= 50 
-					|| this.c_no <= 50 
-					|| this.c_pm10 <= 25 
-					|| this.c_o3 <= 60 
-					|| this.c_pm25 <= 15 
-					|| this.c_co <= 5000 
-					|| this.c_so2 <= 50 
-					|| this.c_nh3 <= 200) {
-					aqi_q = this.translate("Good");
-					aqi_c = "lime";
-				} else if (aqi_i > 25 
-					|| this.c_no2 > 50 
-					|| this.c_no > 50 
-					|| this.c_pm10 > 25 
-					|| this.c_o3 > 60 
-					|| this.c_pm25 > 15	
-					|| this.c_co > 5000	
-					|| this.c_so2 > 50 
-					|| this.c_nh3 > 200) {
-					aqi_q = this.translate("Fair");
-					aqi_c = "yellow";
-				} else if (aqi_i > 50 
-					|| this.c_no2 > 100 
-					|| this.c_no > 100 
-					|| this.c_pm10 > 50 
-					|| this.c_o3 > 120 
-					|| this.c_pm25 > 30 
-					|| this.c_co > 7500 
-					|| this.c_so2 > 100 
-					|| this.c_nh3 > 400) {
-					aqi_q = this.translate("Moderate");
-					aqi_c = "orange";
-				} else if (aqi_i > 75 
-					|| this.c_no2 > 200 
-					|| this.c_no > 200 
-					|| this.c_pm10 > 90 
-					|| this.c_o3 > 180 
-					|| this.c_pm25 > 55 
-					|| this.c_co > 10000 
-					|| this.c_so2 > 350 
-					|| this.c_nh3 > 800) {
-					aqi_q = this.translate("Poor");
-					aqi_c = "orangered";
-				} else if (aqi_i > 100 
-					|| this.c_no2 > 400 
-					|| this.c_no > 400 
-					|| this.c_pm10 > 180 
-					|| this.c_o3 > 240 
-					|| this.c_pm25 > 110 
-					|| this.c_co > 20000 
-					|| this.c_so2 > 500 
-					|| this.c_nh3 > 1600) {
-					aqi_q = this.translate("Unhealty");
-					aqi_c = "redrf";
-				}
-				aqi.innerHTML = this.translate("Index") + " <i class=\"fa fa-leaf " + aqi_c + "\"></i> <span class=" + aqi_c + ">" + aqi_q + " (" + aqi_i + ")</span>";
-			} else {
+
+			if (aqi_i <= 25) {
+				aqi_q = this.translate("Good");
+				aqi_c = "lime";
+			} else if (aqi_i > 25 && aqi_i <= 50) {
+				aqi_q = this.translate("Fair");
+				aqi_c = "yellow";
+			} else if (aqi_i > 50 && aqi_i <= 75) {
+				aqi_q = this.translate("Moderate");
+				aqi_c = "orange";
+			} else if (aqi_i > 75 && aqi_i <= 100) {
+				aqi_q = this.translate("Poor");
+				aqi_c = "coral";
+			} else if (aqi_i > 100) {
+				aqi_q = this.translate("Unhealty");
+				aqi_c = "red";
+			}
+
+			aqi.innerHTML = this.translate("Index") + " <i class=\"fa fa-leaf " + aqi_c + "\"></i> <span class=" + aqi_c + ">" + aqi_q + " (" + aqi_i + ")</span>";
+			
+		} else {
 				if (this.aqi == 1) { 
 					aqi_q = this.translate("Good");
 					aqi_c = "lime";
