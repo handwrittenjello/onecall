@@ -932,7 +932,19 @@ Module.register("onecall", {
 
 		this.updateDom(this.config.animationSpeed);
 		if (this.config.calculateAqi) {
-			this.sendNotification("CURRENTWEATHER_TYPE", { type: "AQI_" + this.aqi_i });
+		    var aqi_s = 0;
+		    if (this.aqi_i > 0 && this.aqi_i<=25) {
+		        aqi_s = 1;
+		    } else if (this.aqi_i > 25 && this.aqi_i<=50) {
+		        aqi_s = 2;
+		    } else if (this.aqi_i > 50 && this.aqi_i<=75) {
+		        aqi_s = 3;
+		    } else if (this.aqi_i > 75 && this.aqi_i<=100) {
+		        aqi_s = 4;
+		    } else if (this.aqi_i > 100) {
+		        aqi_s = 5;
+		    }
+			this.sendNotification("CURRENTWEATHER_TYPE", { type: "AQI_" + aqi_s });
 		} else {
 		    this.sendNotification("CURRENTWEATHER_TYPE", { type: "AQI_" + this.aqi });
 		}
