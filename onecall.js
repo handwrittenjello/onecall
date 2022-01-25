@@ -135,6 +135,7 @@ Module.register("onecall", {
 
 		this.aqi = null;	 			// Air Quality
 		this.aqi_t = null;
+		this.aqi_i = null;
 		this.c_co = null;
 		this.c_no = null;
 		this.c_no2 = null;
@@ -430,7 +431,7 @@ Module.register("onecall", {
 			wrapper.className = "airpollution";
 
 			/*
-			Quality   Index     Sub-index   CAQI calculation from highest pollutant concentration in μg/m3
+			Quality   Index     Sub-index   CAQI calculation from highest pollutant concentration in µg/m3
 
 			                                O3          NO2         PM10        PM25         SO2         NH3        CO
 
@@ -438,7 +439,7 @@ Module.register("onecall", {
 			Fair        2       25-50       60-120      50-100      25-50       15-30        50-100      200-400    5000-7500
 			Moderate    3       50-75       120-180     100-200     50-90       30-55        100-350     400-800    7500-10000
 			Poor        4       75-100      180-240     200-400     90-180      55-110       350-500     800-1600   10000-20000
-			Unhealty    5       > 100       > 240       > 400       > 180       > 110        > 500       > 1600     > 20000
+			Very Poor   5       > 100       > 240       > 400       > 180       > 110        > 500       > 1600     > 20000
 
 			Source: https://www.airqualitynow.eu/download/CITEAIR-Comparing_Urban_Air_Quality_across_Borders.pdf
 			*/
@@ -447,36 +448,35 @@ Module.register("onecall", {
 			aqi.className = "normal medium aqi bright";
 			var aqi_q = null; var aqi_c = null;
 			if (this.config.calculateAqi) {
-				var aqi_i = null;
-				aqi_i = Math.max(
-					this.c_no2/4,       // mandatory
-					this.c_no/4,        // optional
-					this.c_pm10/1.8,    // mandatory 
-					this.c_o3/2.4,      // mandatory
-					this.c_pm25/1.1,    // optional
-					this.c_so2/5,       // optional
-					this.c_nh3/16,      // optional
-					this.c_co/200       // optional
-				).toFixed(0);
+				this.aqi_i = Math.max(
+				Math.round(this.c_no2),      // mandatory
+				Math.round(this.c_no),       // optional
+				Math.round(this.c_pm10),     // mandatory 
+				Math.round(this.c_o3),       // mandatory
+				Math.round(this.c_pm25),     // optional
+				Math.round(this.c_so2),      // optional
+				Math.round(this.c_nh3),      // optional
+				Math.round(this.c_co/1000)   // optional
+			).toFixed(0);
 
-			if (aqi_i <= 25) {
+			if (this.aqi_i <= 25) {
 				aqi_q = this.translate("Good");
 				aqi_c = "lime";
-			} else if (aqi_i > 25 && aqi_i <= 50) {
+			} else if (this.aqi_i > 25 && this.aqi_i <= 50) {
 				aqi_q = this.translate("Fair");
 				aqi_c = "yellow";
-			} else if (aqi_i > 50 && aqi_i <= 75) {
+			} else if (this.aqi_i > 50 && this.aqi_i <= 75) {
 				aqi_q = this.translate("Moderate");
 				aqi_c = "orange";
-			} else if (aqi_i > 75 && aqi_i <= 100) {
+			} else if (this.aqi_i > 75 && this.aqi_i <= 100) {
 				aqi_q = this.translate("Poor");
 				aqi_c = "coral";
-			} else if (aqi_i > 100) {
+			} else if (this.aqi_i > 100) {
 				aqi_q = this.translate("Unhealty");
-				aqi_c = "red";
+				aqi_c = "redrf";
 			}
 
-			aqi.innerHTML = this.translate("Index") + " <i class=\"fa fa-leaf " + aqi_c + "\"></i> <span class=" + aqi_c + ">" + aqi_q + " (" + aqi_i + ")</span>";
+			aqi.innerHTML = this.translate("Index") + " <i class=\"fa fa-leaf " + aqi_c + "\"></i> <span class=" + aqi_c + ">" + aqi_q + " (" + this.aqi_i + ")</span>";
 			
 		} else {
 				if (this.aqi == 1) { 
@@ -490,7 +490,7 @@ Module.register("onecall", {
 					aqi_c = "orange";
 				} else if (this.aqi == 4) { 
 					aqi_q = this.translate("Poor");
-					aqi_c = "orangered";
+					aqi_c = "coral";
 				} else if (this.aqi == 5) { 
 					aqi_q = this.translate("Unhealty");
 					aqi_c = "redrf";
@@ -498,26 +498,18 @@ Module.register("onecall", {
 				aqi.innerHTML = this.translate("Index") + " <i class=\"fa fa-leaf " + aqi_c + "\"></i> <span class=" + aqi_c + ">" + aqi_q + " (" + this.aqi + ")</span>";
 			}
 			wrapper.appendChild(aqi);
-
+			
 			if (this.config.showAqiData && !this.config.showPollution) {
 		 		var aqi_d = document.createElement("div");
 				aqi_d.className = "normal small aqi_d";
-				if (this.config.calculateAqi) {
-    				aqi_d.innerHTML = "O<sub>3</sub> <span class=bright>" + (this.c_o3/2.4).toFixed(0)
-    					+ "</span>; PM<sub>10</sub> <span class=bright>" + (this.c_pm10/1.8).toFixed(0)
-    					+ "</span>; PM<sub>2.5</sub> <span class=bright>" + (this.c_pm25/1.1).toFixed(0)
-    					+ "</span>; NO<sub>2</sub> <span class=bright>" + (this.c_no2/4).toFixed(0)
-    					+ "</span>; SO<sub>2</sub> <span class=bright>" + (this.c_so2/5).toFixed(0)
-    					+ "</span>";
-				} else {
-    				aqi_d.innerHTML = "O<sub>3</sub> <span class=bright>" + this.c_o3.toFixed(0).replace(".", this.config.decimalSymbol)
-    					+ "</span>; PM<sub>10</sub> <span class=bright>" + this.c_pm10.toFixed(0).replace(".", this.config.decimalSymbol)
-    					+ "</span>; PM<sub>2.5</sub> <span class=bright>" + this.c_pm25.toFixed(0).replace(".", this.config.decimalSymbol)
-    					+ "</span>; NO<sub>2</sub> <span class=bright>" + this.c_no2.toFixed(0).replace(".", this.config.decimalSymbol)
-    					+ "</span>; SO<sub>2</sub> <span class=bright>" + this.c_so2.toFixed(0).replace(".", this.config.decimalSymbol)
-    					+ "</span>";
-				}
-				wrapper.appendChild(aqi_d);
+				aqi_d.innerHTML = "PM<sub>10</sub> <span class=bright>" + Math.round(this.c_pm10)
+            			+ "</span>; PM<sub>2.5</sub> <span class=bright>" + Math.round(this.c_pm25)
+	            		+ "</span>; O<sub>3</sub> <span class=bright>" + Math.round(this.c_o3)
+		    	        + "</span>; NO<sub>2</sub> <span class=bright>" + Math.round(this.c_no2)
+			    		+ "</span>; SO<sub>2</sub> <span class=bright>" + Math.round(this.c_so2)
+				    	+ "</span>";
+			    wrapper.appendChild(aqi_d);
+
 			} else if (this.config.showAqiTime) {
 		 		var aqi_t = document.createElement("div");
 				aqi_t.className = "shade small aqi_t";
@@ -530,11 +522,6 @@ Module.register("onecall", {
 				var spacer = document.createElement("br");
 				wrapper.appendChild(spacer);
 
-				var c_o3 = document.createElement("div");
-				c_o3.className = "normal small c_o3";
-				c_o3.innerHTML = "Ozone (O<sub>3</sub>) <span class=bright>" + this.c_o3.toFixed(2).replace(".", this.config.decimalSymbol) + " µg/m³</span>";
-				wrapper.appendChild(c_o3);
-
 				var c_pm10 = document.createElement("div");
 				c_pm10.className = "normal small c_pm10";
 				c_pm10.innerHTML = "10μm particle (PM<sub>10</sub>) <span class=bright>" + this.c_pm10.toFixed(2).replace(".", this.config.decimalSymbol) + " µg/m³</span>";
@@ -544,6 +531,11 @@ Module.register("onecall", {
 				c_pm25.className = "normal small c_pm25";
 				c_pm25.innerHTML = "2.5μm particle (PM<sub>2.5</sub>) <span class=bright>" + this.c_pm25.toFixed(2).replace(".", this.config.decimalSymbol) + " µg/m³</span>";
 				wrapper.appendChild(c_pm25);
+				
+				var c_o3 = document.createElement("div");
+				c_o3.className = "normal small c_o3";
+				c_o3.innerHTML = "Ozone (O<sub>3</sub>) <span class=bright>" + this.c_o3.toFixed(2).replace(".", this.config.decimalSymbol) + " µg/m³</span>";
+				wrapper.appendChild(c_o3);
 
 				var c_no2 = document.createElement("div");
 				c_no2.className = "normal small c_no2";
@@ -562,7 +554,7 @@ Module.register("onecall", {
 
 				var c_co = document.createElement("div");
 				c_co.className = "normal small c_co";
-				c_co.innerHTML = "Carbon monoxide (CO) <span class=bright>" + this.c_co.toFixed(2).replace(".", this.config.decimalSymbol) + " µg/m³</span>";
+				c_co.innerHTML = "Carbon monoxide (CO) <span class=bright>" + (this.c_co/1000).toFixed(2).replace(".", this.config.decimalSymbol) + " mg/m³</span>";
 				wrapper.appendChild(c_co);
 
 				var c_nh3 = document.createElement("div");
@@ -750,7 +742,8 @@ Module.register("onecall", {
 		}
 
 		if (this.config.appendLocationNameToHeader) {
-			if (this.data.header) return this.data.header + " " + this.config.location;
+			if (this.data.header) return this.data.header + " " + this.fetchedLocationName;
+			else return this.fetchedLocationName;
 		}
 
 		return this.data.header ? this.data.header : "";
@@ -761,6 +754,21 @@ Module.register("onecall", {
 		if (notification === "DOM_OBJECTS_CREATED") {
 			if (this.config.appendLocationNameToHeader) {
 				this.hide(0, { lockString: this.identifier });
+			}
+		}
+		if (notification === "CALENDAR_EVENTS") {
+			var senderClasses = sender.data.classes.toLowerCase().split(" ");
+			if (senderClasses.indexOf(this.config.calendarClass.toLowerCase()) !== -1) {
+				this.firstEvent = false;
+
+				for (var e in payload) {
+					var event = payload[e];
+					if (event.location || event.geo) {
+						this.firstEvent = event;
+					//	Log.log("First upcoming event with location: ", event);
+						break;
+					}
+				}
 			}
 		}
 	},
@@ -789,7 +797,11 @@ Module.register("onecall", {
 				} else if (this.status === 401) {
 					self.updateDom(self.config.animationSpeed);
 					self.config.appid = self.config.backup;
-					retry = true;
+			/*	if (self.config.endpointType === "daily") {
+						self.config.endpointType = "hourly";
+						Log.warn(self.name + ": Incorrect APPID.");
+					}
+			*/		retry = true;
 				} else {
 					Log.error(self.name + ": Incorrect APPID. Could not load weather.");
 				}
@@ -811,6 +823,8 @@ Module.register("onecall", {
 		var params = "?";
 		if (this.config.lat && this.config.lon) {
 			params += "lat=" + this.config.lat + "&lon=" + this.config.lon;
+		} else if (this.firstEvent && this.firstEvent.geo) {
+			params += "lat=" + this.firstEvent.geo.lat + "&lon=" + this.firstEvent.geo.lon;
 		} else {
 			this.hide(this.config.animationSpeed, { lockString: this.identifier });
 			Log.error(this.name + ": Latitude and longitude not set!");
@@ -917,7 +931,11 @@ Module.register("onecall", {
 		}
 
 		this.updateDom(this.config.animationSpeed);
-		this.sendNotification("CURRENTWEATHER_TYPE", { type: "AQI_" + this.aqi });
+		if (this.config.calculateAqi) {
+			this.sendNotification("CURRENTWEATHER_TYPE", { type: "AQI_" + this.aqi_i });
+		} else {
+		    this.sendNotification("CURRENTWEATHER_TYPE", { type: "AQI_" + this.aqi });
+		}
 	},
 
 	parserDataWeather: function (data) {
