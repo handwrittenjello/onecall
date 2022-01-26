@@ -124,16 +124,16 @@ Module.register("onecall", {
 		this.feelsLike = null;
 		this.dew = null;				// dew point.
 		this.uvi = null;				// uv index.
-		this.desc = null;	 			// weather description.
-		this.rain = null;	 			// current rain.
-		this.snow = null;	 			// current snow.
-		this.pressure = null;	 		// main pressure.
-		this.visibility = null;	 		// visibility.
+		this.desc = null;				// weather description.
+		this.rain = null;				// current rain.
+		this.snow = null;				// current snow.
+		this.pressure = null;			// main pressure.
+		this.visibility = null;			// visibility.
 		this.start = null;
 		this.end = null;
 		this.alert = null;
 
-		this.aqi = null;	 			// Air Quality
+		this.aqi = null;				// Air Quality
 		this.aqi_t = null;
 		this.aqi_i = null;
 		this.c_co = null;
@@ -449,14 +449,14 @@ Module.register("onecall", {
 			var aqi_q = null; var aqi_c = null;
 			if (this.config.calculateAqi) {
 				this.aqi_i = Math.max(
-				Math.round(this.c_no2),      // mandatory
-				Math.round(this.c_no),       // optional
-				Math.round(this.c_pm10),     // mandatory 
-				Math.round(this.c_o3),       // mandatory
-				Math.round(this.c_pm25),     // optional
-				Math.round(this.c_so2),      // optional
-				Math.round(this.c_nh3),      // optional
-				Math.round(this.c_co/1000)   // optional
+				Math.round(this.c_no2),		// mandatory
+				Math.round(this.c_no),		// optional
+				Math.round(this.c_pm10),	// mandatory 
+				Math.round(this.c_o3),		// mandatory
+				Math.round(this.c_pm25),	// optional
+				Math.round(this.c_so2),		// optional
+				Math.round(this.c_nh3),		// optional
+				Math.round(this.c_co/1000)	// optional
 			).toFixed(0);
 
 			if (this.aqi_i <= 25) {
@@ -473,7 +473,7 @@ Module.register("onecall", {
 				aqi_c = "coral";
 			} else if (this.aqi_i > 100) {
 				aqi_q = this.translate("Unhealty");
-				aqi_c = "redrf";
+				aqi_c = "red";
 			}
 
 			aqi.innerHTML = this.translate("Index") + " <i class=\"fa fa-leaf " + aqi_c + "\"></i> <span class=" + aqi_c + ">" + aqi_q + " (" + this.aqi_i + ")</span>";
@@ -493,25 +493,25 @@ Module.register("onecall", {
 					aqi_c = "coral";
 				} else if (this.aqi == 5) { 
 					aqi_q = this.translate("Unhealty");
-					aqi_c = "redrf";
+					aqi_c = "red";
 				}
 				aqi.innerHTML = this.translate("Index") + " <i class=\"fa fa-leaf " + aqi_c + "\"></i> <span class=" + aqi_c + ">" + aqi_q + " (" + this.aqi + ")</span>";
 			}
 			wrapper.appendChild(aqi);
 			
 			if (this.config.showAqiData && !this.config.showPollution) {
-		 		var aqi_d = document.createElement("div");
+				var aqi_d = document.createElement("div");
 				aqi_d.className = "normal small aqi_d";
 				aqi_d.innerHTML = "PM<sub>10</sub> <span class=bright>" + Math.round(this.c_pm10)
-            			+ "</span>; PM<sub>2.5</sub> <span class=bright>" + Math.round(this.c_pm25)
-	            		+ "</span>; O<sub>3</sub> <span class=bright>" + Math.round(this.c_o3)
-		    	        + "</span>; NO<sub>2</sub> <span class=bright>" + Math.round(this.c_no2)
-			    		+ "</span>; SO<sub>2</sub> <span class=bright>" + Math.round(this.c_so2)
-				    	+ "</span>";
-			    wrapper.appendChild(aqi_d);
+						+ "</span>; PM<sub>2.5</sub> <span class=bright>" + Math.round(this.c_pm25)
+						+ "</span>; O<sub>3</sub> <span class=bright>" + Math.round(this.c_o3)
+						+ "</span>; NO<sub>2</sub> <span class=bright>" + Math.round(this.c_no2)
+						+ "</span>; SO<sub>2</sub> <span class=bright>" + Math.round(this.c_so2)
+						+ "</span>";
+				wrapper.appendChild(aqi_d);
 
 			} else if (this.config.showAqiTime) {
-		 		var aqi_t = document.createElement("div");
+				var aqi_t = document.createElement("div");
 				aqi_t.className = "shade small aqi_t";
 				aqi_t.innerHTML = this.translate("Update") + this.aqi_t + ", " + this.config.location;
 				wrapper.appendChild(aqi_t);
@@ -797,11 +797,7 @@ Module.register("onecall", {
 				} else if (this.status === 401) {
 					self.updateDom(self.config.animationSpeed);
 					self.config.appid = self.config.backup;
-			/*	if (self.config.endpointType === "daily") {
-						self.config.endpointType = "hourly";
-						Log.warn(self.name + ": Incorrect APPID.");
-					}
-			*/		retry = true;
+					retry = true;
 				} else {
 					Log.error(self.name + ": Incorrect APPID. Could not load weather.");
 				}
@@ -932,21 +928,21 @@ Module.register("onecall", {
 
 		this.updateDom(this.config.animationSpeed);
 		if (this.config.calculateAqi) {
-		    var aqi_s = 0;
-		    if (this.aqi_i > 0 && this.aqi_i<=25) {
-		        aqi_s = 1;
-		    } else if (this.aqi_i > 25 && this.aqi_i<=50) {
-		        aqi_s = 2;
-		    } else if (this.aqi_i > 50 && this.aqi_i<=75) {
-		        aqi_s = 3;
-		    } else if (this.aqi_i > 75 && this.aqi_i<=100) {
-		        aqi_s = 4;
-		    } else if (this.aqi_i > 100) {
-		        aqi_s = 5;
-		    }
+			var aqi_s = 0;
+			if (this.aqi_i > 0 && this.aqi_i<=25) {
+				aqi_s = 1;
+			} else if (this.aqi_i > 25 && this.aqi_i<=50) {
+				aqi_s = 2;
+			} else if (this.aqi_i > 50 && this.aqi_i<=75) {
+				aqi_s = 3;
+			} else if (this.aqi_i > 75 && this.aqi_i<=100) {
+				aqi_s = 4;
+			} else if (this.aqi_i > 100) {
+				aqi_s = 5;
+			}
 			this.sendNotification("CURRENTWEATHER_TYPE", { type: "AQI_" + aqi_s });
 		} else {
-		    this.sendNotification("CURRENTWEATHER_TYPE", { type: "AQI_" + this.aqi });
+			this.sendNotification("CURRENTWEATHER_TYPE", { type: "AQI_" + this.aqi });
 		}
 	},
 
