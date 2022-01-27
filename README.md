@@ -215,7 +215,7 @@ Weather and Air Quality compliments to put in your config.js
 			 "<i class=\"fa fa-leaf orange\"></i> Air Quality Moderate",
 		],
 		AQI_4 : [
-			 "<i class=\"fa fa-leaf orangered\"></i> Air Quality Index Poor",
+			 "<i class=\"fa fa-leaf orangered\"></i> Air Quality Poor",
 		],
 		AQI_5 : [
 			 "<i class=\"fa fa-leaf redrf\"></i> Air Quality Unhealty",
