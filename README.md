@@ -188,19 +188,53 @@ Do not make modification and do not replace the default module, just add <i>disa
 		}
 	},
 
-	/*
-	Quality   Index     Sub-index   CAQI calculation from highest pollutant concentration in μg/m3
+			/*
+			EU
 
-	                                O3          NO2         PM10        PM25         SO2         NH3        CO
+			Quality   Index     Sub-index   CAQI calculation from highest pollutant concentration in µg/m3
 
-	Good        1       0-25        0-60        0-50        0-25        0-15         0-50        0-200      0-5000
-	Fair        2       25-50       60-120      50-100      25-50       15-30        50-100      200-400    5000-7500
-	Moderate    3       50-75       120-180     100-200     50-90       30-55        100-350     400-800    7500-10000
-	Poor        4       75-100      180-240     200-400     90-180      55-110       350-500     800-1600   10000-20000
-	Unhealty    5       > 100       > 240       > 400       > 180       > 110        > 500       > 1600     > 20000
+			                                O3          NO2         PM10        PM25         SO2         NH3        CO
 
-	Source: https://www.airqualitynow.eu/download/CITEAIR-Comparing_Urban_Air_Quality_across_Borders.pdf
-	*/
+			Good        1       0-25        0-60        0-50        0-25        0-15         0-50        0-200      0-5000
+			Fair        2       25-50       60-120      50-100      25-50       15-30        50-100      200-400    5000-7500
+			Moderate    3       50-75       120-180     100-200     50-90       30-55        100-350     400-800    7500-10000
+			Poor        4       75-100      180-240     200-400     90-180      55-110       350-500     800-1600   10000-20000
+			Very Poor   5       > 100       > 240       > 400       > 180       > 110        > 500       > 1600     > 20000
+
+			Source: https://www.airqualitynow.eu/download/CITEAIR-Comparing_Urban_Air_Quality_across_Borders.pdf
+
+			***
+
+			US
+
+			O3          O3          PM2.5           PM10        CO          SO2         NO2         AQI         AQI
+			ppb 8h      ppb 1h      μg/m3 24h       μg/m3 24h   ppm 8h      ppb 1h      ppb 1h      Index       Category
+
+			0–54        —           0.0–12.0        0–54        0.0–4.4     0–35        0–53        0–50        Good
+			55–70       —           12.1–35.4       55–154      4.5–9.4     36–75       54–100      51–100      Moderate
+			71–85       125–164     35.5–55.4       155–254     9.5–12.4    76–185      101–360     101–150     Unhealthy for Sensitive Groups
+			86–105      165–204     55.5–150.4      255–354     12.5–15.4   186–304     361–649     151–200     Unhealthy
+			106–200     205–404     150.5–250.4     355–424     15.5–30.4   305–604     650–1249    201–300     Very Unhealthy
+			—           405–504     250.5–350.4     425–504     30.5–40.4   605–804     1250–1649   301–400     Hazardous
+			—           505–604     350.5–500.4     505–604     40.5–50.4   805–1004    1650–2049   401–500     Extreme Hazardous
+
+			AQI = I.high - I.low / C.high - C.low ( C - C.low ) + I.low
+			
+			C = the pollutant concentration,
+			C.low = the concentration breakpoint that is ≤ C,
+			C.high = the concentration breakpoint that is ≥ C,
+			I.low = the index breakpoint corresponding to C.low,
+			I.high = the index breakpoint corresponding to C.high
+
+			Ozone (ppm) – truncate to 3 decimal places
+			PM2.5 (µg/m3) – truncate to 1 decimal place
+			PM10 (µg/m3) – truncate to integer
+			CO (ppm) – truncate to 1 decimal place
+			SO2 (ppb) – truncate to integer
+			NO2 (ppb) – truncate to integer
+
+			Source: https://www.airnow.gov/sites/default/files/2020-05/aqi-technical-assistance-document-sept2018.pdf
+			*/
 
 Weather and Air Quality compliments to put in your config.js
 
