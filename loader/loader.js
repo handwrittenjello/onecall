@@ -8,9 +8,11 @@
 Module.register("loader", {
 	// Default module config.
 	defaults: {
+		lat: "",				// your location latitude,
+		lon: "",				// your location longitude,
 		appid: "",
-		appid2: "", 						// optional
-		backup: config.backup,
+		appid2: "", 			// optional
+		backup: "",				// backup appid
 		dayUpdateInterval: 10 * 60 * 1000, // every 10 minutes
 		nightUpdateInterval: 15 * 60 * 1000, // every 15 minutes
 	},
@@ -31,7 +33,7 @@ Module.register("loader", {
 			Log.error("OneCall: APPID not set!");
 			return;
 		}
-		var params = "?lat=" + config.latitude + "&lon=" + config.longitude + "&units=" + config.units + "&lang=" + config.language;
+		var params = "?lat=" + this.config.lat + "&lon=" + this.config.lon + "&units=" + config.units + "&lang=" + config.language;
 		var url = "https://api.openweathermap.org/data/2.5/onecall" + params + "&exclude=minutely" + "&appid=" + this.config.appid;
 		var self = this;
 
@@ -63,7 +65,7 @@ Module.register("loader", {
 			api = this.config.appid;
 		}
 
-		var url = "https://api.openweathermap.org/data/2.5/air_pollution?lat=" + config.latitude + "&lon=" + config.longitude + "&appid=" + api;
+		var url = "https://api.openweathermap.org/data/2.5/air_pollution?lat=" + this.config.lat + "&lon=" + this.config.lon + "&appid=" + api;
 		var self = this;
 
 		var airRequest = new XMLHttpRequest();

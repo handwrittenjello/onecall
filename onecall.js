@@ -20,7 +20,7 @@ Module.register("onecall", {
 		nightUpdateInterval: 15 * 60 * 1000, // every 15 minutes
 		initialLoadDelay: 0, // 0 seconds delay
 		retryDelay: 0,
-		animationSpeed: 100,
+		animationSpeed: 1000,
 		timeFormat: config.timeFormat,
 		language: config.language,
 		decimalSymbol: ".",
