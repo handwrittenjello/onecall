@@ -15,6 +15,22 @@ Do not make modification and do not replace the default module, just add <i>disa
 		}
 	},
 
+#### Onecall API loader
+
+		{
+			module: "onecall/loader",
+			disabled: false,
+			config: {
+				lat: "",				// your location latitude,
+				lon: "",				// your location longitude,
+				appid: "",
+				appid2: "", 			// optional
+				backup: "",				// backup appid
+				dayUpdateInterval: 10 * 60 * 1000, // every 10 minutes
+				nightUpdateInterval: 15 * 60 * 1000, // every 15 minutes
+			}
+		},
+
 #### Current weather with onecall
 
 <img src=https://github.com/hangorazvan/onecall/blob/master/current.png>
@@ -27,17 +43,8 @@ Do not make modification and do not replace the default module, just add <i>disa
 		classes: "current weather",
 		config: {
 			// you cand skip these settings if they are by default
-			lat: "",				// your location latitude,
-			lon: "",				// your location longitude,
 			location: "",				// your location,
-			appid: "",				// your openweathermap API key,
-			backup: "",				// second openweathermap API key,
 			units: "",				// your units, metric or imperial
-			dayUpdateInterval: 10 * 60 * 1000, 	// every 10 minutes
-			nightUpdateInterval: 15 * 60 * 1000, 	// every 15 minutes
-			initialLoadDelay: 0,
-			retryDelay: 2000,
-			animationSpeed: 1000,
 			timeFormat: 24,
 			lang: "en",
 			decimalSymbol: ".",
@@ -60,6 +67,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			showAlerts: false,
 
 			endpointType: "current",
+			oneLoader: true,
 
 			appendLocationNameToHeader: true,
 			useLocationAsHeader: false,
@@ -84,17 +92,8 @@ Do not make modification and do not replace the default module, just add <i>disa
 		classes: "daily",
 		config: {
 			// you cand skip these settings if they are by default
-			lat: "",				// your location latitude,
-			lon: "",				// your location longitude,
 			location: "",				// your location,
-			appid: "",				// your openweathermap API key,
-			backup: "",				// second openweathermap API key,
 			units: "",				// your units, metric or imperial
-			dayUpdateInterval: 10 * 60 * 1000, 	// every 10 minutes
-			nightUpdateInterval: 15 * 60 * 1000,	// every 15 minutes
-			initialLoadDelay: 2000,
-			retryDelay: 2000,
-			animationSpeed: 1000,
 			timeFormat: 24,
 			lang: "en",
 			decimalSymbol: ".",
@@ -110,6 +109,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			fullday: "ddd", 			// "ddd" in case of daily forecast or "HH [h]" for hourly forecast
 
 			endpointType: "daily",
+			oneLoader: true,
 
 			appendLocationNameToHeader: true,
 			useLocationAsHeader: false,
@@ -131,17 +131,8 @@ Do not make modification and do not replace the default module, just add <i>disa
 		classes: "hourly",
 		config: {
 			// you cand skip these settings if they are by default
-			lat: "",				// your location latitude,
-			lon: "",				// your location longitude,
 			location: "",				// your location,
-			appid: "",				// your openweathermap API key,
-			backup: "",				// second openweathermap API key,
 			units: "",				// your units, metric or imperial
-			dayUpdateInterval: 10 * 60 * 1000, 	// every 10 minutes
-			nightUpdateInterval: 15 * 60 * 1000, 	// every 15 minutes
-			initialLoadDelay: 4000,
-			retryDelay: 2000,
-			animationSpeed: 1000,
 			timeFormat: 24,
 			lang: "en",
 			decimalSymbol: ".",
@@ -157,6 +148,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			fullday: "HH [h]", 			// "ddd" in case of daily forecast or "HH [h]" for hourly forecast
 
 			endpointType: "hourly",
+			oneLoader: true,
 
 			appendLocationNameToHeader: true,
 			useLocationAsHeader: false,
@@ -177,10 +169,9 @@ Do not make modification and do not replace the default module, just add <i>disa
 		classes: "air quality day",
 		disabled: false,
 		config: {
-			lat: "",				// your location latitude,
-			lon: "",				// your location longitude,
-			appid: "",				// your openweathermap API key,
 			endpointType: "aqi",
+			oneLoader: true,
+			
 			calculateAqi: true,			// calculate AQI from pollutants concentration
 			showAqiTime: true,			// show last update time
 			showAqiData: true,			// show AQI calculation pollutants, hidding last update
