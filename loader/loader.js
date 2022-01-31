@@ -43,7 +43,7 @@ Module.register("loader", {
 			if (this.readyState === 4) {
 				if (this.status === 200) {
 					self.sendNotification("ONE_RESPONSE", JSON.parse(this.response));
-					Log.info("ONE_RESPONSE", JSON.parse(this.response));
+					//Log.info("ONE_RESPONSE", JSON.parse(this.response));
 				} else if (this.status === 401) {
 					self.config.appid = self.config.backup;
 				} else {
@@ -74,7 +74,7 @@ Module.register("loader", {
 			if (this.readyState === 4) {
 				if (this.status === 200) {
 					self.sendNotification("AIR_RESPONSE", JSON.parse(this.response));
-					Log.info("AIR_RESPONSE", JSON.parse(this.response));
+					//Log.info("AIR_RESPONSE", JSON.parse(this.response));
 				} else if (this.status === 401) {
 					self.config.appid = self.config.backup;
 				} else {
