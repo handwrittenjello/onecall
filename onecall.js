@@ -151,8 +151,8 @@ Module.register("onecall", {
 			this.scheduleUpdate(this.config.initialLoadDelay);
 		}
 
-		this.forecast = [];
-		this.forecast2 = [];
+		this.forecastDaily = [];
+		this.forecastHourly = [];
 		this.updateTimer = null;
 	},
 
@@ -456,11 +456,11 @@ Module.register("onecall", {
 			if (this.config.calculateAqi) {
 				this.aqi_i = Math.max(
 					Math.round(this.c_no2/4),	// mandatory
-					Math.round(this.c_no/4),		// optional
-					Math.round(this.c_pm10/1.8),	// mandatory 
+					Math.round(this.c_no/4),	// optional
+					Math.round(this.c_pm10/1.8),// mandatory 
 					Math.round(this.c_o3/2.4),	// mandatory
-					Math.round(this.c_pm25/1.1),	// optional
-					Math.round(this.c_so2/5),		// optional
+					Math.round(this.c_pm25/1.1),// optional
+					Math.round(this.c_so2/5),	// optional
 					Math.round(this.c_nh3/16),	// optional
 					Math.round(this.c_co/2000)	// optional
 				).toFixed(0);
@@ -572,12 +572,11 @@ Module.register("onecall", {
 			return wrapper2;
 
 		} else if (this.config.endpointType === "daily") {
-
 			var table = document.createElement("table");
 			table.className = "weatherforecast " + this.config.tableClass;
 
-			for (var f in this.forecast) {
-				var forecast = this.forecast[f];
+			for (var f in this.forecastDaily) {
+				var forecast = this.forecastDaily[f];
 
 				var row = document.createElement("tr");
 				row.className = "forecast";
@@ -664,8 +663,8 @@ Module.register("onecall", {
 					if (this.config.fadePoint < 0) {
 						this.config.fadePoint = 0;
 					}
-					var startingPoint = this.forecast.length * this.config.fadePoint;
-					var steps = this.forecast.length - startingPoint;
+					var startingPoint = this.forecastDaily.length * this.config.fadePoint;
+					var steps = this.forecastDaily.length - startingPoint;
 					if (f >= startingPoint) {
 						var currentStep = f - startingPoint;
 						row.style.opacity = 1 - (1 / steps) * currentStep;
@@ -673,14 +672,11 @@ Module.register("onecall", {
 				}
 
 				// add extra information of weather forecast
-				// humidity, dew point,, pressure, visibility, feels like and UV index
+				// humidity, dew point,, pressure, feels like and UV index
 
+				if (this.config.extra) {
 					var row = document.createElement("tr");
-					if (this.config.extra) {
-						row.className = "extra";
-					} else {
-						row.className = "hidden";
-					}
+					row.className = "extra";
 					table.appendChild(row);
 
 					var humidity = document.createElement("td");
@@ -707,14 +703,14 @@ Module.register("onecall", {
 					uvIndex.innerHTML = "UVI " + parseFloat(forecast.uvIndex).toFixed(1).replace(".", this.config.decimalSymbol);
 					uvIndex.className = "align-right uvIndex lightgreen";
 					row.appendChild(uvIndex);
-				
+				}
 
 				if (this.config.fade && this.config.fadePoint < 1) {
 					if (this.config.fadePoint < 0) {
 						this.config.fadePoint = 0;
 					}
-					var startingPoint = this.forecast.length * this.config.fadePoint;
-					var steps = this.forecast.length - startingPoint;
+					var startingPoint = this.forecastDaily.length * this.config.fadePoint;
+					var steps = this.forecastDaily.length - startingPoint;
 					if (f >= startingPoint) {
 						var currentStep = f - startingPoint;
 						row.style.opacity = 1 - (1 / steps) * currentStep;
@@ -729,8 +725,8 @@ Module.register("onecall", {
 			var table = document.createElement("table");
 			table.className = "weatherforecast " + this.config.tableClass;
 
-			for (var f in this.forecast2) {
-				var forecast = this.forecast2[f];
+			for (var f in this.forecastHourly) {
+				var forecast = this.forecastHourly[f];
 
 				var row = document.createElement("tr");
 				row.className = "forecast";
@@ -817,8 +813,8 @@ Module.register("onecall", {
 					if (this.config.fadePoint < 0) {
 						this.config.fadePoint = 0;
 					}
-					var startingPoint = this.forecast2.length * this.config.fadePoint;
-					var steps = this.forecast2.length - startingPoint;
+					var startingPoint = this.forecastHourly.length * this.config.fadePoint;
+					var steps = this.forecastHourly.length - startingPoint;
 					if (f >= startingPoint) {
 						var currentStep = f - startingPoint;
 						row.style.opacity = 1 - (1 / steps) * currentStep;
@@ -826,15 +822,11 @@ Module.register("onecall", {
 				}
 
 				// add extra information of weather forecast
-				// humidity, dew point,, pressure, visibility, feels like and UV index
+				// humidity, dew point,, pressure, visibility and UV index
 
+				if (this.config.extra) {
 					var row = document.createElement("tr");
-					if (this.config.extra) {
-						row.className = "extra";
-					} else {
-						row.className = "hidden";
-					}
-					
+					row.className = "extra";
 					table.appendChild(row);
 
 					var humidity = document.createElement("td");
@@ -861,14 +853,14 @@ Module.register("onecall", {
 					uvIndex.innerHTML = "UVI " + parseFloat(forecast.uvIndex).toFixed(1).replace(".", this.config.decimalSymbol);
 					uvIndex.className = "align-right uvIndex lightgreen";
 					row.appendChild(uvIndex);
-				
+				}
 
 				if (this.config.fade && this.config.fadePoint < 1) {
 					if (this.config.fadePoint < 0) {
 						this.config.fadePoint = 0;
 					}
-					var startingPoint = this.forecast2.length * this.config.fadePoint;
-					var steps = this.forecast2.length - startingPoint;
+					var startingPoint = this.forecastHourly.length * this.config.fadePoint;
+					var steps = this.forecastHourly.length - startingPoint;
 					if (f >= startingPoint) {
 						var currentStep = f - startingPoint;
 						row.style.opacity = 1 - (1 / steps) * currentStep;
@@ -904,7 +896,7 @@ Module.register("onecall", {
 
 		if (notification === "AIR_RESPONSE") {
 			this.processAir(payload);
-			Log.info("Air " + payload);
+			//Log.info("Air " + payload);
 		}
 
 		if (notification === "ONE_RESPONSE") {
@@ -917,7 +909,7 @@ Module.register("onecall", {
 			if (this.config.endpointType === "hourly") {
 				this.processHourly(payload);
 			}
-			Log.info("One " + payload);
+			//Log.info("One " + payload);
 		}
 
 		if (notification === "CALENDAR_EVENTS") {
@@ -935,128 +927,6 @@ Module.register("onecall", {
 				}
 			}
 		}
-	},
-
-	/* updateWeather(compliments)
-	 * Requests new data from openweather.org.
-	 * Calls processWeather on succesfull response.
--->	 */
-	updateWeather: function () {
-		if (this.config.appid === "" || this.config.backup === "") {
-			Log.error("OneCall: APPID not set!");
-			return;
-		}
-
-		var url = "https://api.openweathermap.org/data/2.5/onecall" + this.getParams();
-		var self = this;
-		var retry = true;
-
-		var weatherRequest = new XMLHttpRequest();
-		weatherRequest.open("GET", url, true);
-		weatherRequest.onreadystatechange = function () {
-			if (this.readyState === 4) {
-				if (this.status === 200) {
-					self.processWeather(JSON.parse(this.response));
-					self.processForecast(JSON.parse(this.response));
-				} else if (this.status === 401) {
-					self.updateDom(self.config.animationSpeed);
-					self.config.appid = self.config.backup;
-					retry = true;
-				} else {
-					Log.error(self.name + ": Incorrect APPID. Could not load weather.");
-				}
-
-				if (retry) {
-					self.scheduleUpdate(self.loaded ? -1 : self.config.retryDelay);
-				}
-			}
-		};
-		weatherRequest.send();
-	},
-	
-	/* getParams(compliments)
-	 * Generates an url with api parameters based on the config.
-	 *
-	 * return String - URL params.
--->	 */
-	getParams: function () {
-		var params = "?";
-		if (this.config.lat && this.config.lon) {
-			params += "lat=" + this.config.lat + "&lon=" + this.config.lon;
-		} else if (this.firstEvent && this.firstEvent.geo) {
-			params += "lat=" + this.firstEvent.geo.lat + "&lon=" + this.firstEvent.geo.lon;
-		} else {
-			this.hide(this.config.animationSpeed, { lockString: this.identifier });
-			Log.error(this.name + ": Latitude and longitude not set!");
-			return;
-		}
-
-		var numberOfDays;
-		if (this.config.endpointType === "daily") {
-			numberOfDays = this.config.maxNumberOfDays < 1 || this.config.maxNumberOfDays > 5 ? 5 : this.config.maxNumberOfDays;
-			// don't get forecasts for the next day, as it would not represent the whole day
-			if (this.config.endpointType === "hourly") {
-				numberOfDays = numberOfDays * 8 - (Math.round(new Date().getHours() / 3) % 8);
-			}
-		} else {
-			numberOfDays = this.config.maxNumberOfDays < 1 || this.config.maxNumberOfDays > 17 ? 7 : this.config.maxNumberOfDays;
-		}
-
-		params += "&cnt=" + numberOfDays;
-		params += "&units=" + this.config.units;
-		params += "&lang=" + this.config.language;
-		params += "&APPID=" + this.config.appid;
-
-		if (this.config.endpointType === "current") {
-			params += "&exclude=minutely,hourly,daily";
-		}
-		else if (this.config.endpointType === "hourly") {
-			params += "&exclude=current,minutely,daily,alerts";
-		}
-		else if (this.config.endpointType === "daily") {
-			params += "&exclude=current,minutely,hourly,alerts";
-		}
-		else {
-			params += "&exclude=minutely,alerts";
-		}
-
-		return params;
-	},
-
-	/* updateAir (Air Qualiti Index)
-	 * Requests new data from openweather.org.
-	 * Calls processAir on succesfull response.
--->	 */
-	updateAir: function () {
-		if (this.config.appid === "" || this.config.backup === "") {
-			Log.error("Air Pollution: APPID not set!");
-			return;
-		}
-
-		var url = "https://api.openweathermap.org/data/2.5/air_pollution?lat=" + this.config.lat + "&lon=" + this.config.lon + "&appid=" + this.config.appid;
-		var self = this;
-		var retry = true;
-
-		var airRequest = new XMLHttpRequest();
-		airRequest.open("GET", url, true);
-		airRequest.onreadystatechange = function () {
-			if (this.readyState === 4) {
-				if (this.status === 200) {
-					self.processAir(JSON.parse(this.response));
-				} else if (this.status === 401) {
-					self.updateDom(self.config.animationSpeed);
-					self.config.appid = self.config.backup;
-					retry = true;
-				} else {
-					Log.error(self.name + ": Incorrect APPID. Could not load Air Pollution.");
-				}
-
-				if (retry) {
-					self.scheduleUpdate(self.loaded ? -1 : self.config.retryDelay);
-				}
-			}
-		};
-		airRequest.send();
 	},
 
 	/* processAir(data)
@@ -1110,14 +980,10 @@ Module.register("onecall", {
 			this.loaded = true;
 		}
 
-		this.updateDom(this.config.animationSpeed);
-	},
-
-	parserDataWeather: function (data) {
-		if (data.hasOwnProperty("main")) {
-			data["temp"] = { min: data.main.temp_min, max: data.main.temp_max };
-		}
-		return data;
+		var self = this;
+		setTimeout(function () {
+			self.updateDom(self.config.animationSpeed);
+		}, this.config.initialLoadDelay + 1000);	
 	},
 
 	/* processWeather(data)
@@ -1251,7 +1117,12 @@ Module.register("onecall", {
 			this.show(this.config.animationSpeed, { lockString: this.identifier });
 			this.loaded = true;
 		}
-		this.updateDom(this.config.animationSpeed);
+
+		var self = this;
+		setTimeout(function () {
+			self.updateDom(self.config.animationSpeed);
+		}, this.config.initialLoadDelay);	
+
 		this.sendNotification("CURRENTWEATHER_TYPE", { type: this.config.iconTable[data.current.weather[0].icon].replace("-", "_") });
 	//	Log.info("CURRENTWEATHER_TYPE", { type: this.config.iconTable[data.current.weather[0].icon].replace("-", "_") });
 	},
@@ -1265,7 +1136,7 @@ Module.register("onecall", {
 			this.fetchedLocationName = "Unknown";
 		}
 
-		this.forecast = [];
+		this.forecastDaily = [];
 		var lastDay = null;
 		var forecastData = {};
 		var dayStarts = 7;
@@ -1282,7 +1153,7 @@ Module.register("onecall", {
 
 		for (var i = 0, count = forecastList.length; i < count; i++) {
 			var forecast = forecastList[i];
-			forecast = this.parserDataWeather(forecast); // hack issue #1017
+		//	forecast = this.parserDataWeather(forecast); // hack issue #1017
 
 			var day;
 			var hour;
@@ -1311,11 +1182,11 @@ Module.register("onecall", {
 					visibility: forecast.visibility,
 				};
 
-				this.forecast.push(forecastData);
+				this.forecastDaily.push(forecastData);
 				lastDay = day;
 
 				// Stop processing when maxNumberOfDays is reached
-				if (this.forecast.length === this.config.maxNumberOfDays) {
+				if (this.forecastDaily.length === this.config.maxNumberOfDays) {
 					break;
 				}
 			} else {
@@ -1332,12 +1203,16 @@ Module.register("onecall", {
 			}
 		}
 
-		//Log.log(this.forecast);
+		//Log.log(this.forecastDaily);
 		if (!this.loaded) {
 			this.show(this.config.animationSpeed, { lockString: this.identifier });
 			this.loaded = true;
 		}
-		this.updateDom(this.config.animationSpeed);
+
+		var self = this;
+		setTimeout(function () {
+			self.updateDom(self.config.animationSpeed);
+		}, this.config.initialLoadDelay + 2000);	
 	},
 
 	processHourly: function (data, momenttz) {
@@ -1349,7 +1224,7 @@ Module.register("onecall", {
 			this.fetchedLocationName = "Unknown";
 		}
 
-		this.forecast2 = [];
+		this.forecastHourly = [];
 		var lastDay = null;
 		var forecastData = {};
 		var dayStarts = 7;
@@ -1366,7 +1241,7 @@ Module.register("onecall", {
 
 		for (var i = 0, count = forecastList.length; i < count; i++) {
 			var forecast = forecastList[i];
-			forecast = this.parserDataWeather(forecast); // hack issue #1017
+		//	forecast = this.parserDataWeather(forecast); // hack issue #1017
 
 			var day;
 			var hour;
@@ -1394,11 +1269,11 @@ Module.register("onecall", {
 					visibility: forecast.visibility,
 				};
 
-				this.forecast2.push(forecastData);
+				this.forecastHourly.push(forecastData);
 				lastDay = day;
 
 				// Stop processing when maxNumberOfDays is reached
-				if (this.forecast2.length === this.config.maxNumberOfDays) {
+				if (this.forecastHourly.length === this.config.maxNumberOfDays) {
 					break;
 				}
 			} else {
@@ -1410,43 +1285,16 @@ Module.register("onecall", {
 			}
 		}
 
-		//Log.log(this.forecast);
+		//Log.log(this.forecastHourly);
 		if (!this.loaded) {
 			this.show(this.config.animationSpeed, { lockString: this.identifier });
 			this.loaded = true;
 		}
-		this.updateDom(this.config.animationSpeed);
-	},
-
-	/* scheduleUpdate()
-	 * Schedule next update.
-	 *
-	 * argument delay number - Milliseconds before next update. If empty, this.config.updateInterval is used.
--->	 */
-	scheduleUpdate: function (delay) {
-		var now = moment().format("HH:mm:ss");
-		var updateInterval = null;
-
-		if (now >= "07:00:00" && now <= "23:59:59") {
-			updateInterval = this.config.dayUpdateInterval;
-		} else {
-			updateInterval = this.config.nightUpdateInterval;
-		}
-
-		var nextLoad = updateInterval;
-		if (typeof delay !== "undefined" && delay >= 0) {
-			nextLoad = delay;
-		}
 
 		var self = this;
-		clearTimeout(this.updateTimer);
-		this.updateTimer = setTimeout(function () {
-			if (self.config.endpointType === "aqi") {
-				self.updateAir();
-			} else {
-				self.updateWeather();				
-			}
-		}, nextLoad);
+		setTimeout(function () {
+			self.updateDom(self.config.animationSpeed);
+		}, this.config.initialLoadDelay + 3000);	
 	},
 
 	/* ms2Beaufort(ms)
@@ -1598,5 +1446,165 @@ Module.register("onecall", {
 			.reduce(function (a, b) {
 				return a + b;
 			}, 0);
+	},
+
+	/* updateWeather(compliments)
+	 * Requests new data from openweather.org.
+	 * Calls processWeather on succesfull response.
+-->	 */
+	updateWeather: function () {
+		if (this.config.appid === "" || this.config.backup === "") {
+			Log.error("OneCall: APPID not set!");
+			return;
+		}
+
+		var url = "https://api.openweathermap.org/data/2.5/onecall" + this.getParams();
+		var self = this;
+		var retry = true;
+
+		var weatherRequest = new XMLHttpRequest();
+		weatherRequest.open("GET", url, true);
+		weatherRequest.onreadystatechange = function () {
+			if (this.readyState === 4) {
+				if (this.status === 200) {
+					self.processWeather(JSON.parse(this.response));
+					self.processForecast(JSON.parse(this.response));
+				} else if (this.status === 401) {
+					self.updateDom(self.config.animationSpeed);
+					self.config.appid = self.config.backup;
+					retry = true;
+				} else {
+					Log.error(self.name + ": Incorrect APPID. Could not load weather.");
+				}
+
+				if (retry) {
+					self.scheduleUpdate(self.loaded ? -1 : self.config.retryDelay);
+				}
+			}
+		};
+		weatherRequest.send();
+	},
+	
+	/* getParams(compliments)
+	 * Generates an url with api parameters based on the config.
+	 *
+	 * return String - URL params.
+-->	 */
+	getParams: function () {
+		var params = "?";
+		if (this.config.lat && this.config.lon) {
+			params += "lat=" + this.config.lat + "&lon=" + this.config.lon;
+		} else if (this.firstEvent && this.firstEvent.geo) {
+			params += "lat=" + this.firstEvent.geo.lat + "&lon=" + this.firstEvent.geo.lon;
+		} else {
+			this.hide(this.config.animationSpeed, { lockString: this.identifier });
+			Log.error(this.name + ": Latitude and longitude not set!");
+			return;
+		}
+
+		var numberOfDays;
+		if (this.config.endpointType === "daily") {
+			numberOfDays = this.config.maxNumberOfDays < 1 || this.config.maxNumberOfDays > 5 ? 5 : this.config.maxNumberOfDays;
+			// don't get forecasts for the next day, as it would not represent the whole day
+			if (this.config.endpointType === "hourly") {
+				numberOfDays = numberOfDays * 8 - (Math.round(new Date().getHours() / 3) % 8);
+			}
+		} else {
+			numberOfDays = this.config.maxNumberOfDays < 1 || this.config.maxNumberOfDays > 17 ? 7 : this.config.maxNumberOfDays;
+		}
+
+		params += "&cnt=" + numberOfDays;
+		params += "&units=" + this.config.units;
+		params += "&lang=" + this.config.language;
+		params += "&APPID=" + this.config.appid;
+
+		if (this.config.endpointType === "current") {
+			params += "&exclude=minutely,hourly,daily";
+		}
+		else if (this.config.endpointType === "hourly") {
+			params += "&exclude=current,minutely,daily,alerts";
+		}
+		else if (this.config.endpointType === "daily") {
+			params += "&exclude=current,minutely,hourly,alerts";
+		}
+		else {
+			params += "&exclude=minutely,alerts";
+		}
+
+		return params;
+	},
+
+	/* updateAir (Air Qualiti Index)
+	 * Requests new data from openweather.org.
+	 * Calls processAir on succesfull response.
+-->	 */
+	updateAir: function () {
+		if (this.config.appid === "" || this.config.backup === "") {
+			Log.error("Air Pollution: APPID not set!");
+			return;
+		}
+
+		var url = "https://api.openweathermap.org/data/2.5/air_pollution?lat=" + this.config.lat + "&lon=" + this.config.lon + "&appid=" + this.config.appid;
+		var self = this;
+		var retry = true;
+
+		var airRequest = new XMLHttpRequest();
+		airRequest.open("GET", url, true);
+		airRequest.onreadystatechange = function () {
+			if (this.readyState === 4) {
+				if (this.status === 200) {
+					self.processAir(JSON.parse(this.response));
+				} else if (this.status === 401) {
+					self.updateDom(self.config.animationSpeed);
+					self.config.appid = self.config.backup;
+					retry = true;
+				} else {
+					Log.error(self.name + ": Incorrect APPID. Could not load Air Pollution.");
+				}
+
+				if (retry) {
+					self.scheduleUpdate(self.loaded ? -1 : self.config.retryDelay);
+				}
+			}
+		};
+		airRequest.send();
+	},
+
+	parserDataWeather: function (data) {
+		if (data.hasOwnProperty("main")) {
+			data["temp"] = { min: data.main.temp_min, max: data.main.temp_max };
+		}
+		return data;
+	},
+
+	/* scheduleUpdate()
+	 * Schedule next update.
+	 *
+	 * argument delay number - Milliseconds before next update. If empty, this.config.updateInterval is used.
+-->	 */
+	scheduleUpdate: function (delay) {
+		var now = moment().format("HH:mm:ss");
+		var updateInterval = null;
+
+		if (now >= "07:00:00" && now <= "23:59:59") {
+			updateInterval = this.config.dayUpdateInterval;
+		} else {
+			updateInterval = this.config.nightUpdateInterval;
+		}
+
+		var nextLoad = updateInterval;
+		if (typeof delay !== "undefined" && delay >= 0) {
+			nextLoad = delay;
+		}
+
+		var self = this;
+		clearTimeout(this.updateTimer);
+		this.updateTimer = setTimeout(function () {
+			if (self.config.endpointType === "aqi") {
+				self.updateAir();
+			} else {
+				self.updateWeather();				
+			}
+		}, nextLoad);
 	}
 });
