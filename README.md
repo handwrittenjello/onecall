@@ -161,7 +161,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 
 <img src=https://github.com/hangorazvan/onecall/blob/master/flex.png>
 
-{
+	{
 		module: "onecall",
 		position: "top_right",
 		disabled: false,        			// not necessary
