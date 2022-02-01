@@ -157,6 +157,59 @@ Do not make modification and do not replace the default module, just add <i>disa
 		}
 	},
 
+#### Flex Day Forecast
+
+<img src=https://github.com/hangorazvan/onecall/blob/master/flex.png>
+
+{
+		module: "onecall",
+		position: "top_right",
+		disabled: false,        			// not necessary
+		header: "Hourly Weather Forecast",
+		classes: "hourly",
+		config: {
+
+			maxNumberOfDays: 3,
+			showRainAmount: true, 			// snow show only in winter months
+			fullday: "HH.mm",
+			flexDayForecast: true,
+
+			endpointType: "hourly",
+			oneLoader: true,
+
+			appendLocationNameToHeader: true,
+			useLocationAsHeader: false,
+
+			tableClass: "small",
+
+		}
+	},
+
+
+	{
+		module: "onecall",
+		position: "top_right",
+		disabled: false,        			// not necessary
+		header: "Daily Weather Forecast",
+		classes: "daily",
+		config: {
+
+			maxNumberOfDays: 6,
+			showRainAmount: true, 			// snow show only in winter months
+			fullday: "dddd",
+			flexDayForecast: true,
+
+			endpointType: "daily",
+			oneLoader: true,
+
+			appendLocationNameToHeader: true,
+			useLocationAsHeader: false,
+
+			tableClass: "small",
+
+		}
+	},
+
 #### Air Quality Index also in stand alone module https://github.com/hangorazvan/pollution
 
 <img src=https://github.com/hangorazvan/onecall/blob/master/aqi_c.png>

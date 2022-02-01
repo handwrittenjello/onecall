@@ -50,6 +50,7 @@ Module.register("onecall", {
 		colored: true,
 		extra: false,
 		fullday: "ddd",
+		flexDayForecast: true,
 
 		endpointType: "current",
 		oneLoader: true,
@@ -366,11 +367,12 @@ Module.register("onecall", {
 				if (this.config.showDew) {
 					var dew = document.createElement("span"); 
 					dew.className = "dew midget cyan";
-					dew.innerHTML = this.translate("DEW") + "<i class=\"wi wi-raindrops lightgreen\"></i> " + this.dew + "&deg;" + degreeLabel;
+					dew.innerHTML = this.translate("DEW") + "<i class=\"wi wi-raindrops lightgreen\"></i> " + this.dew.toFixed(1) + "&deg;" + degreeLabel;
 					small.appendChild(dew);
 				}
 
 				var spacer = document.createElement("span");
+				spacer.className = "spacer";
 				spacer.innerHTML = "&nbsp; ";
 				small.appendChild(spacer);
 
@@ -378,7 +380,7 @@ Module.register("onecall", {
 				if (this.config.showUvi) {
 					var uvi = document.createElement("span");
 					uvi.className = "uvi midget";
-					uvi.innerHTML = this.translate("UVI") + "<i class=\"wi wi-hot gold\"></i>" + this.uvi;
+					uvi.innerHTML = this.translate("UVI") + "<i class=\"wi wi-hot gold\"></i>" + this.uvi.toFixed(1);
 					if (this.uvi < 0.1) {
 						uvi.className = uvi.className + " lightgreen";
 						uvi.innerHTML = this.translate("UVI") + "<i class=\"wi wi-stars\"></i> 0";
@@ -572,148 +574,228 @@ Module.register("onecall", {
 			return wrapper2;
 
 		} else if (this.config.endpointType === "daily") {
-			var table = document.createElement("table");
-			table.className = "weatherforecast " + this.config.tableClass;
 
-			for (var f in this.forecastDaily) {
-				var forecast = this.forecastDaily[f];
+			if (this.config.flexDayForecast) {
+				var container = document.createElement("div");
+				container.className = "flex-container weatherforecast small";
 
-				var row = document.createElement("tr");
-				row.className = "forecast";
-				table.appendChild(row);
+				for (var f in this.forecastDaily) {
+					var forecast = this.forecastDaily[f];
 
-				var dayCell = document.createElement("td");
+					var item = document.createElement("div");
+					item.className = "item forecast currentweather";
+					container.appendChild(item);
 
-				if (this.config.language == "ro") {
-					dayCell.className = "align-left day ro";
-				} else dayCell.className = "align-left day en";
+					var dayCell = document.createElement("div");
+					dayCell.className = "fday medium";
+					dayCell.innerHTML = forecast.day;
+					item.appendChild(dayCell);
 
-				dayCell.innerHTML = forecast.day;
-				row.appendChild(dayCell);
+					var icon = document.createElement("div");
+					icon.className = "wi weathericon wi-" + forecast.icon;
+					icon.style.transform = "translate(0) scale(1)";
+					item.appendChild(icon);
 
-				var iconCell = document.createElement("td");
-				iconCell.className = "align-center bright weather-icon";
-				row.appendChild(iconCell);
-
-				var icon = document.createElement("span");
-				icon.className = "align-center wi forecasticon wi-" + forecast.icon;
-				iconCell.appendChild(icon);
-
-				var degreeLabel = "";
-				if (this.config.units === "metric" || this.config.units === "imperial") {
-					degreeLabel += "&deg;";
-				}
-				if (this.config.degreeLabel) {
-					switch (this.config.units) {
-						case "metric":
-							degreeLabel += "C";
-							break;
-						case "imperial":
-							degreeLabel += "F";
-							break;
-						case "default":
-							degreeLabel = "K";
-							break;
+					var degreeLabel = "";
+					if (this.config.units === "metric" || this.config.units === "imperial") {
+						degreeLabel += "&deg;";
 					}
-				}
-
-				if (this.config.decimalSymbol === "" || this.config.decimalSymbol === " ") {
-					this.config.decimalSymbol = ".";
-				}
-
-				var maxTempCell = document.createElement("td");
-				maxTempCell.innerHTML = forecast.maxTemp.replace(".", this.config.decimalSymbol) + degreeLabel;
-				maxTempCell.className = "align-center max-temp coral";
-				row.appendChild(maxTempCell);
-
-				var minTempCell = document.createElement("td");
-				minTempCell.innerHTML = forecast.minTemp.replace(".", this.config.decimalSymbol) + degreeLabel;
-				minTempCell.className = "align-center min-temp skyblue";
-				row.appendChild(minTempCell);
-
-				if (this.config.showRainAmount) {
-					var rainCell = document.createElement("td");
-					rainCell.className = "align-right bright";
-					if (!forecast.snow && !forecast.rain) {
-						rainCell.className = "align-right rain";
-						rainCell.innerHTML = this.translate("No rain") + " <i class=\"fa fa-tint-slash skyblue\"></i>";
-					} else if (forecast.snow) {
-						if (config.units !== "imperial") {
-							rainCell.innerHTML = parseFloat(forecast.snow).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-snowflake-cold lightblue\"></i>";
-						} else {
-							rainCell.innerHTML = (parseFloat(forecast.snow) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-snowflake-cold lightblue\"></i>";
+					if (this.config.degreeLabel) {
+						switch (this.config.units) {
+							case "metric":
+								degreeLabel += "C";
+								break;
+							case "imperial":
+								degreeLabel += "F";
+								break;
+							case "default":
+								degreeLabel = "K";
+								break;
 						}
-					} else if (forecast.rain) {
-						if (config.units !== "imperial") {
-							rainCell.innerHTML = parseFloat(forecast.rain).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-umbrella lime\"></i>";
-						} else {
-							rainCell.innerHTML = (parseFloat(forecast.rain) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-umbrella lime\"></i>";
-						}
-					} else if (forecast.rain && forecast.snow) {
-						if (config.units !== "imperial") {
-							rainCell.innerHTML = parseFloat(forecast.rain + forecast.snow).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-umbrella lime\"></i>";
-						} else {
-							rainCell.innerHTML = (parseFloat(forecast.rain + forecast.snow) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-umbrella lime\"></i>";
-						}
-					} 
-					row.appendChild(rainCell);
-				}
-
-				if (this.config.fade && this.config.fadePoint < 1) {
-					if (this.config.fadePoint < 0) {
-						this.config.fadePoint = 0;
 					}
-					var startingPoint = this.forecastDaily.length * this.config.fadePoint;
-					var steps = this.forecastDaily.length - startingPoint;
-					if (f >= startingPoint) {
-						var currentStep = f - startingPoint;
-						row.style.opacity = 1 - (1 / steps) * currentStep;
+
+					if (this.config.decimalSymbol === "" || this.config.decimalSymbol === " ") {
+						this.config.decimalSymbol = ".";
 					}
+
+					var maxTempCell = document.createElement("div");
+					maxTempCell.innerHTML = forecast.maxTemp.replace(".", this.config.decimalSymbol) + degreeLabel;
+					maxTempCell.className = "maxtemp coral medium";
+					item.appendChild(maxTempCell);
+
+					var minTempCell = document.createElement("div");
+					minTempCell.innerHTML = forecast.minTemp.replace(".", this.config.decimalSymbol) + degreeLabel;
+					minTempCell.className = "mintemp skyblue medium";
+					item.appendChild(minTempCell);
+
+					var humidity = document.createElement("span");
+					humidity.innerHTML = "<i class=\"wi wi-humidity\"></i> " + parseFloat(forecast.humidity).toFixed(0) + "%";
+					humidity.className = "humidity skyblue";
+					item.appendChild(humidity);
+
+					var dewPoint = document.createElement("span");
+					dewPoint.innerHTML = "&nbsp; <i class=\"wi wi-raindrops lightgreen\"></i> " + parseFloat(forecast.dewPoint).toFixed(1).replace(".", this.config.decimalSymbol) + degreeLabel;
+					dewPoint.className = "dewPoint cyan";
+					item.appendChild(dewPoint);
+
+					var pressure = document.createElement("span");
+					pressure.innerHTML = "<br>" + Math.round(forecast.pressure * 750.062 / 1000).toFixed(0) + " Hg";
+					pressure.className = "pressure gold";
+					item.appendChild(pressure);
+				
+					var uvIndex = document.createElement("span");
+					uvIndex.innerHTML = "&nbsp; UVI " + parseFloat(forecast.uvIndex).toFixed(1).replace(".", this.config.decimalSymbol);
+					uvIndex.className = "uvIndex lightgreen";
+					item.appendChild(uvIndex);
+
+					container.appendChild(item);
 				}
 
-				// add extra information of weather forecast
-				// humidity, dew point,, pressure, feels like and UV index
+				return container;
 
-				if (this.config.extra) {
+			} else {
+
+				var table = document.createElement("table");
+				table.className = "weatherforecast " + this.config.tableClass;
+
+				for (var f in this.forecastDaily) {
+					var forecast = this.forecastDaily[f];
+
 					var row = document.createElement("tr");
-					row.className = "extra";
+					row.className = "forecast";
 					table.appendChild(row);
 
-					var humidity = document.createElement("td");
-					humidity.innerHTML = "<i class=\"wi wi-humidity skyblue little\"></i> " + parseFloat(forecast.humidity).toFixed(0) + "%";
-					humidity.className = "align-left humidity";
-					row.appendChild(humidity);
+					var dayCell = document.createElement("td");
+					if (this.config.language == "ro") {
+						dayCell.className = "align-left day ro";
+					} else dayCell.className = "align-left day en";
+					dayCell.innerHTML = forecast.day;
+					row.appendChild(dayCell);
 
-					var dewPoint = document.createElement("td");
-					dewPoint.innerHTML = parseFloat(forecast.dewPoint).toFixed(1).replace(".", this.config.decimalSymbol) + degreeLabel;
-					dewPoint.className = "align-center dewPoint cyan";
-					row.appendChild(dewPoint);
+					var iconCell = document.createElement("td");
+					iconCell.className = "align-center bright weather-icon";
+					row.appendChild(iconCell);
 
-					var pressure = document.createElement("td");
-					pressure.innerHTML = Math.round(forecast.pressure * 750.062 / 1000).toFixed(0) + " Hg";
-					pressure.className = "align-center pressure gold";
-					row.appendChild(pressure);
+					var icon = document.createElement("span");
+					icon.className = "align-center wi forecasticon wi-" + forecast.icon;
+					iconCell.appendChild(icon);
 
-					var realFeelDay = document.createElement("td");
-					realFeelDay.innerHTML =  parseFloat(forecast.realFeelsDay).toFixed(0) + degreeLabel;
-					realFeelDay.className = "align-center realFeel yellow";
-					row.appendChild(realFeelDay);
-					
-					var uvIndex = document.createElement("td");
-					uvIndex.innerHTML = "UVI " + parseFloat(forecast.uvIndex).toFixed(1).replace(".", this.config.decimalSymbol);
-					uvIndex.className = "align-right uvIndex lightgreen";
-					row.appendChild(uvIndex);
-				}
-
-				if (this.config.fade && this.config.fadePoint < 1) {
-					if (this.config.fadePoint < 0) {
-						this.config.fadePoint = 0;
+					var degreeLabel = "";
+					if (this.config.units === "metric" || this.config.units === "imperial") {
+						degreeLabel += "&deg;";
 					}
-					var startingPoint = this.forecastDaily.length * this.config.fadePoint;
-					var steps = this.forecastDaily.length - startingPoint;
-					if (f >= startingPoint) {
-						var currentStep = f - startingPoint;
-						row.style.opacity = 1 - (1 / steps) * currentStep;
+					if (this.config.degreeLabel) {
+						switch (this.config.units) {
+							case "metric":
+								degreeLabel += "C";
+								break;
+							case "imperial":
+								degreeLabel += "F";
+								break;
+							case "default":
+								degreeLabel = "K";
+								break;
+						}
+					}
+
+					if (this.config.decimalSymbol === "" || this.config.decimalSymbol === " ") {
+						this.config.decimalSymbol = ".";
+					}
+
+					var maxTempCell = document.createElement("td");
+					maxTempCell.innerHTML = forecast.maxTemp.replace(".", this.config.decimalSymbol) + degreeLabel;
+					maxTempCell.className = "align-center max-temp coral";
+					row.appendChild(maxTempCell);
+
+					var minTempCell = document.createElement("td");
+					minTempCell.innerHTML = forecast.minTemp.replace(".", this.config.decimalSymbol) + degreeLabel;
+					minTempCell.className = "align-center min-temp skyblue";
+					row.appendChild(minTempCell);
+
+					if (this.config.showRainAmount) {
+						var rainCell = document.createElement("td");
+						rainCell.className = "align-right bright";
+						if (!forecast.snow && !forecast.rain) {
+							rainCell.className = "align-right rain";
+							rainCell.innerHTML = this.translate("No rain") + " <i class=\"fa fa-tint-slash skyblue\"></i>";
+						} else if (forecast.snow) {
+							if (config.units !== "imperial") {
+								rainCell.innerHTML = parseFloat(forecast.snow).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-snowflake-cold lightblue\"></i>";
+							} else {
+								rainCell.innerHTML = (parseFloat(forecast.snow) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-snowflake-cold lightblue\"></i>";
+							}
+						} else if (forecast.rain) {
+							if (config.units !== "imperial") {
+								rainCell.innerHTML = parseFloat(forecast.rain).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-umbrella lime\"></i>";
+							} else {
+								rainCell.innerHTML = (parseFloat(forecast.rain) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-umbrella lime\"></i>";
+							}
+						} else if (forecast.rain && forecast.snow) {
+							if (config.units !== "imperial") {
+								rainCell.innerHTML = parseFloat(forecast.rain + forecast.snow).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-umbrella lime\"></i>";
+							} else {
+								rainCell.innerHTML = (parseFloat(forecast.rain + forecast.snow) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-umbrella lime\"></i>";
+							}
+						} 
+						row.appendChild(rainCell);
+					}
+
+					if (this.config.fade && this.config.fadePoint < 1) {
+						if (this.config.fadePoint < 0) {
+							this.config.fadePoint = 0;
+						}
+						var startingPoint = this.forecastDaily.length * this.config.fadePoint;
+						var steps = this.forecastDaily.length - startingPoint;
+						if (f >= startingPoint) {
+							var currentStep = f - startingPoint;
+							row.style.opacity = 1 - (1 / steps) * currentStep;
+						}
+					}
+
+					// add extra information of weather forecast
+					// humidity, dew point,, pressure, feels like and UV index
+
+					if (this.config.extra) {
+						var row = document.createElement("tr");
+						row.className = "extra";
+						table.appendChild(row);
+
+						var humidity = document.createElement("td");
+						humidity.innerHTML = "<i class=\"wi wi-humidity skyblue little\"></i> " + parseFloat(forecast.humidity).toFixed(0) + "%";
+						humidity.className = "align-left humidity";
+						row.appendChild(humidity);
+
+						var dewPoint = document.createElement("td");
+						dewPoint.innerHTML = parseFloat(forecast.dewPoint).toFixed(1).replace(".", this.config.decimalSymbol) + degreeLabel;
+						dewPoint.className = "align-center dewPoint cyan";
+						row.appendChild(dewPoint);
+
+						var pressure = document.createElement("td");
+						pressure.innerHTML = Math.round(forecast.pressure * 750.062 / 1000).toFixed(0) + " Hg";
+						pressure.className = "align-center pressure gold";
+						row.appendChild(pressure);
+
+						var realFeelDay = document.createElement("td");
+						realFeelDay.innerHTML =  parseFloat(forecast.realFeelsDay).toFixed(0) + degreeLabel;
+						realFeelDay.className = "align-center realFeel yellow";
+						row.appendChild(realFeelDay);
+						
+						var uvIndex = document.createElement("td");
+						uvIndex.innerHTML = "UVI " + parseFloat(forecast.uvIndex).toFixed(1).replace(".", this.config.decimalSymbol);
+						uvIndex.className = "align-right uvIndex lightgreen";
+						row.appendChild(uvIndex);
+					}
+
+					if (this.config.fade && this.config.fadePoint < 1) {
+						if (this.config.fadePoint < 0) {
+							this.config.fadePoint = 0;
+						}
+						var startingPoint = this.forecastDaily.length * this.config.fadePoint;
+						var steps = this.forecastDaily.length - startingPoint;
+						if (f >= startingPoint) {
+							var currentStep = f - startingPoint;
+							row.style.opacity = 1 - (1 / steps) * currentStep;
+						}
 					}
 				}
 			}
@@ -722,153 +804,262 @@ Module.register("onecall", {
 
 		} else if (this.config.endpointType === "hourly") {
 
-			var table = document.createElement("table");
-			table.className = "weatherforecast " + this.config.tableClass;
+			if (this.config.flexDayForecast) {
+				var container = document.createElement("div");
+				container.className = "flex-container weatherforecast small";
 
-			for (var f in this.forecastHourly) {
-				var forecast = this.forecastHourly[f];
+				for (var f in this.forecastHourly) {
+					var forecast = this.forecastHourly[f];
 
-				var row = document.createElement("tr");
-				row.className = "forecast";
-				table.appendChild(row);
+					var item = document.createElement("div");
+					item.className = "item forecast currentweather";
+					container.appendChild(item);
 
-				var dayCell = document.createElement("td");
+					var dayCell = document.createElement("div");
+					dayCell.className = "fday medium";
+					dayCell.innerHTML = forecast.day + " h";
+					item.appendChild(dayCell);
 
-				if (this.config.language == "ro") {
-					dayCell.className = "align-left day ro";
-				} else dayCell.className = "align-left day en";
+					var icon = document.createElement("div");
+					icon.className = "wi weathericon wi-" + forecast.icon;
+					icon.style.transform = "translate(0) scale(1)";
+					item.appendChild(icon);
 
-				dayCell.innerHTML = forecast.day;
-				row.appendChild(dayCell);
-
-				var iconCell = document.createElement("td");
-				iconCell.className = "align-center bright weather-icon";
-				row.appendChild(iconCell);
-
-				var icon = document.createElement("span");
-				icon.className = "align-center wi forecasticon wi-" + forecast.icon;
-				iconCell.appendChild(icon);
-
-				var degreeLabel = "";
-				if (this.config.units === "metric" || this.config.units === "imperial") {
-					degreeLabel += "&deg;";
-				}
-				if (this.config.degreeLabel) {
-					switch (this.config.units) {
-						case "metric":
-							degreeLabel += "C";
-							break;
-						case "imperial":
-							degreeLabel += "F";
-							break;
-						case "default":
-							degreeLabel = "K";
-							break;
+					var degreeLabel = "";
+					if (this.config.units === "metric" || this.config.units === "imperial") {
+						degreeLabel += "&deg;";
 					}
-				}
-
-				if (this.config.decimalSymbol === "" || this.config.decimalSymbol === " ") {
-					this.config.decimalSymbol = ".";
-				}
-
-				var medTempCell = document.createElement("td");
-				medTempCell.innerHTML = forecast.dayTemp.replace(".", this.config.decimalSymbol) + degreeLabel;
-				medTempCell.className = "align-center lime";
-				row.appendChild(medTempCell);
-
-				var realFeel = document.createElement("td");
-				realFeel.innerHTML = parseFloat(forecast.realFeels).toFixed(0).replace(".", this.config.decimalSymbol) + degreeLabel;
-				realFeel.className = "align-center yellow";
-				row.appendChild(realFeel);	
-
-				if (this.config.showRainAmount) {
-					var rainCell = document.createElement("td");
-					rainCell.className = "align-right bright";
-					if (!forecast.snow && !forecast.rain) {
-						rainCell.className = "align-right rain";
-						rainCell.innerHTML = this.translate("No rain") + " <i class=\"fa fa-tint-slash skyblue\"></i>";
-					} else if (forecast.snow) {
-						if (config.units !== "imperial") {
-							rainCell.innerHTML = parseFloat(forecast.snow).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-snowflake-cold lightblue\"></i>";
-						} else {
-							rainCell.innerHTML = (parseFloat(forecast.snow) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-snowflake-cold lightblue\"></i>";
+					if (this.config.degreeLabel) {
+						switch (this.config.units) {
+							case "metric":
+								degreeLabel += "C";
+								break;
+							case "imperial":
+								degreeLabel += "F";
+								break;
+							case "default":
+								degreeLabel = "K";
+								break;
 						}
-					} else if (forecast.rain) {
-						if (config.units !== "imperial") {
-							rainCell.innerHTML = parseFloat(forecast.rain).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-umbrella lime\"></i>";
-						} else {
-							rainCell.innerHTML = (parseFloat(forecast.rain) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-umbrella lime\"></i>";
-						}
-					} else if (forecast.rain && forecast.snow) {
-						if (config.units !== "imperial") {
-							rainCell.innerHTML = parseFloat(forecast.rain + forecast.snow).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-umbrella lime\"></i>";
-						} else {
-							rainCell.innerHTML = (parseFloat(forecast.rain + forecast.snow) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-umbrella lime\"></i>";
-						}
-					} 
-					row.appendChild(rainCell);
-				}
-
-				if (this.config.fade && this.config.fadePoint < 1) {
-					if (this.config.fadePoint < 0) {
-						this.config.fadePoint = 0;
 					}
-					var startingPoint = this.forecastHourly.length * this.config.fadePoint;
-					var steps = this.forecastHourly.length - startingPoint;
-					if (f >= startingPoint) {
-						var currentStep = f - startingPoint;
-						row.style.opacity = 1 - (1 / steps) * currentStep;
+
+					if (this.config.decimalSymbol === "" || this.config.decimalSymbol === " ") {
+						this.config.decimalSymbol = ".";
 					}
+
+					var medTempCell = document.createElement("div");
+					medTempCell.innerHTML = forecast.dayTemp.replace(".", this.config.decimalSymbol) + degreeLabel;
+					medTempCell.className = "dayTemp lime medium";
+					item.appendChild(medTempCell);
+
+					if (this.config.showRainAmount) {
+						var rainCell = document.createElement("div");
+						rainCell.className = "midget bright";
+						if (!forecast.snow && !forecast.rain) {
+							rainCell.className = "midget";
+							rainCell.innerHTML = this.translate("No rain") + "&nbsp; <i class=\"fa fa-tint-slash skyblue medium\"></i>";
+						} else if (forecast.snow) {
+							if (config.units !== "imperial") {
+								rainCell.innerHTML = parseFloat(forecast.snow).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-snowflake-cold lightblue\"></i>";
+							} else {
+								rainCell.innerHTML = (parseFloat(forecast.snow) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-snowflake-cold lightblue\"></i>";
+							}
+						} else if (forecast.rain) {
+							if (config.units !== "imperial") {
+								rainCell.innerHTML = parseFloat(forecast.rain).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-umbrella lime\"></i>";
+							} else {
+								rainCell.innerHTML = (parseFloat(forecast.rain) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-umbrella lime\"></i>";
+							}
+						} else if (forecast.rain && forecast.snow) {
+							if (config.units !== "imperial") {
+								rainCell.innerHTML = parseFloat(forecast.rain + forecast.snow).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-umbrella lime\"></i>";
+							} else {
+								rainCell.innerHTML = (parseFloat(forecast.rain + forecast.snow) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-umbrella lime\"></i>";
+							}
+						} 
+						item.appendChild(rainCell);
+					} else {
+						var realFeel = document.createElement("div");
+						realFeel.innerHTML = parseFloat(forecast.realFeels).toFixed(0).replace(".", this.config.decimalSymbol) + degreeLabel;
+						realFeel.className = "feels_like yellow medium";
+						item.appendChild(realFeel);	
+
+						var humidity = document.createElement("span");
+						humidity.innerHTML = "<i class=\"wi wi-humidity\"></i> " + parseFloat(forecast.humidity).toFixed(0) + "%";
+						humidity.className = "humidity skyblue";
+						item.appendChild(humidity);
+
+						var dewPoint = document.createElement("span");
+						dewPoint.innerHTML = "&nbsp; <i class=\"wi wi-raindrops lightgreen\"></i> " + parseFloat(forecast.dewPoint).toFixed(1).replace(".", this.config.decimalSymbol) + degreeLabel;
+						dewPoint.className = "dewPoint cyan";
+						item.appendChild(dewPoint);
+
+						var pressure = document.createElement("span");
+						pressure.innerHTML = "<br>" + Math.round(forecast.pressure * 750.062 / 1000).toFixed(0) + " Hg";
+						pressure.className = "pressure gold";
+						item.appendChild(pressure);
+					
+						var uvIndex = document.createElement("span");
+						uvIndex.innerHTML = "&nbsp; UVI " + parseFloat(forecast.uvIndex).toFixed(1).replace(".", this.config.decimalSymbol);
+						uvIndex.className = "uvIndex lightgreen";
+						item.appendChild(uvIndex);
+					}
+
+					container.appendChild(item);
 				}
 
-				// add extra information of weather forecast
-				// humidity, dew point,, pressure, visibility and UV index
+				return container;
 
-				if (this.config.extra) {
+			} else {
+
+				var table = document.createElement("table");
+				table.className = "weatherforecast " + this.config.tableClass;
+
+				for (var f in this.forecastHourly) {
+					var forecast = this.forecastHourly[f];
+
 					var row = document.createElement("tr");
-					row.className = "extra";
+					row.className = "forecast";
 					table.appendChild(row);
 
-					var humidity = document.createElement("td");
-					humidity.innerHTML = "<i class=\"wi wi-humidity skyblue little\"></i> " + parseFloat(forecast.humidity).toFixed(0) + "%";
-					humidity.className = "align-left humidity";
-					row.appendChild(humidity);
+					var dayCell = document.createElement("td");
 
-					var dewPoint = document.createElement("td");
-					dewPoint.innerHTML = parseFloat(forecast.dewPoint).toFixed(1).replace(".", this.config.decimalSymbol) + degreeLabel;
-					dewPoint.className = "align-center dewPoint cyan";
-					row.appendChild(dewPoint);
+					if (this.config.language == "ro") {
+						dayCell.className = "align-left day ro";
+					} else dayCell.className = "align-left day en";
 
-					var pressure = document.createElement("td");
-					pressure.innerHTML = Math.round(forecast.pressure * 750.062 / 1000).toFixed(0) + " Hg";
-					pressure.className = "align-center pressure gold";
-					row.appendChild(pressure);
+					dayCell.innerHTML = forecast.day;
+					row.appendChild(dayCell);
 
-					var visible = document.createElement("td");
-					visible.innerHTML =  forecast.visibility/1000 + " Km";
-					visible.className = "align-center violet visibility";
-					row.appendChild(visible);
-					
-					var uvIndex = document.createElement("td");
-					uvIndex.innerHTML = "UVI " + parseFloat(forecast.uvIndex).toFixed(1).replace(".", this.config.decimalSymbol);
-					uvIndex.className = "align-right uvIndex lightgreen";
-					row.appendChild(uvIndex);
+					var iconCell = document.createElement("td");
+					iconCell.className = "align-center bright weather-icon";
+					row.appendChild(iconCell);
+
+					var icon = document.createElement("span");
+					icon.className = "align-center wi forecasticon wi-" + forecast.icon;
+					iconCell.appendChild(icon);
+
+					var degreeLabel = "";
+					if (this.config.units === "metric" || this.config.units === "imperial") {
+						degreeLabel += "&deg;";
+					}
+					if (this.config.degreeLabel) {
+						switch (this.config.units) {
+							case "metric":
+								degreeLabel += "C";
+								break;
+							case "imperial":
+								degreeLabel += "F";
+								break;
+							case "default":
+								degreeLabel = "K";
+								break;
+						}
+					}
+
+					if (this.config.decimalSymbol === "" || this.config.decimalSymbol === " ") {
+						this.config.decimalSymbol = ".";
+					}
+
+					var medTempCell = document.createElement("td");
+					medTempCell.innerHTML = forecast.dayTemp.replace(".", this.config.decimalSymbol) + degreeLabel;
+					medTempCell.className = "align-center lime";
+					row.appendChild(medTempCell);
+
+					var realFeel = document.createElement("td");
+					realFeel.innerHTML = parseFloat(forecast.realFeels).toFixed(0).replace(".", this.config.decimalSymbol) + degreeLabel;
+					realFeel.className = "align-center yellow";
+					row.appendChild(realFeel);	
+
+					if (this.config.showRainAmount) {
+						var rainCell = document.createElement("td");
+						rainCell.className = "align-right bright";
+						if (!forecast.snow && !forecast.rain) {
+							rainCell.className = "align-right rain";
+							rainCell.innerHTML = this.translate("No rain") + " <i class=\"fa fa-tint-slash skyblue\"></i>";
+						} else if (forecast.snow) {
+							if (config.units !== "imperial") {
+								rainCell.innerHTML = parseFloat(forecast.snow).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-snowflake-cold lightblue\"></i>";
+							} else {
+								rainCell.innerHTML = (parseFloat(forecast.snow) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-snowflake-cold lightblue\"></i>";
+							}
+						} else if (forecast.rain) {
+							if (config.units !== "imperial") {
+								rainCell.innerHTML = parseFloat(forecast.rain).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-umbrella lime\"></i>";
+							} else {
+								rainCell.innerHTML = (parseFloat(forecast.rain) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-umbrella lime\"></i>";
+							}
+						} else if (forecast.rain && forecast.snow) {
+							if (config.units !== "imperial") {
+								rainCell.innerHTML = parseFloat(forecast.rain + forecast.snow).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-umbrella lime\"></i>";
+							} else {
+								rainCell.innerHTML = (parseFloat(forecast.rain + forecast.snow) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-umbrella lime\"></i>";
+							}
+						} 
+						row.appendChild(rainCell);
+					}
+
+					if (this.config.fade && this.config.fadePoint < 1) {
+						if (this.config.fadePoint < 0) {
+							this.config.fadePoint = 0;
+						}
+						var startingPoint = this.forecastHourly.length * this.config.fadePoint;
+						var steps = this.forecastHourly.length - startingPoint;
+						if (f >= startingPoint) {
+							var currentStep = f - startingPoint;
+							row.style.opacity = 1 - (1 / steps) * currentStep;
+						}
+					}
+
+					// add extra information of weather forecast
+					// humidity, dew point,, pressure, visibility and UV index
+
+					if (this.config.extra) {
+						var row = document.createElement("tr");
+						row.className = "extra";
+						table.appendChild(row);
+
+						var humidity = document.createElement("td");
+						humidity.innerHTML = "<i class=\"wi wi-humidity skyblue little\"></i> " + parseFloat(forecast.humidity).toFixed(0) + "%";
+						humidity.className = "align-left humidity";
+						row.appendChild(humidity);
+
+						var dewPoint = document.createElement("td");
+						dewPoint.innerHTML = parseFloat(forecast.dewPoint).toFixed(1).replace(".", this.config.decimalSymbol) + degreeLabel;
+						dewPoint.className = "align-center dewPoint cyan";
+						row.appendChild(dewPoint);
+
+						var pressure = document.createElement("td");
+						pressure.innerHTML = Math.round(forecast.pressure * 750.062 / 1000).toFixed(0) + " Hg";
+						pressure.className = "align-center pressure gold";
+						row.appendChild(pressure);
+
+						var visible = document.createElement("td");
+						visible.innerHTML =  forecast.visibility/1000 + " Km";
+						visible.className = "align-center violet visibility";
+						row.appendChild(visible);
+						
+						var uvIndex = document.createElement("td");
+						uvIndex.innerHTML = "UVI " + parseFloat(forecast.uvIndex).toFixed(1).replace(".", this.config.decimalSymbol);
+						uvIndex.className = "align-right uvIndex lightgreen";
+						row.appendChild(uvIndex);
+					}
+
+					if (this.config.fade && this.config.fadePoint < 1) {
+						if (this.config.fadePoint < 0) {
+							this.config.fadePoint = 0;
+						}
+						var startingPoint = this.forecastHourly.length * this.config.fadePoint;
+						var steps = this.forecastHourly.length - startingPoint;
+						if (f >= startingPoint) {
+							var currentStep = f - startingPoint;
+							row.style.opacity = 1 - (1 / steps) * currentStep;
+						}
+					}
 				}
 
-				if (this.config.fade && this.config.fadePoint < 1) {
-					if (this.config.fadePoint < 0) {
-						this.config.fadePoint = 0;
-					}
-					var startingPoint = this.forecastHourly.length * this.config.fadePoint;
-					var steps = this.forecastHourly.length - startingPoint;
-					if (f >= startingPoint) {
-						var currentStep = f - startingPoint;
-						row.style.opacity = 1 - (1 / steps) * currentStep;
-					}
-				}
+				return table;
 			}
-
-			return table;
 		}
 	},
 
