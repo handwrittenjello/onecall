@@ -157,7 +157,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 		}
 	},
 
-#### Flex Day Forecast
+#### Flex Day Forecast (3 hours and 6 days)
 
 <img src=https://github.com/hangorazvan/onecall/blob/master/flex.png>
 
