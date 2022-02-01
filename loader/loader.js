@@ -8,11 +8,11 @@
 Module.register("loader", {
 	// Default module config.
 	defaults: {
-		lat: "",				// your location latitude,
-		lon: "",				// your location longitude,
+		lat: config.latitude,				// your location latitude,
+		lon: config.longitude,				// your location longitude,
 		appid: "",
 		appid2: "", 			// optional
-		backup: "",				// backup appid
+		backup: config.backup,				// backup appid
 		dayUpdateInterval: 10 * 60 * 1000, // every 10 minutes
 		nightUpdateInterval: 15 * 60 * 1000, // every 15 minutes
 	},
@@ -103,11 +103,10 @@ Module.register("loader", {
 		var self = this;
 		clearTimeout(this.updateTimer);
 		this.updateTimer = setTimeout(function () {
-			if (self.config.endpointType === "aqi") {
+			self.OneUpdate();
+			setTimeout(function () {
 				self.AirUpdate();
-			} else {
-				self.OneUpdate();				
-			}
+			}, 2000);
 		}, nextLoad);
 	}
 });

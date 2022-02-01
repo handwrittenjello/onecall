@@ -1096,7 +1096,7 @@ Module.register("onecall", {
 		}
 
 		if (this.config.appendLocationNameToHeader) {
-			if (this.data.header) return this.data.header + " " + this.fetchedLocationName;
+			if (this.data.header) return this.data.header + " " + this.config.location;
 		}
 
 		return this.data.header ? this.data.header : "";
@@ -1199,7 +1199,7 @@ Module.register("onecall", {
 		var self = this;
 		setTimeout(function () {
 			self.updateDom(self.config.animationSpeed);
-		}, this.config.initialLoadDelay + 1000);	
+		}, this.config.initialLoadDelay + 1000);
 	},
 
 	/* processWeather(data)
@@ -1817,7 +1817,9 @@ Module.register("onecall", {
 		clearTimeout(this.updateTimer);
 		this.updateTimer = setTimeout(function () {
 			if (self.config.endpointType === "aqi") {
-				self.updateAir();
+				setTimeout(function () {
+					self.AirUpdate();
+				}, 2000);
 			} else {
 				self.updateWeather();				
 			}
