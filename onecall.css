@@ -136,7 +136,7 @@
 
 /* Forecast */
 
-.flex-container {
+.onecall .flex-container {
   display: inline-flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -144,15 +144,15 @@
   align-content: flex-start;
   align-items: center;
   gap: 17px;
-  margin-bottom: 10px;
 }
 
-.item {
+.onecall .flex-container .item {
   order: 0;
   width: 30%;
   flex: 0 1 auto;
   align-self: center;
   text-align: center;
+  margin-bottom: 10px;
 }
 
 .weatherforecast header {
@@ -205,8 +205,13 @@
   color: lime;
 }
 
-.daily table tr:nth-child(2) .day:nth-child(1)::after {
+.daily table tr:nth-child(2) .day:nth-child(2)::after {
   color: greenyellow;
+}
+
+.hourly .flex-container .item:nth-child(1) .fday,
+.daily .flex-container .item:nth-child(1) .fday {
+  color: white;
 }
 
 .weatherforecast .day,

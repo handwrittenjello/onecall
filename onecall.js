@@ -38,7 +38,6 @@ Module.register("onecall", {
 		showPressure: true,
 		showDew: true,
 		showUvi: true,
-		showPrecip: true,
 		showDescription: true,
 		showAlerts: false,
 
@@ -371,11 +370,6 @@ Module.register("onecall", {
 					small.appendChild(dew);
 				}
 
-				var spacer = document.createElement("span");
-				spacer.className = "spacer";
-				spacer.innerHTML = "&nbsp; ";
-				small.appendChild(spacer);
-
 				// uv index.
 				if (this.config.showUvi) {
 					var uvi = document.createElement("span");
@@ -399,7 +393,7 @@ Module.register("onecall", {
 				}
 
 				// precipitation
-				if (this.config.showPrecip) {
+				if (this.config.showRainAmount) {
 					var precipitation = document.createElement("div");
 					precipitation.className = "prep midget";
 					if (this.precipitation > 0) {
@@ -587,7 +581,7 @@ Module.register("onecall", {
 					container.appendChild(item);
 
 					var dayCell = document.createElement("div");
-					dayCell.className = "fday medium";
+					dayCell.className = "fday midget";
 					dayCell.innerHTML = forecast.day;
 					item.appendChild(dayCell);
 
@@ -628,27 +622,59 @@ Module.register("onecall", {
 					minTempCell.className = "mintemp skyblue medium";
 					item.appendChild(minTempCell);
 
-					var humidity = document.createElement("span");
-					humidity.innerHTML = "<i class=\"wi wi-humidity\"></i> " + parseFloat(forecast.humidity).toFixed(0) + "%";
-					humidity.className = "humidity skyblue";
-					item.appendChild(humidity);
 
-					var dewPoint = document.createElement("span");
-					dewPoint.innerHTML = "&nbsp; <i class=\"wi wi-raindrops lightgreen\"></i> " + parseFloat(forecast.dewPoint).toFixed(1).replace(".", this.config.decimalSymbol) + degreeLabel;
-					dewPoint.className = "dewPoint cyan";
-					item.appendChild(dewPoint);
+					if (this.config.showRainAmount) {
+						var rainCell = document.createElement("div");
+						rainCell.className = "midget bright";
+						if (!forecast.snow && !forecast.rain) {
+							rainCell.className = "midget";
+							rainCell.innerHTML = this.translate("No rain") + "&nbsp; <i class=\"fa fa-tint-slash skyblue medium\"></i>";
+						} else if (forecast.snow) {
+							if (config.units !== "imperial") {
+								rainCell.innerHTML = parseFloat(forecast.snow).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-snowflake-cold lightblue\"></i>";
+							} else {
+								rainCell.innerHTML = (parseFloat(forecast.snow) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-snowflake-cold lightblue\"></i>";
+							}
+						} else if (forecast.rain) {
+							if (config.units !== "imperial") {
+								rainCell.innerHTML = parseFloat(forecast.rain).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-umbrella lime\"></i>";
+							} else {
+								rainCell.innerHTML = (parseFloat(forecast.rain) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-umbrella lime\"></i>";
+							}
+						} else if (forecast.rain && forecast.snow) {
+							if (config.units !== "imperial") {
+								rainCell.innerHTML = parseFloat(forecast.rain + forecast.snow).toFixed(1).replace(".", this.config.decimalSymbol) + " mm <i class=\"wi wi-umbrella lime\"></i>";
+							} else {
+								rainCell.innerHTML = (parseFloat(forecast.rain + forecast.snow) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-umbrella lime\"></i>";
+							}
+						}
 
-					var pressure = document.createElement("span");
-					pressure.innerHTML = "<br>" + Math.round(forecast.pressure * 750.062 / 1000).toFixed(0) + " Hg";
-					pressure.className = "pressure gold";
-					item.appendChild(pressure);
-				
-					var uvIndex = document.createElement("span");
-					uvIndex.innerHTML = "&nbsp; UVI " + parseFloat(forecast.uvIndex).toFixed(1).replace(".", this.config.decimalSymbol);
-					uvIndex.className = "uvIndex lightgreen";
-					item.appendChild(uvIndex);
+						item.appendChild(rainCell);
+					}
 
-					container.appendChild(item);
+					if (this.config.extra) {
+						var humidity = document.createElement("span");
+						humidity.innerHTML = "<i class=\"wi wi-humidity\"></i> " + parseFloat(forecast.humidity).toFixed(0) + "%";
+						humidity.className = "humidity skyblue extra";
+						item.appendChild(humidity);
+
+						var dewPoint = document.createElement("span");
+						dewPoint.innerHTML = "&nbsp; <i class=\"wi wi-raindrops lightgreen\"></i> " + parseFloat(forecast.dewPoint).toFixed(1).replace(".", this.config.decimalSymbol) + degreeLabel;
+						dewPoint.className = "dewPoint cyan extra";
+						item.appendChild(dewPoint);
+
+						var pressure = document.createElement("span");
+						pressure.innerHTML = "<br>" + Math.round(forecast.pressure * 750.062 / 1000).toFixed(0) + " Hg";
+						pressure.className = "pressure gold extra";
+						item.appendChild(pressure);
+					
+						var uvIndex = document.createElement("span");
+						uvIndex.innerHTML = "&nbsp; UVI " + parseFloat(forecast.uvIndex).toFixed(1).replace(".", this.config.decimalSymbol);
+						uvIndex.className = "uvIndex lightgreen extra";
+						item.appendChild(uvIndex);
+
+						container.appendChild(item);
+					}
 				}
 
 				return container;
@@ -736,7 +762,8 @@ Module.register("onecall", {
 							} else {
 								rainCell.innerHTML = (parseFloat(forecast.rain + forecast.snow) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-umbrella lime\"></i>";
 							}
-						} 
+						}
+
 						row.appendChild(rainCell);
 					}
 
@@ -816,7 +843,7 @@ Module.register("onecall", {
 					container.appendChild(item);
 
 					var dayCell = document.createElement("div");
-					dayCell.className = "fday medium";
+					dayCell.className = "fday midget";
 					dayCell.innerHTML = forecast.day + " h";
 					item.appendChild(dayCell);
 
@@ -849,7 +876,7 @@ Module.register("onecall", {
 
 					var medTempCell = document.createElement("div");
 					medTempCell.innerHTML = forecast.dayTemp.replace(".", this.config.decimalSymbol) + degreeLabel;
-					medTempCell.className = "dayTemp lime medium";
+					medTempCell.className = "dayTemp yellow medium";
 					item.appendChild(medTempCell);
 
 					if (this.config.showRainAmount) {
@@ -876,32 +903,30 @@ Module.register("onecall", {
 							} else {
 								rainCell.innerHTML = (parseFloat(forecast.rain + forecast.snow) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-umbrella lime\"></i>";
 							}
-						} 
-						item.appendChild(rainCell);
-					} else {
-						var realFeel = document.createElement("div");
-						realFeel.innerHTML = parseFloat(forecast.realFeels).toFixed(0).replace(".", this.config.decimalSymbol) + degreeLabel;
-						realFeel.className = "feels_like yellow medium";
-						item.appendChild(realFeel);	
+						}
 
+						item.appendChild(rainCell);
+					} 
+
+					if (this.config.extra) {
 						var humidity = document.createElement("span");
 						humidity.innerHTML = "<i class=\"wi wi-humidity\"></i> " + parseFloat(forecast.humidity).toFixed(0) + "%";
-						humidity.className = "humidity skyblue";
+						humidity.className = "humidity skyblue extra";
 						item.appendChild(humidity);
 
 						var dewPoint = document.createElement("span");
 						dewPoint.innerHTML = "&nbsp; <i class=\"wi wi-raindrops lightgreen\"></i> " + parseFloat(forecast.dewPoint).toFixed(1).replace(".", this.config.decimalSymbol) + degreeLabel;
-						dewPoint.className = "dewPoint cyan";
+						dewPoint.className = "dewPoint cyan extra";
 						item.appendChild(dewPoint);
 
 						var pressure = document.createElement("span");
 						pressure.innerHTML = "<br>" + Math.round(forecast.pressure * 750.062 / 1000).toFixed(0) + " Hg";
-						pressure.className = "pressure gold";
+						pressure.className = "pressure gold extra";
 						item.appendChild(pressure);
 					
 						var uvIndex = document.createElement("span");
 						uvIndex.innerHTML = "&nbsp; UVI " + parseFloat(forecast.uvIndex).toFixed(1).replace(".", this.config.decimalSymbol);
-						uvIndex.className = "uvIndex lightgreen";
+						uvIndex.className = "uvIndex lightgreen extra";
 						item.appendChild(uvIndex);
 					}
 
@@ -995,7 +1020,8 @@ Module.register("onecall", {
 							} else {
 								rainCell.innerHTML = (parseFloat(forecast.rain + forecast.snow) / 25.4).toFixed(2).replace(".", this.config.decimalSymbol) + " in <i class=\"wi wi-umbrella lime\"></i>";
 							}
-						} 
+						}
+
 						row.appendChild(rainCell);
 					}
 
