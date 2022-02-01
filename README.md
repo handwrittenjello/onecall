@@ -4,7 +4,8 @@ https://github.com/hangorazvan/onecall
 
 Modified MagicMirror2 deprecated current & forecast weather module based on Openweathermap with Onecall endpoint and Air Quality Index with compliments. As the name suggests this module call only once your appid no matter how many instances are loaded, for current, hourly, daily or AQI, it uses the onecall endpoint for which reason it was designed for.
 
-Do not make modification and do not replace the default module, just add <i>disabled: true</i> in config.js and use this one as 3rd party
+Do not make modification and do not replace the default module, just add <i>disabled: true</i> in config.js and use this one as 3rd party.
+Keep in mind that this module is for my personal use and not necessarily for sharing so don't create issues or pull requests.
 
 	{
 		module: "weather", 
