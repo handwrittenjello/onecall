@@ -192,7 +192,11 @@ Module.register("onecall", {
 
 		var windSpeedUnit = document.createElement("span");
 		windSpeedUnit.className = "subs";
-		windSpeedUnit.innerHTML = " km/h ";
+		if (this.config.units === "metric" || this.config.units === "default") {
+			windSpeedUnit.innerHTML = " km/h ";
+		} else if (this.config.units === "imperial") {
+			windSpeedUnit.innerHTML = " mph ";
+		}
 		small.appendChild(windSpeedUnit);
 
 		// pressure.
@@ -222,7 +226,11 @@ Module.register("onecall", {
 
 			var visibilityUnit = document.createElement("span");
 			visibilityUnit.className = "subs";
-			visibilityUnit.innerHTML = " km ";
+			if (this.config.units === "metric" || this.config.units === "default") {
+				visibilityUnit.innerHTML = " km ";
+			} else if (this.config.units === "imperial") {
+				visibilityUnit.innerHTML = " mi ";
+			}
 			small.appendChild(visibilityUnit);
 		}
 
@@ -1061,9 +1069,14 @@ Module.register("onecall", {
 						row.appendChild(pressure);
 
 						var visible = document.createElement("td");
-						visible.innerHTML =  forecast.visibility/1000 + " Km";
+						if (this.config.units === "metric" || this.config.units === "default") {
+							visible.innerHTML =  forecast.visibility/1000 + " Km";
+						} else if (this.config.units === "imperial") {
+							visible.innerHTML =  (forecast.visibility/1000)/1.609344 + " mi";
+						}
 						visible.className = "align-center violet visibility";
 						row.appendChild(visible);
+
 						
 						var uvIndex = document.createElement("td");
 						uvIndex.innerHTML = "UVI " + parseFloat(forecast.uvIndex).toFixed(1).replace(".", this.config.decimalSymbol);
@@ -1199,7 +1212,7 @@ Module.register("onecall", {
 		var self = this;
 		setTimeout(function () {
 			self.updateDom(self.config.animationSpeed);
-		}, this.config.initialLoadDelay + 1000);
+		}, this.config.initialLoadDelay + 1000);	
 	},
 
 	/* processWeather(data)
