@@ -212,8 +212,8 @@ Do not make modification and do not replace the default module, just add <i>disa
 
 #### With or without Flex Day Forecast
 
-<img src=https://github.com/hangorazvan/onecall/blob/master/onecall_flex.png width=50%>
-<img src=https://github.com/hangorazvan/onecall/blob/master/onecall.png width=50%>
+<img src=https://github.com/hangorazvan/onecall/blob/master/onecall_flex.png style="width:50%">
+<img src=https://github.com/hangorazvan/onecall/blob/master/onecall.png style="width:50%">
 
 
 #### Air Quality Index also in stand alone module https://github.com/hangorazvan/pollution
