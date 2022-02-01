@@ -1097,7 +1097,6 @@ Module.register("onecall", {
 
 		if (this.config.appendLocationNameToHeader) {
 			if (this.data.header) return this.data.header + " " + this.fetchedLocationName;
-			else return this.fetchedLocationName;
 		}
 
 		return this.data.header ? this.data.header : "";
