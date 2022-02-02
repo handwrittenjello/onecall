@@ -147,6 +147,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			flexDayForecast: true,         // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
 			maxNumberOfDays: 6,
 			fullday: "dddd",               // "dddd" for full day name
+			extra: true,
 
 			endpointType: "daily",         // "current", "hourly", "daily" or "aqi"
 			oneLoader: true,               // very important for just one API call
