@@ -39,7 +39,7 @@ Module.register("onecall", {
 		showRainAmount: true,       // snow show only in winter months
 		onlyTemp: false,
 		hideTemp: false,
-		roundTemp: false,            // error if is true
+		roundTemp: false,           // error if is true
 
 		// current settings
 		showWindDirection: true,
