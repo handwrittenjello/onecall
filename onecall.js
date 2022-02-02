@@ -137,6 +137,7 @@ Module.register("onecall", {
 		this.aqi = null;				// Air Quality
 		this.aqi_t = null;
 		this.aqi_i = null;
+		this.aqi_s = null;
 		this.c_co = null;
 		this.c_no = null;
 		this.c_no2 = null;
@@ -459,14 +460,14 @@ Module.register("onecall", {
 			var aqi_q = null; var aqi_c = null;
 			if (this.config.calculateAqi) {
 				this.aqi_i = Math.max(
-					Math.round(this.c_no2/4),	// mandatory
-					Math.round(this.c_no/4),	// optional
-					Math.round(this.c_pm10/1.8),// mandatory 
-					Math.round(this.c_o3/2.4),	// mandatory
-					Math.round(this.c_pm25/1.1),// optional
-					Math.round(this.c_so2/5),	// optional
-					Math.round(this.c_nh3/16),	// optional
-					Math.round(this.c_co/2000)	// optional
+					Math.round(this.c_no2/4*1.3),	// mandatory
+					Math.round(this.c_no/4)*1.3,	// optional
+					Math.round(this.c_pm10/1.8),	// mandatory 
+					Math.round(this.c_o3/2.4*1.7),	// mandatory
+					Math.round(this.c_pm25/1.1),	// optional
+					Math.round(this.c_so2/5),		// optional
+					Math.round(this.c_nh3/16*0.9),	// optional
+					Math.round(this.c_co/2000*0.9)	// optional
 				).toFixed(0);
 
 				if (this.aqi_i <= 25) {
@@ -489,19 +490,19 @@ Module.register("onecall", {
 				aqi.innerHTML = this.translate("Index") + " <i class=\"fa fa-leaf " + aqi_c + "\"></i> <span class=" + aqi_c + ">" + aqi_q + " (" + this.aqi_i + ")</span>";
 			
 			} else {
-				if (this.aqi == 1) { 
+				if (this.aqi === 1) { 
 					aqi_q = this.translate("Good");
 					aqi_c = "lime";
-				} else if (this.aqi == 2) { 
+				} else if (this.aqi === 2) { 
 					aqi_q = this.translate("Fair");
 					aqi_c = "yellow";
-				} else if (this.aqi == 3) { 
+				} else if (this.aqi === 3) { 
 					aqi_q = this.translate("Moderate");
 					aqi_c = "orange";
-				} else if (this.aqi == 4) { 
+				} else if (this.aqi === 4) { 
 					aqi_q = this.translate("Poor");
 					aqi_c = "coral";
-				} else if (this.aqi == 5) { 
+				} else if (this.aqi === 5) { 
 					aqi_q = this.translate("Unhealty");
 					aqi_c = "red";
 				}
@@ -514,9 +515,9 @@ Module.register("onecall", {
 				aqi_d.className = "normal small aqi_d";
 				aqi_d.innerHTML = "PM<sub>10</sub> <span class=bright>" + Math.round(this.c_pm10/1.8)
 						+ "</span>; PM<sub>2.5</sub> <span class=bright>" + Math.round(this.c_pm25/1.1)
-						+ "</span>; O<sub>3</sub> <span class=bright>" + Math.round(this.c_o3/2.4)
+						+ "</span>; O<sub>3</sub> <span class=bright>" + Math.round(this.c_o3/2.4*1.7)
 						+ "</span>; NO<sub>2</sub> <span class=bright>" + Math.round(this.c_no2/4)
-						+ "</span>; SO<sub>2</sub> <span class=bright>" + Math.round(this.c_so2/5)
+						+ "</span>; SO<sub>2</sub> <span class=bright>" + Math.round(this.c_so2/5*1.3)
 						+ "</span>";
 				wrapper2.appendChild(aqi_d);
 
@@ -1124,7 +1125,9 @@ Module.register("onecall", {
 		}
 
 		if (notification === "AIR_RESPONSE") {
-			this.processAir(payload);
+			if (this.config.endpointType === "aqi") {
+				this.processAir(payload);
+			}
 			//Log.info("Air " + payload);
 		}
 
@@ -1185,20 +1188,19 @@ Module.register("onecall", {
 		}
 
 		if (this.config.calculateAqi) {
-			var aqi_s = 0;
-			if (this.aqi_i > 0 && this.aqi_i<=25) {
-				aqi_s = 1;
-			} else if (this.aqi_i > 25 && this.aqi_i<=50) {
-				aqi_s = 2;
-			} else if (this.aqi_i > 50 && this.aqi_i<=75) {
-				aqi_s = 3;
-			} else if (this.aqi_i > 75 && this.aqi_i<=100) {
-				aqi_s = 4;
+			if (this.aqi_i <= 25) {
+				this.aqi_s = 1;
+			} else if (this.aqi_i > 25 && this.aqi_i <= 50) {
+				this.aqi_s = 2;
+			} else if (this.aqi_i > 50 && this.aqi_i <= 75) {
+				this.aqi_s = 3;
+			} else if (this.aqi_i > 75 && this.aqi_i <= 100) {
+				this.aqi_s = 4;
 			} else if (this.aqi_i > 100) {
-				aqi_s = 5;
+				this.aqi_s = 5;
 			}
-			this.sendNotification("AIRQUALITY_INDEX", { index: "AQI_" + aqi_s });
-		//	Log.info("AIRQUALITY_INDEX", { index: "AQI_" + aqi_s });
+			this.sendNotification("AIRQUALITY_INDEX", { index: "AQI_" + this.aqi_s });
+		//	Log.info("AIRQUALITY_INDEX", { index: "AQI_" + this.aqi_s });
 		} else {
 			this.sendNotification("AIRQUALITY_INDEX", { index: "AQI_" + this.aqi });
 		//	Log.info("AIRQUALITY_INDEX", { index: "AQI_" + this.aqi });
