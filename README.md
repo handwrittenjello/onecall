@@ -82,7 +82,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			colored: true,
 			extra: true,                // snow humidity, dew point, pressure, real feel and rain or snow,
 			fullday: "ddd",             // "ddd" in case of daily forecast or "HH [h]" for hourly forecast
-                                        // "dddd" for full day name
+			                            // "dddd" for full day name
 
 			endpointType: "daily",
 			oneLoader: true,            // important for just one API call
@@ -177,7 +177,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			calculateAqi: true,          // calculate AQI from pollutants concentration
 			showAqiTime: true,           // show last update time
 			showAqiData: true,           // show AQI calculation pollutants, hidding last update
-			showPollution: false,        // snow list of all pollutants, hidding AQI calculation of all pollutants
+			showPollution: false,        // snow list of all pollutants, hidding AQI calculation
 		}
 	},
 
