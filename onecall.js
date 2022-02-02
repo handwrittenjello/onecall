@@ -1704,7 +1704,6 @@ Module.register("onecall", {
 					self.processForecast(JSON.parse(this.response));
 				} else if (this.status === 401) {
 					self.updateDom(self.config.animationSpeed);
-					self.updateDom(self.config.animationSpeed);
 					if (self.config.backup === "") {
 						Log.error("OneCall: backup APPID not set!");
 						return;
@@ -1794,7 +1793,6 @@ Module.register("onecall", {
 				if (this.status === 200) {
 					self.processAir(JSON.parse(this.response));
 				} else if (this.status === 401) {
-					self.updateDom(self.config.animationSpeed);
 					self.updateDom(self.config.animationSpeed);
 					if (self.config.backup === "") {
 						Log.error("Air Pollution: backup APPID not set!");
