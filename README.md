@@ -19,15 +19,14 @@ Do not make modification and do not replace the default module, just add <i>disa
 
 		{
 			module: "onecall/loader",
-			disabled: false,
 			config: {
-				lat: "",				// your location latitude,
-				lon: "",				// your location longitude,
-				appid: "",
-				appid2: "", 				// optional
-				backup: "",				// optional backup appid
-				dayUpdateInterval: 10 * 60 * 1000, 	// every 10 minutes
-				nightUpdateInterval: 15 * 60 * 1000, 	// every 15 minutes
+				lat: "",                               // your location latitude,
+				lon: "",                               // your location longitude,
+				appid: "",                             // your Openweathermap appid
+				appid2: "",                            // optional
+				backup: "",                            // optional backup appid
+				dayUpdateInterval: 10 * 60 * 1000,     // every 10 minutes
+				nightUpdateInterval: 15 * 60 * 1000,   // every 15 minutes
 			}
 		},
 
@@ -38,7 +37,6 @@ Do not make modification and do not replace the default module, just add <i>disa
 	{
 		module: "onecall",
 		position: "top_right",
-		disabled: false,        			// not necessary
 		header: "Current Weather",
 		classes: "current weather",
 		config: {
@@ -49,18 +47,18 @@ Do not make modification and do not replace the default module, just add <i>disa
 			useBeaufort: false,
 			useKMPHwind: true,
 			showFeelsLike: true,
-			realFeelsLike: true,			// from onecall not calculated by module
+			realFeelsLike: true,        // from onecall endpoint not calculated by module
 			showVisibility: true,
 			showHumidity: true,
 			showPressure: true,
-			showDew: true,				// dew point
-			showUvi: true,				// UV index
-			showPrecip: true,			// precipitation
+			showDew: true,              // dew point
+			showUvi: true,              // UV index
+			showPrecip: true,           // precipitation
 			showDescription: true,
 			showAlerts: false,
 
 			endpointType: "current",
-			oneLoader: true,			// important for just one API call
+			oneLoader: true,            // very important for just one API call
 		}
 	},
 
@@ -71,22 +69,23 @@ Do not make modification and do not replace the default module, just add <i>disa
 	{
 		module: "onecall",
 		position: "top_right",
-		disabled: false,        			// not necessary
+		disabled: false,                // not necessary
 		header: "Daily Weather Forecast",
 		classes: "daily",
 		config: {
 
 			// hourly & daily settings
 			maxNumberOfDays: 8,
-			showRainAmount: true, 			// snow show only in winter months
+			showRainAmount: true,       // snow show only in winter months
 			fade: false,
-			fadePoint: 0.25, 			// Start on 1/4th of the list.
+			fadePoint: 0.25,            // Start on 1/4th of the list.
 			colored: true,
-			extra: true,				// snow humidity, dew point, pressure, real feel and rain or snow,
-			fullday: "ddd", 			// "ddd" in case of daily forecast or "HH [h]" for hourly forecast
+			extra: true,                // snow humidity, dew point, pressure, real feel and rain or snow,
+			fullday: "ddd",             // "ddd" in case of daily forecast or "HH [h]" for hourly forecast
+                                        // "dddd" for full day name
 
 			endpointType: "daily",
-			oneLoader: true,			// important for just one API call
+			oneLoader: true,            // important for just one API call
 		}
 	},
 
@@ -97,22 +96,22 @@ Do not make modification and do not replace the default module, just add <i>disa
 	{
 		module: "onecall",
 		position: "top_right",
-		disabled: false,        			// not necessary
 		header: "Hourly Weather Forecast",
 		classes: "hourly",
 		config: {
 
 			// hourly & daily settings
 			maxNumberOfDays: 4,
-			showRainAmount: true, 			// snow show only in winter months
+			showRainAmount: true,         // snow show only in winter months
 			fade: true,
-			fadePoint: 0.25, 			// Start on 1/4th of the list.
+			fadePoint: 0.25,              // Start on 1/4th of the list.
 			colored: true,
-			extra: false,				// snow humidity, dew point, pressure, real feel and rain or snow,
-			fullday: "HH [h]", 			// "ddd" in case of daily forecast or "HH [h]" for hourly forecast
+			extra: false,                 // snow humidity, dew point, pressure, real feel and rain or snow,
+			fullday: "HH [h]",            // "ddd" in case of daily forecast or "HH [h]" for hourly forecast
+			                              // "dddd" for full day name
 
 			endpointType: "hourly",
-			oneLoader: true,			// important for just one API call
+			oneLoader: true,              // very important for just one API call
 		}
 	},
 
@@ -123,18 +122,17 @@ Do not make modification and do not replace the default module, just add <i>disa
 	{
 		module: "onecall",
 		position: "top_right",
-		disabled: false,        			// not necessary
 		header: "Hourly Weather Forecast",
 		classes: "hourly",
 		config: {
 
 			maxNumberOfDays: 3,
-			showRainAmount: true, 			// snow show only in winter months
+			showRainAmount: true,           // snow show only in winter months
 			fullday: "HH.mm",
 			flexDayForecast: true,
 
 			endpointType: "hourly",
-			oneLoader: true,			// important for just one API call
+			oneLoader: true,                // very important for just one API call
 		}
 	},
 
@@ -142,18 +140,17 @@ Do not make modification and do not replace the default module, just add <i>disa
 	{
 		module: "onecall",
 		position: "top_right",
-		disabled: false,        			// not necessary
 		header: "Daily Weather Forecast",
 		classes: "daily",
 		config: {
 
 			maxNumberOfDays: 6,
-			showRainAmount: true, 			// snow show only in winter months
-			fullday: "dddd",			// dddd for full day name
+			showRainAmount: true,          // snow show only in winter months
+			fullday: "dddd",               // "dddd" for full day name
 			flexDayForecast: true,
 
 			endpointType: "daily",
-			oneLoader: true,			// important for just one API call
+			oneLoader: true,               // very important for just one API call
 		}
 	},
 
@@ -177,10 +174,10 @@ Do not make modification and do not replace the default module, just add <i>disa
 			endpointType: "aqi",
 			oneLoader: true,
 			
-			calculateAqi: true,		// calculate AQI from pollutants concentration
-			showAqiTime: true,		// show last update time
-			showAqiData: true,		// show AQI calculation pollutants, hidding last update
-			showPollution: false,		// snow list of all pollutants, hidding AQI calculation of all pollutants
+			calculateAqi: true,          // calculate AQI from pollutants concentration
+			showAqiTime: true,           // show last update time
+			showAqiData: true,           // show AQI calculation pollutants, hidding last update
+			showPollution: false,        // snow list of all pollutants, hidding AQI calculation of all pollutants
 		}
 	},
 
