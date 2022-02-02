@@ -8,11 +8,11 @@
 Module.register("loader", {
 	// Default module config.
 	defaults: {
-		lat: config.latitude,				// your location latitude,
-		lon: config.longitude,				// your location longitude,
+		lat: "",				// your location latitude,
+		lon: "",				// your location longitude,
 		appid: "",
 		appid2: "", 						// optional
-		backup: config.backup,				// optional backup appid
+		backup: "",				// optional backup appid
 		dayUpdateInterval: 10 * 60 * 1000, 	// every 10 minutes
 		nightUpdateInterval: 15 * 60 * 1000, // every 15 minutes
 	},

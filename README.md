@@ -2,10 +2,9 @@
 
 https://github.com/hangorazvan/onecall
 
-Modified MagicMirror2 deprecated current & forecast weather module based on Openweathermap with Onecall endpoint and Air Quality Index with compliments. As the name suggests this module call only once your appid no matter how many instances are loaded, for current, hourly, daily or AQI, it uses the onecall endpoint for which reason it was designed for.
+Modified MagicMirror2 original current & forecast weather module based on Openweathermap with Onecall endpoint and Air Quality Index with compliments. As the name suggests this module call only once your appid no matter how many instances are loaded, for current, hourly, daily or AQI, it uses the onecall endpoint for which reason it was designed for.Keep in mind that this module is for my personal use and not necessarily for sharing so don't create issues or pull requests.
 
 Do not make modification and do not replace the default module, just add <i>disabled: true</i> in config.js and use this one as 3rd party.
-Keep in mind that this module is for my personal use and not necessarily for sharing so don't create issues or pull requests.
 
 	{
 		module: "weather", 
@@ -26,7 +25,7 @@ Keep in mind that this module is for my personal use and not necessarily for sha
 				lon: "",				// your location longitude,
 				appid: "",
 				appid2: "", 			// optional
-				backup: "",				// backup appid
+				backup: "",				// optional backup appid
 				dayUpdateInterval: 10 * 60 * 1000, // every 10 minutes
 				nightUpdateInterval: 15 * 60 * 1000, // every 15 minutes
 			}
@@ -43,13 +42,6 @@ Keep in mind that this module is for my personal use and not necessarily for sha
 		header: "Current Weather",
 		classes: "current weather",
 		config: {
-			// you cand skip these settings if they are by default
-			location: "",				// your location,
-			units: "",				// your units, metric or imperial
-			timeFormat: 24,
-			lang: "en",
-			decimalSymbol: ".",
-			degreeLabel: true,
 
 			// current settings
 			showWindDirection: true,
@@ -69,15 +61,6 @@ Keep in mind that this module is for my personal use and not necessarily for sha
 
 			endpointType: "current",
 			oneLoader: true,
-
-			appendLocationNameToHeader: true,
-			useLocationAsHeader: false,
-
-			calendarClass: "calendar",
-
-			onlyTemp: false,
-			hideTemp: false,
-			roundTemp: false,			// error on true
 		}
 	},
 
@@ -92,13 +75,6 @@ Keep in mind that this module is for my personal use and not necessarily for sha
 		header: "Daily Weather Forecast",
 		classes: "daily",
 		config: {
-			// you cand skip these settings if they are by default
-			location: "",				// your location,
-			units: "",				// your units, metric or imperial
-			timeFormat: 24,
-			lang: "en",
-			decimalSymbol: ".",
-			degreeLabel: true,
 
 			// hourly & daily settings
 			maxNumberOfDays: 8,
@@ -110,13 +86,7 @@ Keep in mind that this module is for my personal use and not necessarily for sha
 			fullday: "ddd", 			// "ddd" in case of daily forecast or "HH [h]" for hourly forecast
 
 			endpointType: "daily",
-			oneLoader: true,
-
-			appendLocationNameToHeader: true,
-			useLocationAsHeader: false,
-
-			tableClass: "small",
-
+			oneLoader: true,			// important for just one API call
 		}
 	},
 
@@ -131,13 +101,6 @@ Keep in mind that this module is for my personal use and not necessarily for sha
 		header: "Hourly Weather Forecast",
 		classes: "hourly",
 		config: {
-			// you cand skip these settings if they are by default
-			location: "",				// your location,
-			units: "",				// your units, metric or imperial
-			timeFormat: 24,
-			lang: "en",
-			decimalSymbol: ".",
-			degreeLabel: true,
 
 			// hourly & daily settings
 			maxNumberOfDays: 4,
@@ -149,12 +112,7 @@ Keep in mind that this module is for my personal use and not necessarily for sha
 			fullday: "HH [h]", 			// "ddd" in case of daily forecast or "HH [h]" for hourly forecast
 
 			endpointType: "hourly",
-			oneLoader: true,
-
-			appendLocationNameToHeader: true,
-			useLocationAsHeader: false,
-
-			tableClass: "small",
+			oneLoader: true,			// important for just one API call
 		}
 	},
 
@@ -176,13 +134,7 @@ Keep in mind that this module is for my personal use and not necessarily for sha
 			flexDayForecast: true,
 
 			endpointType: "hourly",
-			oneLoader: true,
-
-			appendLocationNameToHeader: true,
-			useLocationAsHeader: false,
-
-			tableClass: "small",
-
+			oneLoader: true,				// important for just one API call
 		}
 	},
 
@@ -201,13 +153,7 @@ Keep in mind that this module is for my personal use and not necessarily for sha
 			flexDayForecast: true,
 
 			endpointType: "daily",
-			oneLoader: true,
-
-			appendLocationNameToHeader: true,
-			useLocationAsHeader: false,
-
-			tableClass: "small",
-
+			oneLoader: true,				// important for just one API call
 		}
 	},
 

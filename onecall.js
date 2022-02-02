@@ -10,14 +10,17 @@
 Module.register("onecall", {
 	// Default module config.
 	defaults: {
+		// optional settings if oneLoader is used
 		lat: "",
 		lon: "",
 		location: "",
 		appid: "",
 		backup: "",
-		units: config.units,
 		dayUpdateInterval: 10 * 60 * 1000, // every 10 minutes
 		nightUpdateInterval: 15 * 60 * 1000, // every 15 minutes
+
+		// general settings
+		units: config.units,
 		initialLoadDelay: 0, // 0 seconds delay
 		retryDelay: 0,
 		animationSpeed: 1000,
@@ -25,6 +28,15 @@ Module.register("onecall", {
 		language: config.language,
 		decimalSymbol: ".",
 		degreeLabel: true,
+		appendLocationNameToHeader: true,
+		useLocationAsHeader: false,
+		calendarClass: "calendar",
+		tableClass: "small",
+		onlyTemp: false,
+		hideTemp: false,
+		roundTemp: false, 				// error if is true
+		endpointType: "current",
+		oneLoader: true,				// important for just one API call
 
 		// current settings
 		showWindDirection: true,
@@ -50,25 +62,12 @@ Module.register("onecall", {
 		extra: false,
 		fullday: "ddd",
 		flexDayForecast: true,
-
-		endpointType: "current",
-		oneLoader: true,
-		
+	
 		// Air Quality settings for endpointType: "aqi"
 		calculateAqi: false,			// calculate AQI from pollutants concentration (not fully tested)
 		showAqiTime: true,
 		showAqiData: true,
 		showPollution: false,
-
-		appendLocationNameToHeader: true,
-		useLocationAsHeader: false,
-
-		calendarClass: "calendar",
-		tableClass: "small",
-
-		onlyTemp: false,
-		hideTemp: false,
-		roundTemp: false,
 
 		iconTable: {
 			"01d": "day-sunny",
