@@ -49,7 +49,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 
 			// current settings
 			showWindDirection: true,
-			showWindDirectionAsArrow: true,
+			showWindDirectionAsArrow: false,	// not realy working
 			useBeaufort: false,
 			useKMPHwind: true,
 			showFeelsLike: true,

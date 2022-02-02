@@ -44,7 +44,7 @@ Module.register("onecall", {
 
 		// current settings
 		showWindDirection: true,
-		showWindDirectionAsArrow: true,
+		showWindDirectionAsArrow: false,	// not realy working
 		useBeaufort: false,
 		useKMPHwind: true,
 		showFeelsLike: true,
@@ -172,13 +172,14 @@ Module.register("onecall", {
 
 		if (this.config.showWindDirection) {
 			var windDirection = document.createElement("span");
-			windDirection.className = "wind";
 			if (this.config.showWindDirectionAsArrow) {
 				if (this.windDeg !== null) {
+				    windDirection.className = "wind";
 					windDirection.innerHTML = " <i class=\"wi wi-direction-down\" style=\"transform:rotate(" + this.windDeg + "deg);\"></i>";
 				}
 			} else {
-				windDirection.innerHTML = this.translate(this.windDirection);
+			    windDirection.className = "wind subs";
+				windDirection.innerHTML = " " + this.translate(this.windDirection);
 			}
 			small.appendChild(windDirection);
 		}
