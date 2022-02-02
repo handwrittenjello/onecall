@@ -53,9 +53,10 @@ Do not make modification and do not replace the default module, just add <i>disa
 			showPressure: true,
 			showDew: true,              // dew point
 			showUvi: true,              // UV index
-			showPrecip: true,           // precipitation
 			showDescription: true,
 			showAlerts: false,
+
+			showRainAmount: true,       // snow show only in winter months
 
 			endpointType: "current",    // "current", "hourly", "daily" or "aqi"
 			oneLoader: true,            // very important for just one API call
@@ -77,7 +78,6 @@ Do not make modification and do not replace the default module, just add <i>disa
 			// hourly & daily settings
 			flexDayForecast: false,     // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
 			maxNumberOfDays: 8,
-			showRainAmount: true,       // snow show only in winter months
 			fade: false,
 			fadePoint: 0.25,            // Start on 1/4th of the list.
 			colored: true,
@@ -104,11 +104,10 @@ Do not make modification and do not replace the default module, just add <i>disa
 			// hourly & daily settings
 			flexDayForecast: false,       // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
 			maxNumberOfDays: 4,
-			showRainAmount: true,         // snow show only in winter months
 			fade: true,
 			fadePoint: 0.25,              // Start on 1/4th of the list.
 			colored: true,
-			extra: false,                 // snow humidity, dew point, pressure, real feel and rain or snow,
+			extra: true,                 // snow humidity, dew point, pressure, real feel and rain or snow,
 			fullday: "HH [h]",            // "ddd" in case of daily forecast or "HH [h]" for hourly forecast
 			                              // "dddd" for full day name
 
@@ -130,7 +129,6 @@ Do not make modification and do not replace the default module, just add <i>disa
 
 			flexDayForecast: true,          // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
 			maxNumberOfDays: 3,
-			showRainAmount: true,           // snow show only in winter months
 			fullday: "HH.mm",
 
 			endpointType: "hourly",         // "current", "hourly", "daily" or "aqi"
@@ -148,7 +146,6 @@ Do not make modification and do not replace the default module, just add <i>disa
 
 			flexDayForecast: true,         // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
 			maxNumberOfDays: 6,
-			showRainAmount: true,          // snow show only in winter months
 			fullday: "dddd",               // "dddd" for full day name
 
 			endpointType: "daily",         // "current", "hourly", "daily" or "aqi"

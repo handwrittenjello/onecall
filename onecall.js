@@ -36,6 +36,7 @@ Module.register("onecall", {
 		useLocationAsHeader: false,
 		calendarClass: "calendar",
 		tableClass: "small",
+		showRainAmount: true,       // snow show only in winter months
 		onlyTemp: false,
 		hideTemp: false,
 		roundTemp: false,            // error if is true
@@ -52,14 +53,12 @@ Module.register("onecall", {
 		showPressure: true,
 		showDew: true,              // dew point
 		showUvi: true,              // UV index
-		showPrecip: true,           // precipitation
 		showDescription: true,
 		showAlerts: false,
 
 		// hourly & daily settings
 		flexDayForecast: true,      // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
 		maxNumberOfDays: 8,
-		showRainAmount: true,       // snow show only in winter months
 		fade: false,
 		fadePoint: 0.25,            // Start on 1/4th of the list.
 		colored: true,
