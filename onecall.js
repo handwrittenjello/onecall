@@ -57,6 +57,7 @@ Module.register("onecall", {
 		showAlerts: false,
 
 		// hourly & daily settings
+		flexDayForecast: true,      // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
 		maxNumberOfDays: 8,
 		showRainAmount: true,       // snow show only in winter months
 		fade: false,
