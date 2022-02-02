@@ -24,7 +24,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 				lat: "",				// your location latitude,
 				lon: "",				// your location longitude,
 				appid: "",
-				appid2: "", 			// optional
+				appid2: "", 				// optional
 				backup: "",				// optional backup appid
 				dayUpdateInterval: 10 * 60 * 1000, // every 10 minutes
 				nightUpdateInterval: 15 * 60 * 1000, // every 15 minutes
@@ -134,7 +134,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			flexDayForecast: true,
 
 			endpointType: "hourly",
-			oneLoader: true,				// important for just one API call
+			oneLoader: true,			// important for just one API call
 		}
 	},
 
@@ -153,7 +153,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			flexDayForecast: true,
 
 			endpointType: "daily",
-			oneLoader: true,				// important for just one API call
+			oneLoader: true,			// important for just one API call
 		}
 	},
 
