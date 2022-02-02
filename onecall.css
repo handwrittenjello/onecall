@@ -153,6 +153,8 @@
   align-self: center;
   text-align: center;
   margin-bottom: 10px;
+  background: rgba(128,128,128,0.15);
+  border-radius:  5px;
 }
 
 .weatherforecast header {
@@ -212,6 +214,11 @@
 .hourly .flex-container .item:nth-child(1) .fday,
 .daily .flex-container .item:nth-child(1) .fday {
   color: white;
+}
+
+.hourly .flex-container .item:nth-child(1),
+.daily .flex-container .item:nth-child(1) {
+  background: rgba(128,128,128,0.25);
 }
 
 .weatherforecast .day,
