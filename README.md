@@ -126,10 +126,10 @@ Do not make modification and do not replace the default module, just add <i>disa
 		classes: "hourly",
 		config: {
 
+			flexDayForecast: true,          // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
 			maxNumberOfDays: 3,
 			showRainAmount: true,           // snow show only in winter months
 			fullday: "HH.mm",
-			flexDayForecast: true,
 
 			endpointType: "hourly",         // "current", "hourly", "daily" or "aqi"
 			oneLoader: true,                // very important for just one API call
@@ -144,10 +144,10 @@ Do not make modification and do not replace the default module, just add <i>disa
 		classes: "daily",
 		config: {
 
+			flexDayForecast: true,      // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
 			maxNumberOfDays: 6,
 			showRainAmount: true,          // snow show only in winter months
 			fullday: "dddd",               // "dddd" for full day name
-			flexDayForecast: true,
 
 			endpointType: "daily",         // "current", "hourly", "daily" or "aqi"
 			oneLoader: true,               // very important for just one API call
