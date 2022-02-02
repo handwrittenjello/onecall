@@ -75,6 +75,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 		config: {
 
 			// hourly & daily settings
+			flexDayForecast: false,         // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
 			maxNumberOfDays: 8,
 			showRainAmount: true,       // snow show only in winter months
 			fade: false,
@@ -101,6 +102,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 		config: {
 
 			// hourly & daily settings
+			flexDayForecast: false,         // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
 			maxNumberOfDays: 4,
 			showRainAmount: true,         // snow show only in winter months
 			fade: true,
@@ -144,7 +146,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 		classes: "daily",
 		config: {
 
-			flexDayForecast: true,      // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
+			flexDayForecast: true,         // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
 			maxNumberOfDays: 6,
 			showRainAmount: true,          // snow show only in winter months
 			fullday: "dddd",               // "dddd" for full day name
