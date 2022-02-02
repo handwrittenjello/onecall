@@ -26,7 +26,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 				appid: "",
 				appid2: "", 				// optional
 				backup: "",				// optional backup appid
-				dayUpdateInterval: 10 * 60 * 1000, 		// every 10 minutes
+				dayUpdateInterval: 10 * 60 * 1000, 	// every 10 minutes
 				nightUpdateInterval: 15 * 60 * 1000, 	// every 15 minutes
 			}
 		},
@@ -60,7 +60,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			showAlerts: false,
 
 			endpointType: "current",
-			oneLoader: true,
+			oneLoader: true,			// important for just one API call
 		}
 	},
 
