@@ -1684,7 +1684,7 @@ Module.register("onecall", {
 	 * Calls processWeather on succesfull response.
 -->	 */
 	updateWeather: function () {
-		if (this.config.appid === "" || this.config.backup === "") {
+		if (this.config.appid === "") {
 			Log.error("OneCall: APPID not set!");
 			return;
 		}
@@ -1702,7 +1702,13 @@ Module.register("onecall", {
 					self.processForecast(JSON.parse(this.response));
 				} else if (this.status === 401) {
 					self.updateDom(self.config.animationSpeed);
-					self.config.appid = self.config.backup;
+					self.updateDom(self.config.animationSpeed);
+					if (self.config.backup === "") {
+						Log.error("OneCall: backup APPID not set!");
+						return;
+					} else {
+						self.config.appid = self.config.backup;
+					}
 					retry = true;
 				} else {
 					Log.error(self.name + ": Incorrect APPID. Could not load weather.");
@@ -1787,7 +1793,13 @@ Module.register("onecall", {
 					self.processAir(JSON.parse(this.response));
 				} else if (this.status === 401) {
 					self.updateDom(self.config.animationSpeed);
-					self.config.appid = self.config.backup;
+					self.updateDom(self.config.animationSpeed);
+					if (self.config.backup === "") {
+						Log.error("Air Pollution: backup APPID not set!");
+						return;
+					} else {
+						self.config.appid = self.config.backup;
+					}
 					retry = true;
 				} else {
 					Log.error(self.name + ": Incorrect APPID. Could not load Air Pollution.");

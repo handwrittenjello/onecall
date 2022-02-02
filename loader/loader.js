@@ -11,9 +11,9 @@ Module.register("loader", {
 		lat: config.latitude,				// your location latitude,
 		lon: config.longitude,				// your location longitude,
 		appid: "",
-		appid2: "", 			// optional
-		backup: config.backup,				// backup appid
-		dayUpdateInterval: 10 * 60 * 1000, // every 10 minutes
+		appid2: "", 						// optional
+		backup: config.backup,				// optional backup appid
+		dayUpdateInterval: 10 * 60 * 1000, 	// every 10 minutes
 		nightUpdateInterval: 15 * 60 * 1000, // every 15 minutes
 	},
 
@@ -29,7 +29,7 @@ Module.register("loader", {
 	},
 
 	OneUpdate: function () {
-		if (this.config.appid === "" || this.config.backup === "") {
+		if (this.config.appid === "") {
 			Log.error("OneCall: APPID not set!");
 			return;
 		}
@@ -45,7 +45,13 @@ Module.register("loader", {
 					self.sendNotification("ONE_RESPONSE", JSON.parse(this.response));
 					//Log.info("ONE_RESPONSE", JSON.parse(this.response));
 				} else if (this.status === 401) {
-					self.config.appid = self.config.backup;
+					self.updateDom(self.config.animationSpeed);
+					if (self.config.backup === "") {
+						Log.error("OneCall: backup APPID not set!");
+						return;
+					} else {
+						self.config.appid = self.config.backup;
+					}
 				} else {
 					Log.error(self.name + ": Incorrect APPID. Could not load weather.");
 				}
@@ -55,7 +61,7 @@ Module.register("loader", {
 	},
 
 	AirUpdate: function () {
-		if (this.config.appid === "" || this.config.backup === "") {
+		if (this.config.appid === "") {
 			Log.error("Air Pollution: APPID not set!");
 			return;
 		}
@@ -76,7 +82,13 @@ Module.register("loader", {
 					self.sendNotification("AIR_RESPONSE", JSON.parse(this.response));
 					//Log.info("AIR_RESPONSE", JSON.parse(this.response));
 				} else if (this.status === 401) {
-					self.config.appid = self.config.backup;
+					self.updateDom(self.config.animationSpeed);
+					if (self.config.backup === "") {
+						Log.error("Air Pollution: backup APPID not set!");
+						return;
+					} else {
+						self.config.appid = self.config.backup;
+					}
 				} else {
 					Log.error(self.name + ": Incorrect APPID. Could not load Air Pollution.");
 				}
