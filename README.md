@@ -107,7 +107,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			fade: true,
 			fadePoint: 0.25,              // Start on 1/4th of the list.
 			colored: true,
-			extra: true,                 // snow humidity, dew point, pressure, real feel and rain or snow,
+			extra: true,                  // snow humidity, dew point, pressure, real feel and rain or snow,
 			fullday: "HH [h]",            // "ddd" in case of daily forecast or "HH [h]" for hourly forecast
 			                              // "dddd" for full day name
 
