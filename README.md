@@ -6,7 +6,7 @@ Modified MagicMirror2 original current & forecast weather module based on Openwe
 
 As the name suggests this module call only once your appid no matter how many instances are loaded, for current, hourly, daily or AQI, it uses the onecall endpoint for which reason it was designed for. 
 
-However the module can work without oneLoader and in this case it must be deactivated via <i>oneLoader: false</i>i> and configure latitude, longitude and appid for each instance used.
+However the module can work without oneLoader and in this case it must be deactivated via <i>oneLoader: false</i> and configure latitude, longitude and appid for each instance used.
 
 Keep in mind that this module is for my personal use and not necessarily for sharing so don't create issues or pull requests.
 
