@@ -24,6 +24,7 @@ Module.register("onecall", {
 		oneLoader: true,             // very important for just one API call
 
 		// general settings
+		location: "",
 		units: config.units,
 		initialLoadDelay: 0,         // 0 seconds delay
 		retryDelay: 0,
