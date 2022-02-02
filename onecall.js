@@ -10,18 +10,22 @@
 Module.register("onecall", {
 	// Default module config.
 	defaults: {
-		// optional settings if oneLoader is used
-		lat: "",
-		lon: "",
-		location: "",
-		appid: "",
-		backup: "",
-		dayUpdateInterval: 10 * 60 * 1000, // every 10 minutes
-		nightUpdateInterval: 15 * 60 * 1000, // every 15 minutes
+		// optional settings only if oneLoader is not used
+		lat: "",                               // your location latitude,
+		lon: "",                               // your location longitude,
+		appid: "",                             // your Openweathermap appid
+		appid2: "",                            // optional
+		backup: "",                            // optional backup appid
+		dayUpdateInterval: 10 * 60 * 1000,     // every 10 minutes
+		nightUpdateInterval: 15 * 60 * 1000,   // every 15 minutes
+
+		// important settings
+		endpointType: "current",     // "current", "hourly", "daily" or "aqi"
+		oneLoader: true,             // very important for just one API call
 
 		// general settings
 		units: config.units,
-		initialLoadDelay: 0, // 0 seconds delay
+		initialLoadDelay: 0,         // 0 seconds delay
 		retryDelay: 0,
 		animationSpeed: 1000,
 		timeFormat: config.timeFormat,
@@ -34,9 +38,7 @@ Module.register("onecall", {
 		tableClass: "small",
 		onlyTemp: false,
 		hideTemp: false,
-		roundTemp: false, 				// error if is true
-		endpointType: "current",
-		oneLoader: true,				// important for just one API call
+		roundTemp: false,            // error if is true
 
 		// current settings
 		showWindDirection: true,
@@ -44,30 +46,31 @@ Module.register("onecall", {
 		useBeaufort: false,
 		useKMPHwind: true,
 		showFeelsLike: true,
-		realFeelsLike: true,
+		realFeelsLike: true,        // from onecall endpoint not calculated by module
 		showVisibility: true,
 		showHumidity: true,
 		showPressure: true,
-		showDew: true,
-		showUvi: true,
+		showDew: true,              // dew point
+		showUvi: true,              // UV index
+		showPrecip: true,           // precipitation
 		showDescription: true,
 		showAlerts: false,
 
 		// hourly & daily settings
 		maxNumberOfDays: 8,
-		showRainAmount: true,
+		showRainAmount: true,       // snow show only in winter months
 		fade: false,
-		fadePoint: 0.25, // Start on 1/4th of the list.
+		fadePoint: 0.25,            // Start on 1/4th of the list.
 		colored: true,
-		extra: false,
-		fullday: "ddd",
-		flexDayForecast: true,
+		extra: true,                // snow humidity, dew point, pressure, real feel and rain or snow,
+		fullday: "ddd",             // "ddd" in case of daily forecast or "HH [h]" for hourly forecast
+		                            // "dddd" for full day name
 	
 		// Air Quality settings for endpointType: "aqi"
-		calculateAqi: false,			// calculate AQI from pollutants concentration (not fully tested)
-		showAqiTime: true,
-		showAqiData: true,
-		showPollution: false,
+		calculateAqi: true,          // calculate AQI from pollutants concentration
+		showAqiTime: true,           // show last update time
+		showAqiData: true,           // show AQI calculation pollutants, hidding last update
+		showPollution: false,        // snow list of all pollutants, hidding AQI calculation
 
 		iconTable: {
 			"01d": "day-sunny",

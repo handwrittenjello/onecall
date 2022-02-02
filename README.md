@@ -57,7 +57,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			showDescription: true,
 			showAlerts: false,
 
-			endpointType: "current",
+			endpointType: "current",    // "current", "hourly", "daily" or "aqi"
 			oneLoader: true,            // very important for just one API call
 		}
 	},
@@ -84,7 +84,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			fullday: "ddd",             // "ddd" in case of daily forecast or "HH [h]" for hourly forecast
 			                            // "dddd" for full day name
 
-			endpointType: "daily",
+			endpointType: "daily",      // "current", "hourly", "daily" or "aqi"
 			oneLoader: true,            // important for just one API call
 		}
 	},
@@ -110,7 +110,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			fullday: "HH [h]",            // "ddd" in case of daily forecast or "HH [h]" for hourly forecast
 			                              // "dddd" for full day name
 
-			endpointType: "hourly",
+			endpointType: "hourly",       // "current", "hourly", "daily" or "aqi"
 			oneLoader: true,              // very important for just one API call
 		}
 	},
@@ -131,7 +131,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			fullday: "HH.mm",
 			flexDayForecast: true,
 
-			endpointType: "hourly",
+			endpointType: "hourly",         // "current", "hourly", "daily" or "aqi"
 			oneLoader: true,                // very important for just one API call
 		}
 	},
@@ -149,7 +149,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			fullday: "dddd",               // "dddd" for full day name
 			flexDayForecast: true,
 
-			endpointType: "daily",
+			endpointType: "daily",         // "current", "hourly", "daily" or "aqi"
 			oneLoader: true,               // very important for just one API call
 		}
 	},
@@ -171,9 +171,9 @@ Do not make modification and do not replace the default module, just add <i>disa
 		classes: "air quality day",
 		disabled: false,
 		config: {
-			endpointType: "aqi",
-			oneLoader: true,
-			
+			endpointType: "aqi",         // "current", "hourly", "daily" or "aqi"
+			oneLoader: true,             // very important for just one API call
+
 			calculateAqi: true,          // calculate AQI from pollutants concentration
 			showAqiTime: true,           // show last update time
 			showAqiData: true,           // show AQI calculation pollutants, hidding last update
