@@ -106,9 +106,9 @@ Module.register("onecall", {
 
 	// Define required translations.
 	getTranslations: function () {
-        return {
-            en: "en.json",
-            ro: "ro.json"
+		return {
+			en: "en.json",
+			ro: "ro.json"
         };
 	},
 
