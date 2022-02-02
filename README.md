@@ -149,7 +149,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 
 			maxNumberOfDays: 6,
 			showRainAmount: true, 			// snow show only in winter months
-			fullday: "dddd",
+			fullday: "dddd",				// dddd for full day name
 			flexDayForecast: true,
 
 			endpointType: "daily",
@@ -177,10 +177,10 @@ Do not make modification and do not replace the default module, just add <i>disa
 			endpointType: "aqi",
 			oneLoader: true,
 			
-			calculateAqi: true,			// calculate AQI from pollutants concentration
-			showAqiTime: true,			// show last update time
-			showAqiData: true,			// show AQI calculation pollutants, hidding last update
-			showPollution: false,			// snow list of all pollutants, hidding AQI calculation of all pollutants
+			calculateAqi: true,		// calculate AQI from pollutants concentration
+			showAqiTime: true,		// show last update time
+			showAqiData: true,		// show AQI calculation pollutants, hidding last update
+			showPollution: false,		// snow list of all pollutants, hidding AQI calculation of all pollutants
 		}
 	},
 
