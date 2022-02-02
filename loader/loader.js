@@ -8,13 +8,13 @@
 Module.register("loader", {
 	// Default module config.
 	defaults: {
-		lat: "",				// your location latitude,
-		lon: "",				// your location longitude,
-		appid: "",
-		appid2: "", 						// optional
-		backup: "",				// optional backup appid
-		dayUpdateInterval: 10 * 60 * 1000, 	// every 10 minutes
-		nightUpdateInterval: 15 * 60 * 1000, // every 15 minutes
+		lat: "",								// your location latitude,
+		lon: "",								// your location longitude,
+		appid: "",								// your Openweathermap appid,
+		appid2: "", 							// optional
+		backup: "",								// optional backup appid
+		dayUpdateInterval: 10 * 60 * 1000, 		// every 10 minutes
+		nightUpdateInterval: 15 * 60 * 1000, 	// every 15 minutes
 	},
 
 	getScripts: function () {
