@@ -149,7 +149,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 
 			maxNumberOfDays: 6,
 			showRainAmount: true, 			// snow show only in winter months
-			fullday: "dddd",				// dddd for full day name
+			fullday: "dddd",			// dddd for full day name
 			flexDayForecast: true,
 
 			endpointType: "daily",
