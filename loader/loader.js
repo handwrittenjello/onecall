@@ -8,13 +8,13 @@
 Module.register("loader", {
 	// Default module config.
 	defaults: {
-		lat: "",                                // your location latitude,
-		lon: "",                                // your location longitude,
-		appid: "",                              // your Openweathermap appid,
-		appid2: "",                             // optional
-		backup: "",                             // optional backup appid
-		dayUpdateInterval: 10 * 60 * 1000,      // every 10 minutes
-		nightUpdateInterval: 15 * 60 * 1000,    // every 15 minutes
+		lat: config.latitude,				// your location latitude,
+		lon: config.longitude,				// your location longitude,
+		appid: "",
+		appid2: "", 						// optional
+		backup: config.backup,				// optional backup appid
+		dayUpdateInterval: 10 * 60 * 1000, 	// every 10 minutes
+		nightUpdateInterval: 15 * 60 * 1000, // every 15 minutes
 	},
 
 	getScripts: function () {
@@ -61,14 +61,13 @@ Module.register("loader", {
 	},
 
 	AirUpdate: function () {
-		if (this.config.appid === "") {
-			Log.error("Air Pollution: APPID not set!");
-			return;
-		}
-
 		var api = this.config.appid2;
 		if (this.config.appid2 === ""){
 			api = this.config.appid;
+			if (this.config.appid === "") {
+				Log.error("Air Pollution: APPID not set!");
+				return;
+			}
 		}
 
 		var url = "https://api.openweathermap.org/data/2.5/air_pollution?lat=" + this.config.lat + "&lon=" + this.config.lon + "&appid=" + api;

@@ -56,6 +56,7 @@ Module.register("onecall", {
 		showUvi: true,              // UV index
 		showDescription: true,
 		showAlerts: false,
+		defaultIcons: false,        // with or without default icons
 
 		// hourly & daily settings
 		flexDayForecast: true,      // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
@@ -164,7 +165,7 @@ Module.register("onecall", {
 	// windDirection, pressure, visibility and humidity
 	addExtraInfoWeather: function (wrapper) {
 		var small = document.createElement("div");
-		small.className = "normal medium";
+		small.className = "normal medium currentweather";
 
 		var windIcon = document.createElement("span");
 		windIcon.className = "wi wi-strong-wind cyan";
@@ -281,7 +282,7 @@ Module.register("onecall", {
 
 		if (this.config.endpointType === "current") {
 			var wrapper = document.createElement("div");
-			wrapper.className = "currentweather";
+			wrapper.className = "current weather";
 
 			if (this.config.onlyTemp === false) {
 				this.addExtraInfoWeather(wrapper);
@@ -313,14 +314,27 @@ Module.register("onecall", {
 			}
 
 			if (this.config.hideTemp === false) {
+				var iconwrapper = document.createElement("span");
+				if (this.config.defaultIcons) {
+					iconwrapper.className = "current-weather mlarge";
+					iconwrapper.style.transform = "translate(0) !important";
+				} else {
+					iconwrapper.className = "currentweather";
+				}
+				large.appendChild(iconwrapper);
+
 				var weatherIcon = document.createElement("span");
 				weatherIcon.className = "wi weathericon wi-" + this.weatherType;
-				large.appendChild(weatherIcon);
+				iconwrapper.appendChild(weatherIcon);
+
+				var tempwrapper = document.createElement("span");
+				tempwrapper.className = "currentweather";
+				large.appendChild(tempwrapper);
 
 				var temperature = document.createElement("span");
 				temperature.className = "bright light xlarge";
 				temperature.innerHTML = " " + this.temperature.replace(".", this.config.decimalSymbol) + "&deg;<span class=\"deg\">" + degreeLabel + "</span>";
-				large.appendChild(temperature);
+				tempwrapper.appendChild(temperature);
 			}
 
 			wrapper.appendChild(large);
@@ -371,7 +385,7 @@ Module.register("onecall", {
 						}
 					} else feelsLike.className = "dimmed real";
 
-					feelsLike.innerHTML = this.translate("FEELS", {DEGREE: "<i class=\"wi wi-thermometer yellow\"></i> " + this.feelsLike + "&deg;" + degreeLabel});
+					feelsLike.innerHTML = this.translate("FEELS", {DEGREE: "<span class=\"currentweather\"><i class=\"wi wi-thermometer yellow\"></i></span> " + this.feelsLike + "&deg;" + degreeLabel});
 					small.appendChild(feelsLike);
 				}
 
@@ -423,10 +437,14 @@ Module.register("onecall", {
 
 				// weather description.
 				if (this.config.showDescription) {
+					var descwrapper = document.createElement("span");
+					descwrapper.className = "currentweather";
+					small.appendChild(descwrapper);
+
 					var description = document.createElement("div");
-					description.className = "bright";
+					description.className = "bright description";
 					description.innerHTML = this.desc;
-					small.appendChild(description);
+					descwrapper.appendChild(description);
 				}
 
 				if (this.config.showAlerts && (this.alert !== null)) {
@@ -579,7 +597,12 @@ Module.register("onecall", {
 					var forecast = this.forecastDaily[f];
 
 					var item = document.createElement("div");
-					item.className = "item forecast currentweather";
+					if (this.config.defaultIcons) {
+						item.className = "item forecast weatherforecast";
+						item.style.lineHeight = "2rem";
+					} else {
+						item.className = "item forecast currentweather";
+					}
 					container.appendChild(item);
 
 					var dayCell = document.createElement("div");
@@ -589,7 +612,12 @@ Module.register("onecall", {
 
 					var icon = document.createElement("div");
 					icon.className = "wi weathericon wi-" + forecast.icon;
-					icon.style.transform = "translate(0) scale(1)";
+					if (this.config.defaultIcons) {
+						icon.style.transform = "scale(2)";
+						icon.style.padding = "17px";
+					} else {
+						icon.style.transform = "scale(0.8)";
+					}
 					item.appendChild(icon);
 
 					var degreeLabel = "";
@@ -836,12 +864,24 @@ Module.register("onecall", {
 			if (this.config.flexDayForecast) {
 				var container = document.createElement("div");
 				container.className = "flex-container weatherforecast small";
+				if (this.config.defaultIcons) {
+					container.style.flexWrap = "nowrap";
+					container.style.gap = "30px";
+				} else {
+					container.style.flexWarp = "warp";
+				}
 
 				for (var f in this.forecastHourly) {
 					var forecast = this.forecastHourly[f];
 
 					var item = document.createElement("div");
-					item.className = "item forecast currentweather";
+					if (this.config.defaultIcons) {
+						item.className = "item forecast weatherforecast";
+						item.style.width = "32%";
+						item.style.lineHeight = "2rem";
+					} else {
+						item.className = "item forecast currentweather";
+					}
 					container.appendChild(item);
 
 					var dayCell = document.createElement("div");
@@ -851,7 +891,12 @@ Module.register("onecall", {
 
 					var icon = document.createElement("div");
 					icon.className = "wi weathericon wi-" + forecast.icon;
-					icon.style.transform = "translate(0) scale(1)";
+					if (this.config.defaultIcons) {
+						icon.style.transform = "scale(2)";
+						icon.style.padding = "17px";
+					} else {
+						icon.style.transform = "scale(0.8)";
+					}
 					item.appendChild(icon);
 
 					var degreeLabel = "";
