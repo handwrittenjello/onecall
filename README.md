@@ -8,7 +8,7 @@ As the name suggests this module call only once your appid no matter how many in
 
 However the module can work without oneLoader and in this case it must be deactivated via <i>oneLoader: false</i> and configure latitude, longitude and appid for each instance used.
 
-Keep in mind that this module is for my personal use and not necessarily for sharing so don't create issues or pull requests.
+Keep in mind that this module is for my personal use with specific css styling or settings and not necessarily for sharing so don't create issues or pull requests.
 
 Do not make modification and do not replace the default module, just add <i>disabled: true</i> in config.js and use this one as 3rd party.
 
