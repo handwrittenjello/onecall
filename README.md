@@ -156,7 +156,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			maxNumberOfDays: 6,
 			fullday: "dddd",               // "dddd" for full day name
 			extra: true,
-			defaultIcons: falsee,          // with or without default icons
+			defaultIcons: true,            // with or without default icons
 
 			endpointType: "daily",         // "current", "hourly", "daily" or "aqi"
 			oneLoader: true,               // very important for just one API call
