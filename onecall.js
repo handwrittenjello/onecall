@@ -1824,7 +1824,7 @@ Module.register("onecall", {
 	 * Calls processAir on succesfull response.
 -->	 */
 	updateAir: function () {
-		if (this.config.appid === "" || this.config.backup === "") {
+		if (this.config.appid === "") {
 			Log.error("Air Pollution: APPID not set!");
 			return;
 		}
