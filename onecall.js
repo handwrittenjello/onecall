@@ -680,7 +680,7 @@ Module.register("onecall", {
 						item.appendChild(rainCell);
 					}
 
-					if (this.config.extra) {
+					if (this.config.extra && !this.config.defaultIcons) {
 						var humidity = document.createElement("span");
 						humidity.innerHTML = "<i class=\"wi wi-humidity\"></i> " + parseFloat(forecast.humidity).toFixed(0) + "%";
 						humidity.className = "humidity skyblue extra";
@@ -953,7 +953,7 @@ Module.register("onecall", {
 						item.appendChild(rainCell);
 					} 
 
-					if (this.config.extra) {
+					if (this.config.extra && !this.config.defaultIcons) {
 						var humidity = document.createElement("span");
 						humidity.innerHTML = "<i class=\"wi wi-humidity\"></i> " + parseFloat(forecast.humidity).toFixed(0) + "%";
 						humidity.className = "humidity skyblue extra";
