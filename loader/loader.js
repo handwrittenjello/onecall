@@ -26,7 +26,6 @@ Module.register("loader", {
 		this.AirUpdate();
 		this.OneUpdate();
 		this.scheduleUpdate()
-		this.updateTimer = null;
 	},
 
 	OneUpdate: function () {
@@ -100,6 +99,8 @@ Module.register("loader", {
 	scheduleUpdate: function (delay) {
 		var now = moment().format("HH:mm:ss");
 		var updateInterval = null;
+		var updateTimer = null;
+		var self = this;
 
 		if (now >= "07:00:00" && now <= "23:59:59") {
 			updateInterval = this.config.dayUpdateInterval;
@@ -107,14 +108,14 @@ Module.register("loader", {
 			updateInterval = this.config.nightUpdateInterval;
 		}
 
+		if (delay === void 0) { delay = null; }
 		var nextLoad = updateInterval;
-		if (typeof delay !== "undefined" && delay >= 0) {
+		if (delay !== null && delay >= 0) {
 			nextLoad = delay;
 		}
 
-		var self = this;
-		clearTimeout(this.updateTimer);
-		this.updateTimer = setTimeout(function () {
+		clearTimeout(updateTimer);
+		updateTimer = setInterval(function () {
 			self.OneUpdate();
 			setTimeout(function () {
 				self.AirUpdate();
