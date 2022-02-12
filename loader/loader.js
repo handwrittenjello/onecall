@@ -110,7 +110,6 @@ Module.register("loader", {
 			setTimeout(function () {
 				self.AirUpdate();
 			}, 2000);
-			Log.info("Last update", now);
 		}, updateInterval);
 	}
 });

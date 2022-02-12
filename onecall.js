@@ -157,9 +157,6 @@ Module.register("onecall", {
 			this.AirUpdate();
 			this.scheduleUpdate(this.config.initialLoadDelay);
 		}
-
-		this.forecastDaily = [];
-		this.forecastHourly = [];
 	},
 
 	// add extra information of current weather
@@ -283,7 +280,7 @@ Module.register("onecall", {
 
 		if (this.config.endpointType === "current") {
 			var wrapper = document.createElement("div");
-			wrapper.className = "current weather";
+			wrapper.className = "current weather normal";
 
 			if (this.config.onlyTemp === false) {
 				this.addExtraInfoWeather(wrapper);
@@ -394,7 +391,7 @@ Module.register("onecall", {
 				if (this.config.showDew) {
 					var dew = document.createElement("span"); 
 					dew.className = "dew midget cyan";
-					dew.innerHTML = this.translate("DEW") + "<i class=\"wi wi-raindrops lightgreen\"></i> " + this.dew.toFixed(1) + "&deg;" + degreeLabel;
+					dew.innerHTML = this.translate("DEW") + "<i class=\"wi wi-raindrops lightgreen\"></i> " + this.dew.toFixed(1).replace(".", this.config.decimalSymbol) + "&deg;" + degreeLabel;
 					small.appendChild(dew);
 				}
 
@@ -402,7 +399,7 @@ Module.register("onecall", {
 				if (this.config.showUvi) {
 					var uvi = document.createElement("span");
 					uvi.className = "uvi midget";
-					uvi.innerHTML = this.translate("UVI") + "<i class=\"wi wi-hot gold\"></i>" + this.uvi.toFixed(1);
+					uvi.innerHTML = this.translate("UVI") + "<i class=\"wi wi-hot gold\"></i>" + this.uvi.toFixed(1).replace(".", this.config.decimalSymbol);
 					if (this.uvi < 0.1) {
 						uvi.className = uvi.className + " lightgreen";
 						uvi.innerHTML = this.translate("UVI") + "<i class=\"wi wi-stars\"></i> 0";
@@ -592,7 +589,7 @@ Module.register("onecall", {
 
 			if (this.config.flexDayForecast) {
 				var container = document.createElement("div");
-				container.className = "flex-container weatherforecast small";
+				container.className = "flex-container weatherforecast small normal";
 
 				for (var f in this.forecastDaily) {
 					var forecast = this.forecastDaily[f];
@@ -658,7 +655,7 @@ Module.register("onecall", {
 						var rainCell = document.createElement("div");
 						rainCell.className = "midget bright";
 						if (!forecast.snow && !forecast.rain) {
-							rainCell.className = "midget";
+							rainCell.className = "midget normal";
 							rainCell.innerHTML = this.translate("No rain") + "&nbsp; <i class=\"fa fa-tint-slash skyblue medium\"></i>";
 						} else if (forecast.snow) {
 							if (config.units !== "imperial") {
@@ -719,7 +716,7 @@ Module.register("onecall", {
 					var forecast = this.forecastDaily[f];
 
 					var row = document.createElement("tr");
-					row.className = "forecast";
+					row.className = "forecast normal";
 					table.appendChild(row);
 
 					var dayCell = document.createElement("td");
@@ -815,7 +812,7 @@ Module.register("onecall", {
 
 					if (this.config.extra) {
 						var row = document.createElement("tr");
-						row.className = "extra";
+						row.className = "extra normal";
 						table.appendChild(row);
 
 						var humidity = document.createElement("td");
@@ -864,7 +861,7 @@ Module.register("onecall", {
 
 			if (this.config.flexDayForecast) {
 				var container = document.createElement("div");
-				container.className = "flex-container weatherforecast small";
+				container.className = "flex-container weatherforecast small normal";
 				if (this.config.defaultIcons) {
 					container.style.flexWrap = "nowrap";
 					container.style.gap = "30px";
@@ -931,7 +928,7 @@ Module.register("onecall", {
 						var rainCell = document.createElement("div");
 						rainCell.className = "midget bright";
 						if (!forecast.snow && !forecast.rain) {
-							rainCell.className = "midget";
+							rainCell.className = "midget normal";
 							rainCell.innerHTML = this.translate("No rain") + "&nbsp; <i class=\"fa fa-tint-slash skyblue medium\"></i>";
 						} else if (forecast.snow) {
 							if (config.units !== "imperial") {
@@ -992,7 +989,7 @@ Module.register("onecall", {
 					var forecast = this.forecastHourly[f];
 
 					var row = document.createElement("tr");
-					row.className = "forecast";
+					row.className = "forecast normal";
 					table.appendChild(row);
 
 					var dayCell = document.createElement("td");
@@ -1090,7 +1087,7 @@ Module.register("onecall", {
 
 					if (this.config.extra) {
 						var row = document.createElement("tr");
-						row.className = "extra";
+						row.className = "extra normal";
 						table.appendChild(row);
 
 						var humidity = document.createElement("td");
@@ -1411,12 +1408,6 @@ Module.register("onecall", {
 	processDaily: function (data, momenttz) {
 		var mom = momenttz ? momenttz : moment; // Exception last.
 
-		if (this.config.location) {
-			this.fetchedLocationName = this.config.location;
-		} else {
-			this.fetchedLocationName = "Unknown";
-		}
-
 		this.forecastDaily = [];
 		var lastDay = null;
 		var forecastData = {};
@@ -1498,12 +1489,6 @@ Module.register("onecall", {
 
 	processHourly: function (data, momenttz) {
 		var mom = momenttz ? momenttz : moment; // Exception last.
-
-		if (this.config.location) {
-			this.fetchedLocationName = this.config.location;
-		} else {
-			this.fetchedLocationName = "Unknown";
-		}
 
 		this.forecastHourly = [];
 		var lastDay = null;
@@ -1887,7 +1872,6 @@ Module.register("onecall", {
 			setTimeout(function () {
 				self.AirUpdate();
 			}, 2000);
-			Log.info("Last update", now);
 		}, updateInterval);
 	}
 });
