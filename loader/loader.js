@@ -25,7 +25,7 @@ Module.register("loader", {
 		Log.info("Starting module: " + this.name);
 		this.AirUpdate();
 		this.OneUpdate();
-		this.scheduleUpdate()
+		this.scheduleUpdate();
 	},
 
 	OneUpdate: function () {
@@ -45,7 +45,6 @@ Module.register("loader", {
 					self.sendNotification("ONE_RESPONSE", JSON.parse(this.response));
 					//Log.info("ONE_RESPONSE", JSON.parse(this.response));
 				} else if (this.status === 401) {
-					self.updateDom(self.config.animationSpeed);
 					if (self.config.backup === "") {
 						Log.error("OneCall: backup APPID not set!");
 						return;
@@ -81,7 +80,6 @@ Module.register("loader", {
 					self.sendNotification("AIR_RESPONSE", JSON.parse(this.response));
 					//Log.info("AIR_RESPONSE", JSON.parse(this.response));
 				} else if (this.status === 401) {
-					self.updateDom(self.config.animationSpeed);
 					if (self.config.backup === "") {
 						Log.error("Air Pollution: backup APPID not set!");
 						return;
