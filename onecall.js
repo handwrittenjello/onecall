@@ -158,6 +158,7 @@ Module.register("onecall", {
 
 		this.forecastDaily = [];
 		this.forecastHourly = [];
+		this.updateTimer = null;
 	},
 
 	// add extra information of current weather
@@ -1871,7 +1872,7 @@ Module.register("onecall", {
 	 *
 	 * argument delay number - Milliseconds before next update. If empty, this.config.updateInterval is used.
 -->	 */
-	scheduleUpdate: function () {
+	scheduleUpdate: function (delay) {
 		var now = moment().format("HH:mm:ss");
 		var updateInterval = null;
 
@@ -1881,15 +1882,18 @@ Module.register("onecall", {
 			updateInterval = this.config.nightUpdateInterval;
 		}
 
+		var nextLoad = updateInterval;
+		if (typeof delay !== "undefined" && delay >= 0) {
+			nextLoad = delay;
+		}
+
 		var self = this;
-		setInterval(function () {
-			if (self.config.endpointType === "aqi") {
-				setTimeout(function () {
-					self.AirUpdate();
-				}, 2000);
-			} else {
-				self.updateWeather();				
-			}
-		}, updateInterval);
+		clearTimeout(this.updateTimer);
+		this.updateTimer = setTimeout(function () {
+			self.OneUpdate();
+			setTimeout(function () {
+				self.AirUpdate();
+			}, 2000);
+		}, nextLoad);
 	}
 });
