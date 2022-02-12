@@ -1167,7 +1167,7 @@ Module.register("onecall", {
 			if (this.config.endpointType === "aqi") {
 				this.processAir(payload);
 			}
-			//Log.info("Air " + payload);
+		//	Log.info("Air " + payload);
 		}
 
 		if (notification === "ONE_RESPONSE") {
@@ -1180,7 +1180,7 @@ Module.register("onecall", {
 			if (this.config.endpointType === "hourly") {
 				this.processHourly(payload);
 			}
-			//Log.info("One " + payload);
+		//	Log.info("One " + payload);
 		}
 
 		if (notification === "CALENDAR_EVENTS") {
@@ -1264,7 +1264,7 @@ Module.register("onecall", {
 		var self = this;
 		setTimeout(function () {
 			self.updateDom(self.config.animationSpeed);
-		}, this.config.initialLoadDelay + 1000);	
+		}, this.config.initialLoadDelay);	
 	},
 
 	/* processWeather(data)
@@ -1471,9 +1471,9 @@ Module.register("onecall", {
 					break;
 				}
 			} else {
-				//Log.log("Compare max: ", forecast.temp.max, parseFloat(forecastData.maxTemp));
+			//	Log.log("Compare max: ", forecast.temp.max, parseFloat(forecastData.maxTemp));
 				forecastData.maxTemp = forecast.temp.max > parseFloat(forecastData.maxTemp) ? this.roundValue(forecast.temp.max) : forecastData.maxTemp;
-				//Log.log("Compare min: ", forecast.temp.min, parseFloat(forecastData.minTemp));
+			//	Log.log("Compare min: ", forecast.temp.min, parseFloat(forecastData.minTemp));
 				forecastData.minTemp = forecast.temp.min < parseFloat(forecastData.minTemp) ? this.roundValue(forecast.temp.min) : forecastData.minTemp;
 
 				// Since we don't want an icon from the start of the day (in the middle of the night)
@@ -1484,7 +1484,7 @@ Module.register("onecall", {
 			}
 		}
 
-		//Log.log(this.forecastDaily);
+		//	Log.log(this.forecastDaily);
 		if (!this.loaded) {
 			this.show(this.config.animationSpeed, { lockString: this.identifier });
 			this.loaded = true;
@@ -1493,7 +1493,7 @@ Module.register("onecall", {
 		var self = this;
 		setTimeout(function () {
 			self.updateDom(self.config.animationSpeed);
-		}, this.config.initialLoadDelay + 2000);	
+		}, this.config.initialLoadDelay);	
 	},
 
 	processHourly: function (data, momenttz) {
@@ -1566,7 +1566,7 @@ Module.register("onecall", {
 			}
 		}
 
-		//Log.log(this.forecastHourly);
+		//	Log.log(this.forecastHourly);
 		if (!this.loaded) {
 			this.show(this.config.animationSpeed, { lockString: this.identifier });
 			this.loaded = true;
@@ -1575,7 +1575,7 @@ Module.register("onecall", {
 		var self = this;
 		setTimeout(function () {
 			self.updateDom(self.config.animationSpeed);
-		}, this.config.initialLoadDelay + 3000);	
+		}, this.config.initialLoadDelay);	
 	},
 
 	/* ms2Beaufort(ms)
@@ -1660,7 +1660,7 @@ Module.register("onecall", {
 	processRain: function (forecast, allForecasts, momenttz) {
 		var mom = momenttz ? momenttz : moment; // Exception last.
 
-		//If the amount of rain actually is a number, return it
+		// If the amount of rain actually is a number, return it
 		if (this.config.endpointType === "hourly") {
 			if (!isNaN(forecast.rain) && !isNaN(forecast.rain["1h"])) {
 				return forecast.rain;
@@ -1671,19 +1671,19 @@ Module.register("onecall", {
 			}
 		}
 
-		//Find all forecasts that is for the same day
+		// Find all forecasts that is for the same day
 		var checkDateTime = forecast.dt_txt ? mom(forecast.dt_txt, "YYYY-MM-DD hh:mm:ss") : moment(forecast.dt, "X");
 		var daysForecasts = allForecasts.filter(function (item) {
 			var itemDateTime = item.dt_txt ? mom(item.dt_txt, "YYYY-MM-DD hh:mm:ss") : moment(item.dt, "X");
 			return itemDateTime.isSame(checkDateTime, "day") && item.rain instanceof Object;
 		});
 
-		//If no rain this day return undefined so it wont be displayed for this day
+		// If no rain this day return undefined so it wont be displayed for this day
 		if (daysForecasts.length === 0) {
 			return undefined;
 		}
 
-		//Summarize all the rain from the matching days
+		// Summarize all the rain from the matching days
 		return daysForecasts
 			.map(function (item) {
 				return Object.values(item.rain)[0];
@@ -1696,7 +1696,7 @@ Module.register("onecall", {
 	processSnow: function (forecast, allForecasts, momenttz) {
 		var mom = momenttz ? momenttz : moment; // Exception last.
 
-		//If the amount of snow actually is a number, return it
+		// If the amount of snow actually is a number, return it
 		if (this.config.endpointType === "hourly") {
 			if (!isNaN(forecast.snow) && !isNaN(forecast.snow["1h"])) {
 				return forecast.snow;
@@ -1707,19 +1707,19 @@ Module.register("onecall", {
 			}
 		}
 
-		//Find all forecasts that is for the same day
+		// Find all forecasts that is for the same day
 		var checkDateTime = forecast.dt_txt ? mom(forecast.dt_txt, "YYYY-MM-DD hh:mm:ss") : moment(forecast.dt, "X");
 		var daysForecasts = allForecasts.filter(function (item) {
 			var itemDateTime = item.dt_txt ? mom(item.dt_txt, "YYYY-MM-DD hh:mm:ss") : moment(item.dt, "X");
 			return itemDateTime.isSame(checkDateTime, "day") && item.snow instanceof Object;
 		});
 
-		//If no snow this day return undefined so it wont be displayed for this day
+		// If no snow this day return undefined so it wont be displayed for this day
 		if (daysForecasts.length === 0) {
 			return undefined;
 		}
 
-		//Summarize all the snow from the matching days
+		// Summarize all the snow from the matching days
 		return daysForecasts
 			.map(function (item) {
 				return Object.values(item.snow)[0];
@@ -1887,6 +1887,7 @@ Module.register("onecall", {
 			setTimeout(function () {
 				self.AirUpdate();
 			}, 2000);
+			Log.info("Last update", now);
 		}, updateInterval);
 	}
 });
