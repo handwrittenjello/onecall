@@ -153,6 +153,8 @@ Module.register("onecall", {
 
 		this.loaded = false;
 		if (!this.config.oneLoader) {
+			this.OneUpdate();
+			this.AirUpdate();
 			this.scheduleUpdate(this.config.initialLoadDelay);
 		}
 
@@ -1731,7 +1733,7 @@ Module.register("onecall", {
 	 * Requests new data from openweather.org.
 	 * Calls processWeather on succesfull response.
 -->	 */
-	updateWeather: function () {
+	OneUpdate: function () {
 		if (this.config.appid === "") {
 			Log.error("OneCall: APPID not set!");
 			return;
@@ -1822,7 +1824,7 @@ Module.register("onecall", {
 	 * Requests new data from openweather.org.
 	 * Calls processAir on succesfull response.
 -->	 */
-	updateAir: function () {
+	AirUpdate: function () {
 		if (this.config.appid === "") {
 			Log.error("Air Pollution: APPID not set!");
 			return;
@@ -1868,13 +1870,10 @@ Module.register("onecall", {
 
 	/* scheduleUpdate()
 	 * Schedule next update.
-	 *
-	 * argument delay number - Milliseconds before next update. If empty, this.config.updateInterval is used.
 -->	 */
-	scheduleUpdate: function (delay) {
+	scheduleUpdate: function () {
 		var now = moment().format("HH:mm:ss");
 		var updateInterval = null;
-		var updateTimer = null;
 		var self = this;
 
 		if (now >= "07:00:00" && now <= "23:59:59") {
@@ -1883,18 +1882,11 @@ Module.register("onecall", {
 			updateInterval = this.config.nightUpdateInterval;
 		}
 
-		if (delay === void 0) { delay = null; }
-		var nextLoad = updateInterval;
-		if (delay !== null && delay >= 0) {
-			nextLoad = delay;
-		}
-
-		clearTimeout(updateTimer);
-		updateTimer = setInterval(function () {
+		setInterval(function () {
 			self.OneUpdate();
 			setTimeout(function () {
 				self.AirUpdate();
 			}, 2000);
-		}, nextLoad);
+		}, updateInterval);
 	}
 });

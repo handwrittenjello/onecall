@@ -23,8 +23,8 @@ Module.register("loader", {
 
 	start: function () {
 		Log.info("Starting module: " + this.name);
-		this.AirUpdate();
 		this.OneUpdate();
+		this.AirUpdate();
 		this.scheduleUpdate();
 	},
 
@@ -43,7 +43,7 @@ Module.register("loader", {
 			if (this.readyState === 4) {
 				if (this.status === 200) {
 					self.sendNotification("ONE_RESPONSE", JSON.parse(this.response));
-					//Log.info("ONE_RESPONSE", JSON.parse(this.response));
+				//	Log.info("ONE_RESPONSE", JSON.parse(this.response));
 				} else if (this.status === 401) {
 					if (self.config.backup === "") {
 						Log.error("OneCall: backup APPID not set!");
@@ -78,7 +78,7 @@ Module.register("loader", {
 			if (this.readyState === 4) {
 				if (this.status === 200) {
 					self.sendNotification("AIR_RESPONSE", JSON.parse(this.response));
-					//Log.info("AIR_RESPONSE", JSON.parse(this.response));
+				//	Log.info("AIR_RESPONSE", JSON.parse(this.response));
 				} else if (this.status === 401) {
 					if (self.config.backup === "") {
 						Log.error("Air Pollution: backup APPID not set!");
@@ -94,10 +94,9 @@ Module.register("loader", {
 		airRequest.send();
 	},
 
-	scheduleUpdate: function (delay) {
+	scheduleUpdate: function () {
 		var now = moment().format("HH:mm:ss");
 		var updateInterval = null;
-		var updateTimer = null;
 		var self = this;
 
 		if (now >= "07:00:00" && now <= "23:59:59") {
@@ -106,18 +105,11 @@ Module.register("loader", {
 			updateInterval = this.config.nightUpdateInterval;
 		}
 
-		if (delay === void 0) { delay = null; }
-		var nextLoad = updateInterval;
-		if (delay !== null && delay >= 0) {
-			nextLoad = delay;
-		}
-
-		clearTimeout(updateTimer);
-		updateTimer = setInterval(function () {
+		setInterval(function () {
 			self.OneUpdate();
 			setTimeout(function () {
 				self.AirUpdate();
 			}, 2000);
-		}, nextLoad);
+		}, updateInterval);
 	}
 });
