@@ -25,7 +25,8 @@ Module.register("loader", {
 		Log.info("Starting module: " + this.name);
 		this.AirUpdate();
 		this.OneUpdate();
-		this.scheduleUpdate();
+		this.scheduleUpdate()
+		this.updateTimer = null;
 	},
 
 	OneUpdate: function () {
