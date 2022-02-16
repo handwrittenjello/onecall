@@ -189,7 +189,8 @@ Do not make modification and do not replace the default module, just add <i>disa
 		}
 	},
 
-	/*
+
+	
 	Quality   Index     Sub-index   CAQI calculation from highest pollutant concentration in μg/m3
 
 	                                O3          NO2         PM10        PM25         SO2         NH3        CO
@@ -201,7 +202,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 	Unhealty    5       > 100       > 240       > 400       > 180       > 110        > 500       > 1600     > 20000
 
 	Source: https://www.airqualitynow.eu/download/CITEAIR-Comparing_Urban_Air_Quality_across_Borders.pdf
-	*/
+	
 
 Weather and Air Quality compliments to put in your config.js
 <br>You need to use my compliments_plus to work with AQI compliments
