@@ -61,39 +61,57 @@
   text-transform: capitalize !important;
 }
 
+.compliments .wi {
+  display: inline-block;
+  transform: translate(20px, 25px) scale(0.6);
+}
+
 .currentweather .wi-day-sunny {
   content: url("icons/clear.png");
   transform: translate(0, 15px) scale(1.4);
 }
 
+.compliments .wi-day-sunny {
+  content: url("icons/clear.png");
+  transform: translate(0, 25px) scale(1);
+}
+
+.compliments .wi-day-cloudy,
 .currentweather .wi-day-cloudy {
   content: url("icons/mostlysunny.png");
 }
 
+.compliments .wi-cloudy,
 .currentweather .wi-cloudy {
   content: url("icons/cloudy.png");
 }
 
+.compliments .wi-day-cloudy-windy,
 .currentweather .wi-day-cloudy-windy {
   content: url("icons/mostlycloudy.png");
 }
 
+.compliments .wi-day-showers,
 .currentweather .wi-day-showers {
   content: url("icons/rain.png");
 }
 
+.complients .wi-day-rain,
 .currentweather .wi-day-rain {
   content: url("icons/rain.png");
 }
 
+.compliments .wi-day-thunderstorm,
 .currentweather .wi-day-thunderstorm {
   content: url("icons/tstorms.png");
 }
 
+.compliments .wi-day-snow,
 .currentweather .wi-day-snow {
   content: url("icons/snow.png");
 }
 
+.compliments .wi-day-fog,
 .currentweather .wi-day-fog {
   content: url("icons/fog.png");
 }
@@ -103,30 +121,42 @@
   transform: translate(0, 15px) scale(1.6);
 }
 
+.compliments .wi-night-clear {
+  content: url("icons/nt_clear.png");
+  transform: translate(0, 25px) scale(1.2);
+}
+
+.compliments .wi-night-cloudy,
 .currentweather .wi-night-cloudy {
   content: url("icons/nt_cloudy.png");
 }
 
+.compliments .wi-night-alt-cloudy,
 .currentweather .wi-night-alt-cloudy {
   content: url("icons/nt_cloudy.png");
 }
 
+.compliments .wi-night-alt-showers,
 .currentweather .wi-night-alt-showers {
   content: url("icons/nt_rain.png");
 }
 
+.compliments .wi-night-alt-rain,
 .currentweather .wi-night-alt-rain {
   content: url("icons/nt_rain.png");
 }
 
+.compliments .wi-night-alt-thunderstorm,
 .currentweather .wi-night-alt-thunderstorm {
   content: url("icons/nt_tstorms.png");
 }
 
+.compliments .wi-night-alt-snow,
 .currentweather .wi-night-alt-snow {
   content: url("icons/nt_snow.png");
 }
 
+.compliments .wi-night-alt-cloudy-windy,
 .currentweather .wi-night-alt-cloudy-windy {
   content: url("icons/nt_hazy.png");
 }
@@ -348,6 +378,8 @@
   transform: translateX(-1px);
   color: skyblue;
 }
+
+/* colors */
 
 .grayscale {
    filter: grayscale(100%);

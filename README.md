@@ -137,7 +137,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			flexDayForecast: true,          // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
 			maxNumberOfDays: 3,
 			fullday: "HH.mm",
-			defaultIcons: false,		// with or without default icons
+			defaultIcons: true,		// with or without default icons
 
 			endpointType: "hourly",         // "current", "hourly", "daily" or "aqi"
 			oneLoader: true,                // very important for just one API call
@@ -156,7 +156,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			maxNumberOfDays: 6,
 			fullday: "dddd",               // "dddd" for full day name
 			extra: true,
-			defaultIcons: false,            // with or without default icons
+			defaultIcons: true,            // with or without default icons
 
 			endpointType: "daily",         // "current", "hourly", "daily" or "aqi"
 			oneLoader: true,               // very important for just one API call
@@ -192,7 +192,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 	/*
 	Quality   Index     Sub-index   CAQI calculation from highest pollutant concentration in μg/m3
 
-        	                        O3          NO2         PM10        PM25         SO2         NH3        CO
+	                                O3          NO2         PM10        PM25         SO2         NH3        CO
 
 	Good        1       0-25        0-60        0-50        0-25        0-15         0-50        0-200      0-5000
 	Fair        2       25-50       60-120      50-100      25-50       15-30        50-100      200-400    5000-7500
@@ -275,90 +275,6 @@ https://github.com/hangorazvan/compliments_plus
 			"<i class=\"skyblue wi wi-night-alt-cloudy-windy\"></i> Clouds and fog",
 		],
 	}
-
-To put in your custom.css
-
-		.compliments .wi {
-			display: inline-block;
-			transform: translate(20px, 25px) scale(0.6);
-		}
-
-		.compliments .wi-day-sunny {
-			content: url("../modules/onecall/icons/clear.png");
-			transform: translate(0, 25px);
-		}
-
-		.ompliments .wi-day-cloudy {
-		  content: url("../modules/onecall/icons/mostlysunny.png");
-		}
-
-		.compliments .wi-cloudy {
-		  content: url("../modules/onecall/icons/cloudy.png");
-		}
-
-		.compliments .wi-day-cloudy-windy {
-		  content: url("../modules/onecall/icons/mostlycloudy.png");
-		}
-
-		.compliments .wi-day-showers {
-		  content: url("../modules/onecall/icons/rain.png");
-		}
-
-		.compliments .wi-day-rain {
-		  content: url("../modules/onecall/icons/rain.png");
-		}
-
-		.compliments .wi-day-thunderstorm {
-		  content: url("../modules/onecall/icons/tstorms.png");
-		}
-
-		.compliments .wi-day-snow {
-		  content: url("../modules/onecall/icons/snow.png");
-		}
-
-		.compliments .wi-day-fog {
-		  content: url("../modules/onecall/icons/fog.png");
-		}
-
-		.compliments .wi-night-clear {
-			content: url("../modules/onecall/icons/nt_clear.png");
-			transform: translate(0, 25px) scale(1.2);
-		}
-
-		.compliments .wi-night-cloudy {
-		  content: url("../modules/onecall/icons/nt_cloudy.png");
-		}
-
-		.compliments .wi-night-alt-cloudy {
-		  content: url("../modules/onecall/icons/nt_cloudy.png");
-		}
-
-		.compliments .wi-night-alt-showers {
-		  content: url("../modules/onecall/icons/nt_rain.png");
-		}
-
-		.compliments .wi-night-alt-rain {
-		  content: url("../modules/onecall/icons/nt_rain.png");
-		}
-
-		.compliments .wi-night-alt-thunderstorm {
-		  content: url("../modules/onecall/icons/nt_tstorms.png");
-		}
-
-		.compliments .wi-night-alt-snow {
-		  content: url("../modules/onecall/icons/nt_snow.png");
-		}
-
-		.compliments .wi-night-alt-cloudy-windy {
-		  content: url("../modules/onecall/icons/nt_hazy.png");
-		}
-
-		.compliments .fa,
-		.compliments .fas,
-		.compliments .far {
-			display: inline-block;
-			transform: scale(0.75);
-		}
 
 Redesigned by Răzvan Cristea
 https://github.com/hangorazvan
