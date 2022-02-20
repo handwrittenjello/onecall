@@ -1,5 +1,9 @@
 # onecall (Openweathermap)
 
+[![Platform](https://img.shields.io/badge/platform-MagicMirror-informational)](https://MagicMirror.builders)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://raw.githubusercontent.com/hangorazvan/MagicMirror2/master/LICENSE)
+[![Known Vulnerabilities](https://snyk.io/test/github/hangorazvan/MagicMirror2/badge.svg)](https://snyk.io/test/github/hangorazvan/MagicMirror2)
+
 https://github.com/hangorazvan/onecall
 
 Modified MagicMirror2 original current & forecast weather module based on Openweathermap with Onecall endpoint and Air Quality Index with compliments. 
