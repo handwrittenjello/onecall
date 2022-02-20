@@ -2,7 +2,7 @@
 
 [![Platform](https://img.shields.io/badge/platform-MagicMirror-informational)](https://MagicMirror.builders)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://raw.githubusercontent.com/hangorazvan/MagicMirror2/master/LICENSE)
-[![Known Vulnerabilities](https://snyk.io/test/github/hangorazvan/MagicMirror2/badge.svg)](https://snyk.io/test/github/hangorazvan/MagicMirror2)
+[![Known Vulnerabilities](https://snyk.io/test/github/hangorazvan/onecall/badge.svg)](https://snyk.io/test/github/hangorazvan/onecall)
 
 https://github.com/hangorazvan/onecall
 
