@@ -2,9 +2,9 @@
 
 [![Platform](https://img.shields.io/badge/platform-MagicMirror2-informational)](https://github.com/hangorazvan/MagicMirror2)
 [![CC-0 license](https://img.shields.io/badge/License-CC--4.0-blue.svg)](https://creativecommons.org/licenses/by-nd/4.0)
-[![GitHub branches](https://badgen.net/github/branches/hangorazvan/MagicMirror2)](https://github.com/hangorazvan/MagicMirror2)
-[![GitHub forks](https://badgen.net/github/forks/hangorazvan/MagicMirror2)](https://github.com/hangorazvan/MagicMirror2)
-[![GitHub stars](https://badgen.net/github/stars/hangorazvan/MagicMirror2)](https://github.com/hangorazvan/MagicMirror2)
+[![GitHub branches](https://badgen.net/github/branches/hangorazvan/onecall)](https://github.com/hangorazvan/onecall)
+[![GitHub forks](https://badgen.net/github/forks/hangorazvan/onecall)](https://github.com/hangorazvan/onecall)
+[![GitHub stars](https://badgen.net/github/stars/hangorazvan/onecall)](https://github.com/hangorazvan/onecall)
 
 https://github.com/hangorazvan/onecall
 
