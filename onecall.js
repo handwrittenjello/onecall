@@ -1202,15 +1202,13 @@ Module.register("onecall", {
 	 *
 	 * argument data object - air quality information received form openweather.org.
 	 */
-	processAir: function (data, momenttz) {
+	processAir: function (data) {
 		if (!data || !data.list === "undefined") {
 			return;
 		}
 
-		var mom = momenttz ? momenttz : moment; // Exception last.
-
 		this.aqi = data.list[0].main.aqi;
-		this.aqi_t = mom(data.list[0].dt, "X").format("HH:mm");
+		this.aqi_t = moment(data.list[0].dt, "X").format("HH:mm");
 		if (data.list[0].hasOwnProperty("components")) {
 			var aqi_p = data.list[0].components;
 			this.c_co = aqi_p.co;
@@ -1269,14 +1267,12 @@ Module.register("onecall", {
 	 *
 	 * argument data object - Weather information received form openweather.org.
 	 */
-	processWeather: function (data, momenttz) {
+	processWeather: function (data) {
 		if (!data || !data.current || typeof data.current.temp === "undefined") {
 			// Did not receive usable new data.
 			// Maybe this needs a better check?
 			return;
 		}
-
-		var mom = momenttz ? momenttz : moment; // Exception last.
 
 		this.humidity = parseFloat(data.current.humidity);
 		this.temperature = this.roundValue(data.current.temp);
@@ -1288,8 +1284,8 @@ Module.register("onecall", {
 		this.uvi = data.current.uvi;						// uv index.
 
 		if (data.hasOwnProperty("alerts")) {
-			this.start = mom(data.alerts[0].start, "X").format("HH:mm");
-			this.end = mom(data.alerts[0].end, "X").format("HH:mm");
+			this.start = moment(data.alerts[0].start, "X").format("HH:mm");
+			this.end = moment(data.alerts[0].end, "X").format("HH:mm");
 			this.alert = data.alerts[0].description;
 		}
 
@@ -1405,9 +1401,7 @@ Module.register("onecall", {
 	//	Log.info("CURRENTWEATHER_TYPE", { type: this.config.iconTable[data.current.weather[0].icon].replace("-", "_") });
 	},
 
-	processDaily: function (data, momenttz) {
-		var mom = momenttz ? momenttz : moment; // Exception last.
-
+	processDaily: function (data) {
 		this.forecastDaily = [];
 		var lastDay = null;
 		var forecastData = {};
@@ -1430,11 +1424,11 @@ Module.register("onecall", {
 			var day;
 			var hour;
 			if (forecast.dt_txt) {
-				day = mom(forecast.dt_txt, "YYYY-MM-DD hh:mm:ss").format(this.config.fullday);
-				hour = new Date(mom(forecast.dt_txt).locale(this.config.language).format("YYYY-MM-DD HH:mm:ss")).getHours();
+				day = moment(forecast.dt_txt, "YYYY-MM-DD hh:mm:ss").format(this.config.fullday);
+				hour = new Date(moment(forecast.dt_txt).locale(this.config.language).format("YYYY-MM-DD HH:mm:ss")).getHours();
 			} else {
-				day = mom(forecast.dt, "X").format(this.config.fullday);
-				hour = new Date(mom(forecast.dt, "X")).getHours();
+				day = moment(forecast.dt, "X").format(this.config.fullday);
+				hour = new Date(moment(forecast.dt, "X")).getHours();
 			}
 
 			if (day !== lastDay) {
@@ -1443,8 +1437,8 @@ Module.register("onecall", {
 					icon: this.config.iconTable[forecast.weather[0].icon],
 					maxTemp: this.roundValue(forecast.temp.max),
 					minTemp: this.roundValue(forecast.temp.min),
-					rain: this.processRain(forecast, forecastList, mom),
-					snow: this.processSnow(forecast, forecastList, mom),
+					rain: this.processRain(forecast, forecastList, moment),
+					snow: this.processSnow(forecast, forecastList, moment),
 					humidity: forecast.humidity,
 					pressure: forecast.pressure,
 					precip: this.roundValue(forecast.pop),
@@ -1487,9 +1481,7 @@ Module.register("onecall", {
 		}, this.config.initialLoadDelay);	
 	},
 
-	processHourly: function (data, momenttz) {
-		var mom = momenttz ? momenttz : moment; // Exception last.
-
+	processHourly: function (data) {
 		this.forecastHourly = [];
 		var lastDay = null;
 		var forecastData = {};
@@ -1512,19 +1504,19 @@ Module.register("onecall", {
 			var day;
 			var hour;
 			if (forecast.dt_txt) {
-				day = mom(forecast.dt_txt, "YYYY-MM-DD hh:mm:ss").format(this.config.fullday);
-				hour = new Date(mom(forecast.dt_txt).locale(this.config.language).format("YYYY-MM-DD HH:mm:ss")).getHours();
+				day = moment(forecast.dt_txt, "YYYY-MM-DD hh:mm:ss").format(this.config.fullday);
+				hour = new Date(moment(forecast.dt_txt).locale(this.config.language).format("YYYY-MM-DD HH:mm:ss")).getHours();
 			} else {
-				day = mom(forecast.dt, "X").format(this.config.fullday);
-				hour = new Date(mom(forecast.dt, "X")).getHours();
+				day = moment(forecast.dt, "X").format(this.config.fullday);
+				hour = new Date(moment(forecast.dt, "X")).getHours();
 			}
 
 			if (day !== lastDay) {
 				forecastData = {
 					day: day,
 					icon: this.config.iconTable[forecast.weather[0].icon],
-					rain: this.processRain(forecast, forecastList, mom),
-					snow: this.processSnow(forecast, forecastList, mom),
+					rain: this.processRain(forecast, forecastList, moment),
+					snow: this.processSnow(forecast, forecastList, moment),
 					humidity: forecast.humidity,
 					pressure: forecast.pressure,
 					dayTemp: this.roundValue(forecast.temp),
@@ -1642,9 +1634,7 @@ Module.register("onecall", {
 	 * That object has a property "3h" which contains the amount of rain since the previous forecast in the list.
 	 * This code finds all forecasts that is for the same day and sums the amount of rain and returns that.
 	 */
-	processRain: function (forecast, allForecasts, momenttz) {
-		var mom = momenttz ? momenttz : moment; // Exception last.
-
+	processRain: function (forecast, allForecasts) {
 		// If the amount of rain actually is a number, return it
 		if (this.config.endpointType === "hourly") {
 			if (!isNaN(forecast.rain) && !isNaN(forecast.rain["1h"])) {
@@ -1657,9 +1647,9 @@ Module.register("onecall", {
 		}
 
 		// Find all forecasts that is for the same day
-		var checkDateTime = forecast.dt_txt ? mom(forecast.dt_txt, "YYYY-MM-DD hh:mm:ss") : moment(forecast.dt, "X");
+		var checkDateTime = forecast.dt_txt ? moment(forecast.dt_txt, "YYYY-MM-DD hh:mm:ss") : moment(forecast.dt, "X");
 		var daysForecasts = allForecasts.filter(function (item) {
-			var itemDateTime = item.dt_txt ? mom(item.dt_txt, "YYYY-MM-DD hh:mm:ss") : moment(item.dt, "X");
+			var itemDateTime = item.dt_txt ? moment(item.dt_txt, "YYYY-MM-DD hh:mm:ss") : moment(item.dt, "X");
 			return itemDateTime.isSame(checkDateTime, "day") && item.rain instanceof Object;
 		});
 
@@ -1678,9 +1668,7 @@ Module.register("onecall", {
 			}, 0);
 	},
 
-	processSnow: function (forecast, allForecasts, momenttz) {
-		var mom = momenttz ? momenttz : moment; // Exception last.
-
+	processSnow: function (forecast, allForecasts) {
 		// If the amount of snow actually is a number, return it
 		if (this.config.endpointType === "hourly") {
 			if (!isNaN(forecast.snow) && !isNaN(forecast.snow["1h"])) {
@@ -1693,9 +1681,9 @@ Module.register("onecall", {
 		}
 
 		// Find all forecasts that is for the same day
-		var checkDateTime = forecast.dt_txt ? mom(forecast.dt_txt, "YYYY-MM-DD hh:mm:ss") : moment(forecast.dt, "X");
+		var checkDateTime = forecast.dt_txt ? moment(forecast.dt_txt, "YYYY-MM-DD hh:mm:ss") : moment(forecast.dt, "X");
 		var daysForecasts = allForecasts.filter(function (item) {
-			var itemDateTime = item.dt_txt ? mom(item.dt_txt, "YYYY-MM-DD hh:mm:ss") : moment(item.dt, "X");
+			var itemDateTime = item.dt_txt ? moment(item.dt_txt, "YYYY-MM-DD hh:mm:ss") : moment(item.dt, "X");
 			return itemDateTime.isSame(checkDateTime, "day") && item.snow instanceof Object;
 		});
 
