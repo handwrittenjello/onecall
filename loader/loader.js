@@ -36,6 +36,7 @@ Module.register("loader", {
 		var params = "?lat=" + this.config.lat + "&lon=" + this.config.lon + "&units=" + config.units + "&lang=" + config.language;
 		var url = "https://api.openweathermap.org/data/2.5/onecall" + params + "&exclude=minutely" + "&appid=" + this.config.appid;
 		var self = this;
+		var retry = true;
 
 		var weatherRequest = new XMLHttpRequest();
 		weatherRequest.open("GET", url, true);
@@ -45,14 +46,20 @@ Module.register("loader", {
 					self.sendNotification("ONE_RESPONSE", JSON.parse(this.response));
 				//	Log.info("ONE_RESPONSE", JSON.parse(this.response));
 				} else if (this.status === 401) {
+					self.updateDom(self.config.animationSpeed);
 					if (self.config.backup === "") {
-						Log.error("OneCall: backup APPID not set!");
+						Log.error("Onecall: backup APPID not set!");
 						return;
 					} else {
 						self.config.appid = self.config.backup;
 					}
+					retry = true;
 				} else {
 					Log.error(self.name + ": Incorrect APPID. Could not load weather.");
+				}
+
+				if (retry) {
+					self.scheduleUpdate(self.loaded ? -1 : self.config.retryDelay);
 				}
 			}
 		};
@@ -71,6 +78,7 @@ Module.register("loader", {
 
 		var url = "https://api.openweathermap.org/data/2.5/air_pollution?lat=" + this.config.lat + "&lon=" + this.config.lon + "&appid=" + api;
 		var self = this;
+		var retry = true;
 
 		var airRequest = new XMLHttpRequest();
 		airRequest.open("GET", url, true);
@@ -80,14 +88,20 @@ Module.register("loader", {
 					self.sendNotification("AIR_RESPONSE", JSON.parse(this.response));
 				//	Log.info("AIR_RESPONSE", JSON.parse(this.response));
 				} else if (this.status === 401) {
+					self.updateDom(self.config.animationSpeed);
 					if (self.config.backup === "") {
 						Log.error("Air Pollution: backup APPID not set!");
 						return;
 					} else {
 						self.config.appid = self.config.backup;
 					}
+					retry = true;
 				} else {
 					Log.error(self.name + ": Incorrect APPID. Could not load Air Pollution.");
+				}
+
+				if (retry) {
+					self.scheduleUpdate(self.loaded ? -1 : self.config.retryDelay);
 				}
 			}
 		};

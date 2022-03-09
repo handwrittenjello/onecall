@@ -186,6 +186,10 @@
   margin-bottom: 10px;
 }
 
+.onecall header {
+  margin-top: 10px;
+}
+
 .weatherforecast header {
   margin-bottom: 5px;
 }
@@ -240,8 +244,8 @@
   color: greenyellow;
 }
 
-.hourly .flex-container .item:nth-child(1) .fday,
-.daily .flex-container .item:nth-child(1) .fday {
+.hourly .item:nth-child(1) .fday,
+.daily .item:nth-child(1) .fday {
   color: lime;
 }
 
@@ -276,7 +280,8 @@
   width: 25% !important;
 }
 
-.weatherforecast .rain, .weatherforecast .snow {
+.weatherforecast .rain, 
+.weatherforecast .snow {
   color: lightgray;
 }
 
@@ -426,6 +431,10 @@
   font-size: 1.2rem;
 }
 
+.smedium {
+  font-size: 1.4rem;
+}
+
 .medium {
   font-size: 1.6rem;
 }
@@ -438,6 +447,10 @@
 .large {
   font-size: 6rem;
   line-height: 1;
+}
+
+.details {
+  line-height: 1.8rem;
 }
 
 .xlarge {
