@@ -17,13 +17,6 @@
 	"No rain": "Nu plouă",
 	"No snow": "Nu ninge",
 	"ALERTS": "Alertă meteo între ",
-	"Good": "Bun",
-    "Fair": "Accepabil",
-    "Moderate": "Moderat",
-    "Poor": "Slab",
-    "Unhealty": "Nesănătos",
-    "Index": "Indice AQ",
-    "Update": "Ultima actualizare ",
 
 	"N": "N",
 	"NNE": "NNE",
@@ -40,5 +33,7 @@
 	"W": "V",
 	"WNW": "VNV",
 	"NW": "NV",
-	"NNW": "NNV"
+	"NNW": "NNV",
+	"Next hours": "Vremea în următoarele ore, ",
+	"Next days": "Vremea în următoarele zile, "
 }

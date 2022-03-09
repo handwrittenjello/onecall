@@ -17,13 +17,6 @@
 	"No rain": "No rain ",
 	"No snow": "No snow ",
 	"ALERTS": "Weather alert between ",
-	"Good": "Good",
-    "Fair": "Fair",
-    "Moderate": "Moderate",
-    "Poor": "Poor",
-    "Unhealty": "Unhealty",
-    "Index": "Air Quality Index",
-    "Update": "Last update ",
 
 	"N": "N",
 	"NNE": "NNE",
@@ -40,5 +33,7 @@
 	"W": "W",
 	"WNW": "WNW",
 	"NW": "NW",
-	"NNW": "NNW"
+	"NNW": "NNW",
+	"Next hours": "Forecast in next hours, ",
+	"Next days": "Forecast in next days, "
 }
