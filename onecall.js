@@ -20,7 +20,7 @@ Module.register("onecall", {
 		nightUpdateInterval: 15 * 60 * 1000,   // every 15 minutes
 
 		// important settings
-		endpointType: "onecall",     // "onecall", "current", "hourly" or "daily"
+		endpointType: "onecall",     // "onecall", "current", "hourly", "daily" or "onecall"
 		oneLoader: true,             // very important for just one API call
 
 		// general settings
