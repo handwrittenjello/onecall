@@ -47,7 +47,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			classes: "current weather",
 			disabled: false,
 			config: {
-				// your settings
+				endpointType: "onecall",    // "current", "hourly", "daily" or "onecall"
 			}
 		},
 
