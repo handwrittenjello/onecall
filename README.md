@@ -181,7 +181,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 
 
 Weather compliments to put in your config.js
-<br>You need to use my compliments_plus to work with AQI compliments
+<br>You need to use my compliments_plus to work with Onecall compliments
 https://github.com/hangorazvan/compliments_plus
 
 	compliments: {		
