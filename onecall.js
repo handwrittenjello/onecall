@@ -48,7 +48,6 @@ Module.register("onecall", {
 		useBeaufort: false,
 		useKMPHwind: true,
 		showFeelsLike: true,
-		realFeelsLike: true,        // from onecall endpoint not calculated by module
 		showVisibility: true,
 		showHumidity: true,
 		showPressure: true,

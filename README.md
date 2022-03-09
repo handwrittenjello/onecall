@@ -59,7 +59,6 @@ Do not make modification and do not replace the default module, just add <i>disa
 			useBeaufort: false,
 			useKMPHwind: true,
 			showFeelsLike: true,
-			realFeelsLike: true,        // from onecall endpoint not calculated by module
 			showVisibility: true,
 			showHumidity: true,
 			showPressure: true,
@@ -94,7 +93,6 @@ Do not make modification and do not replace the default module, just add <i>disa
 			fade: false,
 			fadePoint: 0.25,            // Start on 1/4th of the list.
 			colored: true,
-			extraHourly: true,          // snow extra hourly humidity, dew point, pressure, real feel and rain or snow,
 			extraDaily: true,           // snow extra daily humidity, dew point, pressure, real feel and rain or snow,
 			daily: "dddd",              // "ddd" for short day name or "dddd" for full day name
 
@@ -121,7 +119,6 @@ Do not make modification and do not replace the default module, just add <i>disa
 			fadePoint: 0.25,              // Start on 1/4th of the list.
 			colored: true,
 			extraHourly: true,            // snow extra hourly humidity, dew point, pressure, real feel and rain or snow,
-			extraDaily: true,             // snow extra daily humidity, dew point, pressure, real feel and rain or snow,
 			hourly: "HH.mm",	      // "HH [h]" for hourly forecast or "HH.mm" for hour and minutes
 
 			endpointType: "hourly",       // "current", "hourly", "daily" or "onecall"
