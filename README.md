@@ -171,7 +171,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 
 #### With or without Flex Day Forecast and with default icons
 
-<img src=https://github.com/hangorazvan/onecall/blob/master/onecall_flex.png height="700"> <img src=https://github.com/hangorazvan/onecall/blob/master/onecall.png height="700"> <img src=https://github.com/hangorazvan/onecall/blob/master/defaultIcons.png height="700">
+<img src=https://github.com/hangorazvan/onecall/blob/master/onecall.png height="700">
 
 
 Weather compliments to put in your config.js
