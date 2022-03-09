@@ -27,7 +27,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 		}
 	},
 
-#### Onecall API loader
+#### Onecall API loader and single instance
 
 		{
 			module: "onecall/loader",
@@ -39,6 +39,15 @@ Do not make modification and do not replace the default module, just add <i>disa
 				backup: "",                            // optional backup appid
 				dayUpdateInterval: 10 * 60 * 1000,     // every 10 minutes
 				nightUpdateInterval: 15 * 60 * 1000,   // every 15 minutes
+			}
+		},
+		{
+			module: "onecall",
+			position: "top_right",
+			classes: "current weather",
+			disabled: false,
+			config: {
+				// your settings
 			}
 		},
 
