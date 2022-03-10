@@ -27,7 +27,6 @@ Module.register("onecall", {
 		location: "",
 		units: config.units,
 		initialLoadDelay: 0,         // 0 seconds delay
-		retryDelay: 0,
 		animationSpeed: 1000,
 		timeFormat: config.timeFormat,
 		language: config.language,
@@ -1037,7 +1036,6 @@ Module.register("onecall", {
 		var params = "?lat=" + this.config.lat + "&lon=" + this.config.lon + "&units=" + config.units + "&lang=" + config.language;
 		var url = "https://api.openweathermap.org/data/2.5/onecall" + params + "&exclude=minutely" + "&appid=" + this.config.appid;
 		var self = this;
-		var retry = true;
 
 		var weatherRequest = new XMLHttpRequest();
 		weatherRequest.open("GET", url, true);
@@ -1058,7 +1056,7 @@ Module.register("onecall", {
 						self.processDaily(JSON.parse(this.response));
 						self.processHourly(JSON.parse(this.response));
 					}
-				} else if (this.status === 401) {
+				} else if (this.status === 401 || this.status === 429) {
 					self.updateDom(self.config.animationSpeed);
 					if (self.config.backup === "") {
 						Log.error("OneCall: backup APPID not set!");
@@ -1066,13 +1064,8 @@ Module.register("onecall", {
 					} else {
 						self.config.appid = self.config.backup;
 					}
-					retry = true;
 				} else {
 					Log.error(self.name + ": Incorrect APPID. Could not load weather.");
-				}
-
-				if (retry) {
-					self.scheduleUpdate(self.loaded ? -1 : self.config.retryDelay);
 				}
 			}
 		};
@@ -1100,12 +1093,6 @@ Module.register("onecall", {
 
 	// Override notification handler.
 	notificationReceived: function (notification, payload, sender) {
-		if (notification === "DOM_OBJECTS_CREATED") {
-			if (!this.config.appendLocationNameToHeader) {
-				this.hide(0, { lockString: this.identifier });
-			}
-		}
-
 		if (notification === "ONE_RESPONSE") {
 			if (this.config.endpointType === "current") {
 				this.processWeather(payload);
@@ -1202,15 +1189,9 @@ Module.register("onecall", {
 		this.windDeg = data.wind_deg;
 		this.weatherType = this.config.iconTable[data.current.weather[0].icon];
 
-		if (!this.loaded) {
-			this.show(this.config.animationSpeed, { lockString: this.identifier });
-			this.loaded = true;
-		}
-
-		var self = this;
-		setTimeout(function () {
-			self.updateDom(self.config.animationSpeed);
-		}, this.config.initialLoadDelay);	
+		this.show(this.config.animationSpeed, { lockString: this.identifier });
+		this.loaded = true;
+		this.updateDom(this.config.animationSpeed);
 
 		this.sendNotification("CURRENTWEATHER_TYPE", { type: this.config.iconTable[data.current.weather[0].icon].replace("-", "_") });
 	//	Log.info("CURRENTWEATHER_TYPE", { type: this.config.iconTable[data.current.weather[0].icon].replace("-", "_") });
@@ -1280,19 +1261,10 @@ Module.register("onecall", {
 			}
 		}
 
-		if (this.config.endpointType !== "onecall") {
-		
-			//	Log.log(this.forecastDaily);
-			if (!this.loaded) {
-				this.show(this.config.animationSpeed, { lockString: this.identifier });
-				this.loaded = true;
-			}
-
-			var self = this;
-			setTimeout(function () {
-				self.updateDom(self.config.animationSpeed);
-			}, this.config.initialLoadDelay);
-		}
+		//	Log.log(this.forecastDaily);
+		this.show(this.config.animationSpeed, { lockString: this.identifier });
+		this.loaded = true;
+		this.updateDom(this.config.animationSpeed);
 	},
 
 	processHourly: function (data) {
@@ -1353,19 +1325,10 @@ Module.register("onecall", {
 			}
 		}
 
-		if (this.config.endpointType !== "onecall") {
-
-			//	Log.log(this.forecastHourly);
-			if (!this.loaded) {
-				this.show(this.config.animationSpeed, { lockString: this.identifier });
-				this.loaded = true;
-			}
-
-			var self = this;
-			setTimeout(function () {
-				self.updateDom(self.config.animationSpeed);
-			}, this.config.initialLoadDelay);
-		}
+		//	Log.log(this.forecastHourly);
+		this.show(this.config.animationSpeed, { lockString: this.identifier });
+		this.loaded = true;
+		this.updateDom(this.config.animationSpeed);
 	},
 
 	/* ms2Beaufort(ms)
