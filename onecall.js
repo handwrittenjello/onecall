@@ -44,6 +44,7 @@ Module.register("onecall", {
 		// current settings
 		showWindDirection: true,
 		showWindDirectionAsArrow: false,	// not realy working
+		showIndoorTemp_Hum: false,
 		useBeaufort: false,
 		useKMPHwind: true,
 		showFeelsLike: true,
@@ -131,6 +132,8 @@ Module.register("onecall", {
 		this.start = null;
 		this.end = null;
 		this.alert = null;
+		this.indoorTemperature = "NA";
+		this.indoorHumidity = "NA";
 
 		this.loaded = false;
 		if (!this.config.oneLoader) {
@@ -314,6 +317,25 @@ Module.register("onecall", {
 				temperature.className = "bright light xlarge";
 				temperature.innerHTML = " " + this.temperature.replace(".", this.config.decimalSymbol) + "&deg;<span class=\"deg\">" + degreeLabel + "</span>";
 				tempwrapper.appendChild(temperature);
+			}
+
+			if (this.config.showIndoorTemp_Hum) {
+				var indoorSpace = document.createElement("br");
+				large.appendChild(indoorSpace);
+
+				var indoorIcon = document.createElement("span");
+				indoorIcon.className = "medium fa fa-home gold";
+				large.appendChild(indoorIcon);
+
+				var indoorTemperature = document.createElement("span");
+				indoorTemperature.className = "medium bright";
+				indoorTemperature.innerHTML = "&nbsp; <i class=\"fa fa-thermometer orange\"></i> " + this.indoorTemperature.replace(".", this.config.decimalSymbol) + "&deg;" + degreeLabel;
+				large.appendChild(indoorTemperature);
+
+				var indoorHumidity = document.createElement("span");
+				indoorHumidity.className = "medium bright";
+				indoorHumidity.innerHTML = " <i class=\"fa fa-tint skyblue\"></i> " + this.indoorHumidity + "%";
+				large.appendChild(indoorHumidity);
 			}
 
 			wrapper.appendChild(large);
@@ -1109,6 +1131,15 @@ Module.register("onecall", {
 				this.processHourly(payload);
 			}
 		//	Log.info("One " + payload);
+		}
+
+		if (notification === "INDOOR_TEMPERATURE") {
+			this.indoorTemperature = this.roundValue(payload);
+			this.updateDom(this.config.animationSpeed);
+		}
+		if (notification === "INDOOR_HUMIDITY") {
+			this.indoorHumidity = this.roundValue(payload);
+			this.updateDom(this.config.animationSpeed);
 		}
 
 		if (notification === "CALENDAR_EVENTS") {
