@@ -27,7 +27,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 		}
 	},
 
-#### Onecall API loader and single instance
+#### Onecall API loader and single instance (appid2 is optional for https://github.com/hangorazvan/pollution)
 
 <img src=https://github.com/hangorazvan/onecall/blob/master/onecall.png>
 
@@ -37,7 +37,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			lat: "",                               // your location latitude,
 			lon: "",                               // your location longitude,
 			appid: "",                             // your Openweathermap appid
-			appid2: "",                            // optional
+			appid2: "",                            // optional for Pollution module
 			backup: "",                            // optional backup appid
 			dayUpdateInterval: 10 * 60 * 1000,     // every 10 minutes
 			nightUpdateInterval: 15 * 60 * 1000,   // every 15 minutes
@@ -58,7 +58,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 		}
 	},
 
-#### Current weather with onecall
+#### Current weather
 
 <img src=https://github.com/hangorazvan/onecall/blob/master/current.png>
 
@@ -88,7 +88,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 		}
 	},
 
-#### Daily forecast with onecall (6 days)
+#### Daily forecast (6 days)
 
 <img src=https://github.com/hangorazvan/onecall/blob/master/daily.png>
 
@@ -110,7 +110,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 		}
 	},
 
-#### Hourly forecast with onecall (3 hours)
+#### Hourly forecast (3 hours)
 
 <img src=https://github.com/hangorazvan/onecall/blob/master/hourly.png>
 
