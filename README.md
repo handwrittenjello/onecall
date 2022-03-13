@@ -90,6 +90,27 @@ Do not make modification and do not replace the default module, just add <i>disa
 		}
 	},
 
+#### Hourly forecast (3 hours)
+
+<img src=https://github.com/hangorazvan/onecall/blob/master/hourly.png>
+
+	{
+		module: "onecall",
+		position: "top_right",
+		header: "Cuurrent weather and forecast",
+		classes: "hourly",
+		config: {
+
+			// hourly & daily settings
+			flexDayForecast: true,        // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
+			maxNumberOfHours: 3,
+			extraHourly: true,            // snow extra hourly humidity, dew point, pressure, real feel and rain or snow,
+			hourly: "HH.mm",              // "HH [h]" for hourly forecast or "HH.mm" for hour and minutes
+			endpointType: "hourly",       // "current", "hourly", "daily" or "onecall"
+			oneLoader: true,              // very important for just one API call
+		}
+	},
+
 #### Daily forecast (6 days)
 
 <img src=https://github.com/hangorazvan/onecall/blob/master/daily.png>
@@ -109,27 +130,6 @@ Do not make modification and do not replace the default module, just add <i>disa
 			daily: "dddd",              // "ddd" for short day name or "dddd" for full day name
 			endpointType: "daily",      // "current", "hourly", "daily" or "onecall"
 			oneLoader: true,            // important for just one API call
-		}
-	},
-
-#### Hourly forecast (3 hours)
-
-<img src=https://github.com/hangorazvan/onecall/blob/master/hourly.png>
-
-	{
-		module: "onecall",
-		position: "top_right",
-		header: "Cuurrent weather and forecast",
-		classes: "hourly",
-		config: {
-
-			// hourly & daily settings
-			flexDayForecast: true,        // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
-			maxNumberOfHours: 3,
-			extraHourly: true,            // snow extra hourly humidity, dew point, pressure, real feel and rain or snow,
-			hourly: "HH.mm",              // "HH [h]" for hourly forecast or "HH.mm" for hour and minutes
-			endpointType: "hourly",       // "current", "hourly", "daily" or "onecall"
-			oneLoader: true,              // very important for just one API call
 		}
 	},
 
