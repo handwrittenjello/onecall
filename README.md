@@ -10,7 +10,7 @@ https://github.com/hangorazvan/onecall
 
 Modified MagicMirror2 original current & forecast weather module based on Openweathermap with Onecall endpoint and compliments. 
 
-As the name suggests this module call only once your appid no matter how many instances are loaded, for current, hourly or daily, it uses the onecall endpoint for which reason it was designed for. Not for stupid people!
+As the name suggests this module call only once your appid no matter how many instances are loaded, for current, hourly or daily, it uses the onecall endpoint for which reason it was designed for.
 
 However the module can work without oneLoader and in this case it must be deactivated via <i>oneLoader: false</i> and configure latitude, longitude and appid for each instance used.
 
@@ -28,6 +28,8 @@ Do not make modification and do not replace the default module, just add <i>disa
 	},
 
 #### Onecall API loader and single instance
+
+<img src=https://github.com/hangorazvan/onecall/blob/master/onecall.png>
 
 		{
 			module: "onecall/loader",
@@ -48,6 +50,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			disabled: false,
 			config: {
 				endpointType: "onecall",    // "current", "hourly", "daily" or "onecall"
+				oneLoader: true,            // important for just one API call
 			}
 		},
 
@@ -76,15 +79,13 @@ Do not make modification and do not replace the default module, just add <i>disa
 			showDescription: true,
 			showAlerts: false,
 			defaultIcons: false,        // with or without default icons
-
 			showRainAmount: true,       // snow show only in winter months
-
 			endpointType: "current",    // "current", "hourly", "daily" or "onecall"
 			oneLoader: true,            // very important for just one API call
 		}
 	},
 
-#### Daily forecast with onecall (7 days)
+#### Daily forecast with onecall (6 days)
 
 <img src=https://github.com/hangorazvan/onecall/blob/master/daily.png>
 
@@ -97,91 +98,130 @@ Do not make modification and do not replace the default module, just add <i>disa
 		config: {
 
 			// hourly & daily settings
-			flexDayForecast: false,     // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
-			maxNumberOfDays: 8,
-			fade: false,
-			fadePoint: 0.25,            // Start on 1/4th of the list.
+			flexDayForecast: true,     // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
+			maxNumberOfDays: 6,
 			colored: true,
 			extraDaily: true,           // snow extra daily humidity, dew point, pressure, real feel and rain or snow,
 			daily: "dddd",              // "ddd" for short day name or "dddd" for full day name
-
 			endpointType: "daily",      // "current", "hourly", "daily" or "onecall"
 			oneLoader: true,            // important for just one API call
 		}
 	},
 
-#### Hourly forecast with onecall (1 hour)
+#### Hourly forecast with onecall (3 hours)
 
 <img src=https://github.com/hangorazvan/onecall/blob/master/hourly.png>
 
 	{
 		module: "onecall",
 		position: "top_right",
-		header: "Hourly Weather Forecast",
+		header: "Cuurrent weather and forecast",
 		classes: "hourly",
 		config: {
 
 			// hourly & daily settings
-			flexDayForecast: false,       // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
-			maxNumberOfDays: 4,
-			fade: true,
-			fadePoint: 0.25,              // Start on 1/4th of the list.
+			flexDayForecast: true,       // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
+			maxNumberOfHours: 3,
 			colored: true,
 			extraHourly: true,            // snow extra hourly humidity, dew point, pressure, real feel and rain or snow,
 			hourly: "HH.mm",	      // "HH [h]" for hourly forecast or "HH.mm" for hour and minutes
-
 			endpointType: "hourly",       // "current", "hourly", "daily" or "onecall"
 			oneLoader: true,              // very important for just one API call
 		}
 	},
 
-#### Flex Day Forecast (3 hours and 6 days)
+#### Classic icons and separate 3 instances (3 hours and 6 days) without oneLoader (not recommanded)
 
-<img src=https://github.com/hangorazvan/onecall/blob/master/flex.png>
+<img src=https://github.com/hangorazvan/onecall/blob/master/icons.png>
 
 	{
 		module: "onecall",
 		position: "top_right",
-		header: "Hourly Weather Forecast",
-		classes: "hourly",
+		header: "Current Weather",
+		classes: "current weather",
 		config: {
-
-			flexDayForecast: true,          // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
-			maxNumberOfDays: 3,
-			hourly: "HH.mm",		// "HH [h]" for hourly forecast or "HH.mm" for hour and minutes
-			defaultIcons: true,		// with or without default icons
-
-			endpointType: "hourly",         // "current", "hourly", "daily" or "onecall"
-			oneLoader: true,                // very important for just one API call
+			lat: "",                               // your location latitude,
+			lon: "",                               // your location longitude,
+			appid: "",                             // your Openweathermap appid
+			// current settings
+			defaultIcons: true,
+			endpointType: "current",    // "current", "hourly", "daily" or "onecall"
+			oneLoader: false,            // very important for just one API call
 		}
 	},
 
+	{
+		module: "onecall",
+		position: "top_right",
+		header: "Cuurrent weather and forecast",
+		classes: "hourly",
+		config: {
+			lat: "",                               // your location latitude,
+			lon: "",                               // your location longitude,
+			appid: "",                             // your Openweathermap appid
+			// hourly & daily settings
+			defaultIcons: true,
+			flexDayForecast: true,       // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
+			maxNumberOfHours: 3,
+			endpointType: "hourly",       // "current", "hourly", "daily" or "onecall"
+			oneLoader: false,              // very important for just one API call
+		}
+	},
 
 	{
 		module: "onecall",
 		position: "top_right",
+		disabled: false,                // not necessary
 		header: "Daily Weather Forecast",
 		classes: "daily",
 		config: {
-
-			flexDayForecast: true,         // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
+			lat: "",                               // your location latitude,
+			lon: "",                               // your location longitude,
+			appid: "",                             // your Openweathermap appid
+			// hourly & daily settings
+			defaultIcons: true,
+			flexDayForecast: true,     // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
 			maxNumberOfDays: 6,
-			daily: "dddd",                 // "ddd" for short day name or "dddd" for full day name
-			extraDaily: true,              // snow extra daily humidity, dew point, pressure, real feel and rain or snow,
-			defaultIcons: true,            // with or without default icons
-
-			endpointType: "daily",         // "current", "hourly", "daily" or "onecall"
-			oneLoader: true,               // very important for just one API call
+			endpointType: "daily",      // "current", "hourly", "daily" or "onecall"
+			oneLoader: false,            // important for just one API call
 		}
 	},
 
-#### With or without Flex Day Forecast and with default icons
+#### Single instance with table forecast
 
-<img src=https://github.com/hangorazvan/onecall/blob/master/onecall.png>
+<img src=https://github.com/hangorazvan/onecall/blob/master/table.png>
 
+		{
+			module: "onecall/loader",
+			config: {
+				lat: "",                               // your location latitude,
+				lon: "",                               // your location longitude,
+				appid: "",                             // your Openweathermap appid
+			}
+		},
+		{
+			module: "onecall",
+			position: "top_right",
+			classes: "current weather",
+			disabled: false,
+			config: {
+				flexDayForecast: false,     // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
+				maxNumberOfHours: 8,
+				maxNumberOfDays: 8,
+				hourly: "HH.mm",	      // "HH [h]" for hourly forecast or "HH.mm" for hour and minutes
+				daily: "dddd",              // "ddd" for short day name or "dddd" for full day name
+				fade: true,
+				fadePoint: 0.25,              // Start on 1/4th of the list.
+				colored: true,
+				extraHourly: true,            // snow extra hourly humidity, dew point, pressure, real feel and rain or snow,
+				extraDaily: true,            // snow extra daily humidity, dew point, pressure, real feel and rain or snow,
+				endpointType: "onecall",    // "current", "hourly", "daily" or "onecall"
+				oneLoader: true,            // important for just one API call
+			}
+		},
 
 Weather compliments to put in your config.js
-<br>You need to use my compliments_plus to work with Onecall compliments
+<br>You need to use my compliments_plus to work with AQI compliments
 https://github.com/hangorazvan/compliments_plus
 
 	compliments: {		
