@@ -21,7 +21,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 	{
 		module: "weather", 
 		position: "top_right",
-		disabled: true,
+		disabled: true,			// disabled module
 		config: {
 			// no needed anyore
 		}
@@ -47,13 +47,12 @@ Do not make modification and do not replace the default module, just add <i>disa
 		module: "onecall",
 		position: "top_right",
 		classes: "current weather",
-		disabled: false,
 		config: {
 			flexDayForecast: false,     // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
 			maxNumberOfHours: 3,
 			maxNumberOfDays: 6,
-			extraHourly: true,            // snow extra hourly humidity, dew point, pressure, real feel and rain or snow,
-			extraDaily: true,            // snow extra daily humidity, dew point, pressure, real feel and rain or snow,
+			extraHourly: true,          // snow extra hourly humidity, dew point, pressure, real feel and rain or snow,
+			extraDaily: true,           // snow extra daily humidity, dew point, pressure, real feel and rain or snow,
 			endpointType: "onecall",    // "current", "hourly", "daily" or "onecall"
 			oneLoader: true,            // important for just one API call
 		}
@@ -102,9 +101,8 @@ Do not make modification and do not replace the default module, just add <i>disa
 		config: {
 
 			// hourly & daily settings
-			flexDayForecast: true,     // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
+			flexDayForecast: true,      // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
 			maxNumberOfDays: 6,
-			colored: true,
 			extraDaily: true,           // snow extra daily humidity, dew point, pressure, real feel and rain or snow,
 			daily: "dddd",              // "ddd" for short day name or "dddd" for full day name
 			endpointType: "daily",      // "current", "hourly", "daily" or "onecall"
@@ -124,11 +122,10 @@ Do not make modification and do not replace the default module, just add <i>disa
 		config: {
 
 			// hourly & daily settings
-			flexDayForecast: true,       // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
+			flexDayForecast: true,        // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
 			maxNumberOfHours: 3,
-			colored: true,
 			extraHourly: true,            // snow extra hourly humidity, dew point, pressure, real feel and rain or snow,
-			hourly: "HH.mm",	      // "HH [h]" for hourly forecast or "HH.mm" for hour and minutes
+			hourly: "HH.mm",              // "HH [h]" for hourly forecast or "HH.mm" for hour and minutes
 			endpointType: "hourly",       // "current", "hourly", "daily" or "onecall"
 			oneLoader: true,              // very important for just one API call
 		}
@@ -149,7 +146,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			appid: "",                             // your Openweathermap appid
 			// current settings
 			defaultIcons: true,
-			endpointType: "current",    // "current", "hourly", "daily" or "onecall"
+			endpointType: "current",     // "current", "hourly", "daily" or "onecall"
 			oneLoader: false,            // very important for just one API call
 		}
 	},
@@ -167,15 +164,14 @@ Do not make modification and do not replace the default module, just add <i>disa
 			defaultIcons: true,
 			flexDayForecast: true,       // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
 			maxNumberOfHours: 3,
-			endpointType: "hourly",       // "current", "hourly", "daily" or "onecall"
-			oneLoader: false,              // very important for just one API call
+			endpointType: "hourly",      // "current", "hourly", "daily" or "onecall"
+			oneLoader: false,            // very important for just one API call
 		}
 	},
 
 	{
 		module: "onecall",
 		position: "top_right",
-		disabled: false,                // not necessary
 		header: "Daily Weather Forecast",
 		classes: "daily",
 		config: {
@@ -184,9 +180,9 @@ Do not make modification and do not replace the default module, just add <i>disa
 			appid: "",                             // your Openweathermap appid
 			// hourly & daily settings
 			defaultIcons: true,
-			flexDayForecast: true,     // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
+			flexDayForecast: true,       // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
 			maxNumberOfDays: 6,
-			endpointType: "daily",      // "current", "hourly", "daily" or "onecall"
+			endpointType: "daily",       // "current", "hourly", "daily" or "onecall"
 			oneLoader: false,            // important for just one API call
 		}
 	},
@@ -212,13 +208,13 @@ Do not make modification and do not replace the default module, just add <i>disa
 			flexDayForecast: false,     // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
 			maxNumberOfHours: 8,
 			maxNumberOfDays: 8,
-			hourly: "HH.mm",	      // "HH [h]" for hourly forecast or "HH.mm" for hour and minutes
+			hourly: "HH.mm",            // "HH [h]" for hourly forecast or "HH.mm" for hour and minutes
 			daily: "dddd",              // "ddd" for short day name or "dddd" for full day name
 			fade: true,
-			fadePoint: 0.25,              // Start on 1/4th of the list.
+			fadePoint: 0.25,            // Start on 1/4th of the list.
 			colored: true,
-			extraHourly: true,            // snow extra hourly humidity, dew point, pressure, real feel and rain or snow,
-			extraDaily: true,            // snow extra daily humidity, dew point, pressure, real feel and rain or snow,
+			extraHourly: false,         // snow extra hourly humidity, dew point, pressure, real feel and rain or snow,
+			extraDaily: true,           // snow extra daily humidity, dew point, pressure, real feel and rain or snow,
 			endpointType: "onecall",    // "current", "hourly", "daily" or "onecall"
 			oneLoader: true,            // important for just one API call
 		}
