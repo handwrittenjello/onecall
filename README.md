@@ -31,28 +31,28 @@ Do not make modification and do not replace the default module, just add <i>disa
 
 <img src=https://github.com/hangorazvan/onecall/blob/master/onecall.png>
 
-		{
-			module: "onecall/loader",
-			config: {
-				lat: "",                               // your location latitude,
-				lon: "",                               // your location longitude,
-				appid: "",                             // your Openweathermap appid
-				appid2: "",                            // optional
-				backup: "",                            // optional backup appid
-				dayUpdateInterval: 10 * 60 * 1000,     // every 10 minutes
-				nightUpdateInterval: 15 * 60 * 1000,   // every 15 minutes
-			}
-		},
-		{
-			module: "onecall",
-			position: "top_right",
-			classes: "current weather",
-			disabled: false,
-			config: {
-				endpointType: "onecall",    // "current", "hourly", "daily" or "onecall"
-				oneLoader: true,            // important for just one API call
-			}
-		},
+	{
+		module: "onecall/loader",
+		config: {
+			lat: "",                               // your location latitude,
+			lon: "",                               // your location longitude,
+			appid: "",                             // your Openweathermap appid
+			appid2: "",                            // optional
+			backup: "",                            // optional backup appid
+			dayUpdateInterval: 10 * 60 * 1000,     // every 10 minutes
+			nightUpdateInterval: 15 * 60 * 1000,   // every 15 minutes
+		}
+	},
+	{
+		module: "onecall",
+		position: "top_right",
+		classes: "current weather",
+		disabled: false,
+		config: {
+			endpointType: "onecall",    // "current", "hourly", "daily" or "onecall"
+			oneLoader: true,            // important for just one API call
+		}
+	},
 
 #### Current weather with onecall
 
