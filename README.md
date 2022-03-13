@@ -23,7 +23,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 		position: "top_right",
 		disabled: true,
 		config: {
-								// no needed anyore
+			// no needed anyore
 		}
 	},
 
@@ -49,6 +49,11 @@ Do not make modification and do not replace the default module, just add <i>disa
 		classes: "current weather",
 		disabled: false,
 		config: {
+			flexDayForecast: false,     // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
+			maxNumberOfHours: 3,
+			maxNumberOfDays: 6,
+			extraHourly: true,            // snow extra hourly humidity, dew point, pressure, real feel and rain or snow,
+			extraDaily: true,            // snow extra daily humidity, dew point, pressure, real feel and rain or snow,
 			endpointType: "onecall",    // "current", "hourly", "daily" or "onecall"
 			oneLoader: true,            // important for just one API call
 		}
@@ -64,10 +69,9 @@ Do not make modification and do not replace the default module, just add <i>disa
 		header: "Current Weather",
 		classes: "current weather",
 		config: {
-
 			// current settings
 			showWindDirection: true,
-			showWindDirectionAsArrow: false,	// not realy working
+			showWindDirectionAsArrow: false,
 			useBeaufort: false,
 			useKMPHwind: true,
 			showFeelsLike: true,
@@ -92,7 +96,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 	{
 		module: "onecall",
 		position: "top_right",
-		disabled: false,                // not necessary
+		disabled: false,
 		header: "Daily Weather Forecast",
 		classes: "daily",
 		config: {
@@ -191,34 +195,34 @@ Do not make modification and do not replace the default module, just add <i>disa
 
 <img src=https://github.com/hangorazvan/onecall/blob/master/table.png>
 
-		{
-			module: "onecall/loader",
-			config: {
-				lat: "",                               // your location latitude,
-				lon: "",                               // your location longitude,
-				appid: "",                             // your Openweathermap appid
-			}
-		},
-		{
-			module: "onecall",
-			position: "top_right",
-			classes: "current weather",
-			disabled: false,
-			config: {
-				flexDayForecast: false,     // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
-				maxNumberOfHours: 8,
-				maxNumberOfDays: 8,
-				hourly: "HH.mm",	      // "HH [h]" for hourly forecast or "HH.mm" for hour and minutes
-				daily: "dddd",              // "ddd" for short day name or "dddd" for full day name
-				fade: true,
-				fadePoint: 0.25,              // Start on 1/4th of the list.
-				colored: true,
-				extraHourly: true,            // snow extra hourly humidity, dew point, pressure, real feel and rain or snow,
-				extraDaily: true,            // snow extra daily humidity, dew point, pressure, real feel and rain or snow,
-				endpointType: "onecall",    // "current", "hourly", "daily" or "onecall"
-				oneLoader: true,            // important for just one API call
-			}
-		},
+	{
+		module: "onecall/loader",
+		config: {
+			lat: "",                               // your location latitude,
+			lon: "",                               // your location longitude,
+			appid: "",                             // your Openweathermap appid
+		}
+	},
+	{
+		module: "onecall",
+		position: "top_right",
+		classes: "current weather",
+		disabled: false,
+		config: {
+			flexDayForecast: false,     // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
+			maxNumberOfHours: 8,
+			maxNumberOfDays: 8,
+			hourly: "HH.mm",	      // "HH [h]" for hourly forecast or "HH.mm" for hour and minutes
+			daily: "dddd",              // "ddd" for short day name or "dddd" for full day name
+			fade: true,
+			fadePoint: 0.25,              // Start on 1/4th of the list.
+			colored: true,
+			extraHourly: true,            // snow extra hourly humidity, dew point, pressure, real feel and rain or snow,
+			extraDaily: true,            // snow extra daily humidity, dew point, pressure, real feel and rain or snow,
+			endpointType: "onecall",    // "current", "hourly", "daily" or "onecall"
+			oneLoader: true,            // important for just one API call
+		}
+	},
 
 Weather compliments to put in your config.js
 <br>You need to use my compliments_plus to work with AQI compliments
