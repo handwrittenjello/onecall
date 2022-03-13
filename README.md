@@ -29,7 +29,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 
 #### Onecall API loader and single instance
 
-<img src=https://github.com/hangorazvan/onecall/blob/master/current.png>
+<img src=https://github.com/hangorazvan/onecall/blob/master/onecall.png>
 
 		{
 			module: "onecall/loader",
