@@ -56,7 +56,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			extraHourly: true,          // snow extra hourly humidity, dew point, pressure, real feel and rain or snow,
 			extraDaily: true,           // snow extra daily humidity, dew point, pressure, real feel and rain or snow,
 			endpointType: "onecall",    // "current", "hourly", "daily" or "onecall"
-			oneLoader: true,            // important for just one API call
+			oneLoader: true,            // very important for just one API call
 		}
 	},
 
@@ -129,7 +129,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			extraDaily: true,           // snow extra daily humidity, dew point, pressure, real feel and rain or snow,
 			daily: "dddd",              // "ddd" for short day name or "dddd" for full day name
 			endpointType: "daily",      // "current", "hourly", "daily" or "onecall"
-			oneLoader: true,            // important for just one API call
+			oneLoader: true,            // very important for just one API call
 		}
 	},
 
@@ -185,7 +185,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			flexDayForecast: true,       // show Flex Day Forecast, set maxNumberOfDays to 3 or 6
 			maxNumberOfDays: 6,
 			endpointType: "daily",       // "current", "hourly", "daily" or "onecall"
-			oneLoader: false,            // important for just one API call
+			oneLoader: false,            // very important for just one API call
 		}
 	},
 
@@ -218,7 +218,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 			extraHourly: false,         // snow extra hourly humidity, dew point, pressure, real feel and rain or snow,
 			extraDaily: true,           // snow extra daily humidity, dew point, pressure, real feel and rain or snow,
 			endpointType: "onecall",    // "current", "hourly", "daily" or "onecall"
-			oneLoader: true,            // important for just one API call
+			oneLoader: true,            // very important for just one API call
 		}
 	},
 
