@@ -29,7 +29,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 
 #### Onecall API loader and single instance
 
-<img src=https://github.com/hangorazvan/onecall/blob/master/onecall.png height="50%">
+<img src=https://github.com/hangorazvan/onecall/blob/master/onecall.png width="300">
 
 (appid2 is optional for https://github.com/hangorazvan/pollution)
 
@@ -113,7 +113,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 
 #### Daily forecast (6 days)
 
-<img src=https://github.com/hangorazvan/onecall/blob/master/daily.png  height="75%">
+<img src=https://github.com/hangorazvan/onecall/blob/master/daily.png width="300">
 
 	{
 		module: "onecall",
@@ -135,7 +135,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 
 #### Classic icons and separate 3 instances without oneLoader (not recommanded)
 
-<img src=https://github.com/hangorazvan/onecall/blob/master/icons.png height="50%">
+<img src=https://github.com/hangorazvan/onecall/blob/master/icons.png width="300">
 
 	{
 		module: "onecall",
@@ -191,7 +191,7 @@ Do not make modification and do not replace the default module, just add <i>disa
 
 #### Single instance with table forecast (8 hours and 8 days)
 
-<img src=https://github.com/hangorazvan/onecall/blob/master/table.png height="50%">
+<img src=https://github.com/hangorazvan/onecall/blob/master/table.png width="300">
 
 	{
 		module: "onecall/loader",
