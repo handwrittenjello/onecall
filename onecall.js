@@ -721,7 +721,7 @@ Module.register("onecall", {
 						if (this.config.units === "metric" || this.config.units === "default") {
 							visible.innerHTML =  forecast.visibility/1000 + " Km";
 						} else if (this.config.units === "imperial") {
-							visible.innerHTML =  (forecast.visibility/1000)/1.609344 + " mi";
+							visible.innerHTML =  Math.round(forecast.visibility/1000).toFixed(2) + " mi";
 						}
 						visible.className = "align-center violet visibility";
 						row.appendChild(visible);
